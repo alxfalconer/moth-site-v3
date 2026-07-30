@@ -952,6 +952,20 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 </style>
 <style id="foot-fullbleed">.foot{margin:0 !important;width:100vw;min-height:100vh}</style>
 <style id="navpage-css">.navpage{margin-left:14px;padding-left:14px;border-left:1px solid var(--line);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink);line-height:1}</style>
+<style id="vt-css">
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:520ms;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-old(root){animation-name:vt-out}
+::view-transition-new(root){animation-name:vt-in}
+@keyframes vt-out{from{opacity:1;filter:blur(0);transform:scale(1)}to{opacity:0;filter:blur(16px);transform:scale(1.06)}}
+@keyframes vt-in{from{opacity:0;filter:blur(16px);transform:scale(.965)}to{opacity:1;filter:blur(0);transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){
+::view-transition-old(root){animation:vt-out-rm 140ms both}
+::view-transition-new(root){animation:vt-in-rm 140ms both}
+@keyframes vt-out-rm{to{opacity:0}}
+@keyframes vt-in-rm{from{opacity:0}}
+}
+</style>
 </head>
 <body class="theme-tools viewing">
 <div class="grain" aria-hidden="true"></div>
@@ -1365,5 +1379,16 @@ audio2  = scheme.<span class="tok-fn">decode</span>(circuit)   <span class="tok-
 })();
 </script>
 <script id="tools-cta-js">(function(){var f=document.getElementById('waitForm2');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var i=f.querySelector('input[type=email]');if(i&&!i.checkValidity()){i.reportValidity();return;}var w=f.closest('.wait');if(w)w.classList.add('done');});})();</script>
+<script id="vt-grain">
+addEventListener('pagereveal',function(e){
+  if(!e.viewTransition||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var g=document.querySelector('.grain');if(!g)return;
+  var base=parseFloat(getComputedStyle(g).opacity)||0.15;
+  g.style.transition='none';g.style.opacity=Math.min(base+0.30,0.7);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    g.style.transition='opacity 620ms ease';g.style.opacity='';
+  });});
+});
+</script>
 </body>
 </html>

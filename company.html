@@ -342,8 +342,8 @@
   .rillo .moth-diagram text.on{fill:var(--ink)}
 
   /* people intro — single justified editorial paragraph */
-  .pintro{max-width:62ch;margin-bottom:56px}
-  .pintro p{font-size:14px;line-height:1.7;color:var(--soft);text-align:justify;margin:0}
+  .pintro{max-width:none;margin-bottom:56px}
+  .pintro p{font-size:clamp(2rem,4.6vw,4.4rem);line-height:1.02;font-weight:700;letter-spacing:-.03em;color:var(--ink);text-align:left;margin:0}
 
   /* ---------------- Tools lens (builder hub) ---------------- */
   .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:10px}
@@ -935,6 +935,20 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 @media (max-width:640px){ .off-clocks{flex-direction:column;align-items:center;gap:44px} .office-item{width:100%;max-width:300px} }
 </style>
 <style id="navpage-css">.navpage{margin-left:14px;padding-left:14px;border-left:1px solid var(--line);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink);line-height:1}</style>
+<style id="vt-css">
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:520ms;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-old(root){animation-name:vt-out}
+::view-transition-new(root){animation-name:vt-in}
+@keyframes vt-out{from{opacity:1;filter:blur(0);transform:scale(1)}to{opacity:0;filter:blur(16px);transform:scale(1.06)}}
+@keyframes vt-in{from{opacity:0;filter:blur(16px);transform:scale(.965)}to{opacity:1;filter:blur(0);transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){
+::view-transition-old(root){animation:vt-out-rm 140ms both}
+::view-transition-new(root){animation:vt-in-rm 140ms both}
+@keyframes vt-out-rm{to{opacity:0}}
+@keyframes vt-in-rm{from{opacity:0}}
+}
+</style>
 </head>
 <body class="theme-light viewing">
 <!-- v3 nav chrome -->
@@ -970,9 +984,8 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 </aside>
 
 <section class="state" id="people" aria-label="People">
-    <header class="ctx"><h2 class="ctx-line">People.</h2></header>
     <div class="pintro">
-      <p>Moth began in 2022, when Eduardo Miranda’s <em>Quantum Computer Music</em> drew together two communities that rarely met — artists curious about quantum computing, and quantum researchers curious about art. Out of that convergence, and a quantum music project linking co-founder Harry Kumar with Quantinuum’s Ilyas Khan, the company set out to build the first consumer wave of quantum-powered creative tools.</p>
+      <p>Moth began in 2022, when two communities that rarely met — artists curious about quantum computing, and quantum researchers curious about art — converged. Out of that union, co-founder <span style="color:var(--mute)">Harry Kumar</span> with Quantinuum’s <span style="color:var(--mute)">Ilyas Khan</span> set out to build the first consumer wave of quantum-powered creative tools.</p>
     </div>
     <div class="grouphdr">Leadership</div>
     <div class="leadpin" id="leadPin">
@@ -1371,6 +1384,17 @@ Brooklyn, NY 11205 · United States</p>
   update();
   if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){ setInterval(update,1000); }
 })();
+</script>
+<script id="vt-grain">
+addEventListener('pagereveal',function(e){
+  if(!e.viewTransition||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var g=document.querySelector('.grain');if(!g)return;
+  var base=parseFloat(getComputedStyle(g).opacity)||0.15;
+  g.style.transition='none';g.style.opacity=Math.min(base+0.30,0.7);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    g.style.transition='opacity 620ms ease';g.style.opacity='';
+  });});
+});
 </script>
 </body>
 </html>
