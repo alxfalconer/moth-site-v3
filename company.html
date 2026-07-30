@@ -343,7 +343,7 @@
 
   /* people intro — single justified editorial paragraph */
   .pintro{max-width:none;margin-bottom:56px}
-  .pintro p{font-size:clamp(2rem,4.6vw,4.4rem);line-height:1.02;font-weight:700;letter-spacing:-.03em;color:var(--ink);text-align:left;margin:0}
+  .pintro p{font-size:clamp(32px,3.4vw,48px);line-height:1.02;font-weight:700;letter-spacing:-.03em;color:var(--ink);text-align:left;margin:0}
 
   /* ---------------- Tools lens (builder hub) ---------------- */
   .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:10px}
@@ -525,7 +525,7 @@
   .leadgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:18px}
   /* leadership pin-scroll slider */
   .leadpin{position:relative;height:240vh}
-  .leadsticky{position:sticky;top:96px;height:auto;display:flex;align-items:flex-start;overflow:hidden;padding-bottom:24px}
+  .leadsticky{position:sticky;top:-52px;height:auto;display:flex;align-items:flex-start;overflow:hidden;padding-bottom:24px}
   .leadtrack{display:flex;gap:20px;padding-right:48px;will-change:transform}
   .leadtrack .lead{flex:0 0 clamp(300px,24vw,380px)}
   @media (prefers-reduced-motion:reduce){
@@ -809,11 +809,11 @@
   background-size:200px 200px;will-change:transform;animation:grain .5s steps(1) infinite}
 @keyframes grain{0%{transform:translate(0,0)}10%{transform:translate(-4%,-3%)}20%{transform:translate(-6%,2%)}30%{transform:translate(4%,-4%)}40%{transform:translate(-2%,5%)}50%{transform:translate(-6%,3%)}60%{transform:translate(5%,4%)}70%{transform:translate(-4%,2%)}80%{transform:translate(-2%,-5%)}90%{transform:translate(3%,4%)}100%{transform:translate(0,0)}}
 @media (prefers-reduced-motion:reduce){ .grain{animation:none} }
-.navbar{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:60;display:flex;align-items:center;padding:0 34px}
+.navbar{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:60;display:flex;align-items:center;padding:0 calc(clamp(150px,10vw,160px) + 34px)}
 .brand{display:inline-flex;align-items:center;text-decoration:none}
 .brand-img{height:20px;width:auto;display:block}
 body:not(.theme-light) .brand-img{filter:invert(1)}
-.menu-btn{position:fixed;top:calc((var(--nav-h) - 40px)/2);right:34px;z-index:90;width:40px;height:40px;border:none;background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;border-radius:0;transition:background .25s var(--ease),color .25s var(--ease)}
+.menu-btn{position:fixed;top:calc((var(--nav-h) - 40px)/2);right:calc(clamp(150px,10vw,160px) + 34px);z-index:90;width:40px;height:40px;border:none;background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;border-radius:0;transition:background .25s var(--ease),color .25s var(--ease)}
 .menu-btn:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
 .menu-btn svg{width:24px;height:24px;position:absolute;transition:opacity .25s var(--ease),transform .25s var(--ease)}
 .menu-btn .ic-x{opacity:0;transform:rotate(-45deg)}
@@ -849,7 +849,7 @@ body.nav-open .sidenav a:nth-child(7){--rd:.50s}
 body.nav-open .navbar,body.nav-open #people{transform:translateX(calc(-1 * var(--shift)));opacity:.45;filter:blur(3px)}
 body.nav-open #people{pointer-events:none}
 /* keep #people as the scroll container (pin-scroll + reveal root depend on it); centre content to 1200 */
-#people.state{padding:calc(var(--nav-h) + 76px) 34px 0 !important}
+#people.state{padding:calc(var(--nav-h) + 76px) 34px 0 !important;max-width:calc(100vw - clamp(300px,20vw,320px))!important;margin-left:auto!important;margin-right:auto!important}
 #people .ctx-line{font-size:clamp(2rem,4.6vw,4.4rem)}
 body:not(.theme-light) .pagequote.midq p{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){ .sidenav a{transition:opacity .2s,background .16s,color .16s;transform:none;filter:none} body.nav-open .sidenav a{transition-delay:0 !important} }
@@ -985,7 +985,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 
 <section class="state" id="people" aria-label="People">
     <div class="pintro">
-      <p>Moth began in 2022, when two communities that rarely met — artists curious about quantum computing, and quantum researchers curious about art — converged. Out of that union, co-founder <span style="color:var(--mute)">Harry Kumar</span> with Quantinuum’s <span style="color:var(--mute)">Ilyas Khan</span> set out to build the first consumer wave of quantum-powered creative tools.</p>
+      <p>Moth began in 2022, when two communities that rarely met — artists curious about quantum computing, and quantum researchers curious about art — converged. Out of that union, co-founder <span style="color:var(--mute)">Harry Kumar</span> and Quantinuum’s <span style="color:var(--mute)">Ilyas Khan</span> set out to bend quantum towards culture.</p>
     </div>
     <div class="grouphdr">Leadership</div>
     <div class="leadpin" id="leadPin">
