@@ -976,12 +976,12 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 .mterm-bar{position:relative;display:flex;align-items:center;gap:8px;height:32px;padding:0 13px;
   background:linear-gradient(#343434,#262626);border-bottom:1px solid var(--tline)}
 .mterm-dot{width:12px;height:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.mterm-dot i{font-style:normal;font-size:9px;line-height:1;color:rgba(0,0,0,.62);opacity:0;transition:opacity .15s ease}
+.mterm-dot i{font-style:normal;font-size:10px;font-weight:900;line-height:1;color:rgba(0,0,0,.82);opacity:0;transition:opacity .15s ease}
 .mterm-bar:hover .mterm-dot i{opacity:1}
 .mterm{transition:opacity .42s ease,transform .42s ease}
 .mterm.mterm--closing{opacity:0;transform:scale(.97);pointer-events:none}
-.mterm.mterm--min{animation:mtermMin .56s cubic-bezier(.5,.05,.7,.02) forwards;pointer-events:none}
-@keyframes mtermMin{60%{opacity:.6}to{transform:translateY(46px) scaleX(.1) scaleY(.02);opacity:0;filter:blur(1.5px)}}
+.mterm.mterm--min{transform-origin:100% 100%;animation:mtermMin .82s cubic-bezier(.45,.02,.85,.35) forwards;pointer-events:none}
+@keyframes mtermMin{0%{transform:perspective(900px) translate(0,0) scale(1) rotateX(0) skewX(0);opacity:1;filter:none}28%{transform:perspective(900px) translate(3vw,5vh) scale(.9) rotateX(6deg) skewX(-7deg);opacity:1}62%{transform:perspective(900px) translate(20vw,32vh) scale(.42) rotateX(16deg) skewX(-22deg) skewY(5deg);opacity:.9;filter:blur(.6px)}100%{transform:perspective(900px) translate(52vw,74vh) scale(.03) rotateX(34deg) skewX(-38deg) skewY(10deg);opacity:0;filter:blur(3px)}}
 .mterm-dot--c{background:#ff5f56}.mterm-dot--m{background:#ffbd2e}.mterm-dot--x{background:#27c93f}
 .mterm-title{position:absolute;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.01em;color:#8a8a8a;pointer-events:none}
 .mterm-body{padding:16px 18px 20px;font-size:12px;line-height:1.4;color:#e8e8e8}
@@ -1483,7 +1483,7 @@ addEventListener('pagereveal',function(e){
 })();
 </script>
 <script id="mterm-controls">
-(function(){var t=document.getElementById("mothTerm");if(!t)return;var c=t.querySelector(".mterm-dot--c"),m=t.querySelector(".mterm-dot--m");function gone(){t.style.display="none";}if(c)c.addEventListener("click",function(){t.classList.add("mterm--closing");setTimeout(gone,440);});if(m)m.addEventListener("click",function(){t.classList.add("mterm--min");setTimeout(gone,580);});})();
+(function(){var t=document.getElementById("mothTerm");if(!t)return;var c=t.querySelector(".mterm-dot--c"),m=t.querySelector(".mterm-dot--m");function gone(){t.style.display="none";}if(c)c.addEventListener("click",function(){t.classList.add("mterm--closing");setTimeout(gone,440);});if(m)m.addEventListener("click",function(){t.classList.add("mterm--min");setTimeout(gone,840);});})();
 </script>
 </body>
 </html>
