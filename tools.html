@@ -937,7 +937,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 .toolgrid{grid-template-columns:1fr !important}
 .trow2{flex-direction:row}
 .trow2 .tcol{flex:1 1 0;width:auto}
-.tpane-left .tools-cta{min-height:0;justify-content:flex-start;align-items:center;text-align:center;padding:36px 0 0;margin-top:20px;border-top:1px solid var(--line)}
+.tpane-left .tools-cta{min-height:0;justify-content:flex-start;align-items:center;text-align:center;padding:36px 0 0;margin-top:20px;border-top:none}
 .tpane-left .tools-cta h2{font-size:clamp(1.15rem,1.7vw,1.6rem);line-height:1.12;letter-spacing:-.02em}
 .tpane-left .tools-cta .lede{margin:14px auto 0;font-size:.92rem}
 .tpane-left .tools-cta .wait{margin:18px auto 0}
@@ -968,6 +968,29 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 @keyframes vt-out-rm{to{opacity:0}}
 @keyframes vt-in-rm{from{opacity:0}}
 }
+</style>
+<style id="mterm-css">
+.mterm{--tbg:#0c0c0c;--tline:rgba(255,255,255,.10);font-family:ui-monospace,"SF Mono","Menlo","Consolas",monospace;
+  width:min(560px,100%);margin:34px auto clamp(56px,8vh,104px);border:1px solid var(--tline);border-radius:9px;overflow:hidden;
+  background:var(--tbg);box-shadow:0 24px 70px rgba(0,0,0,.55);text-align:left}
+.mterm-bar{position:relative;display:flex;align-items:center;gap:8px;height:32px;padding:0 13px;
+  background:linear-gradient(#343434,#262626);border-bottom:1px solid var(--tline)}
+.mterm-dot{width:12px;height:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.mterm-dot i{font-style:normal;font-size:9px;line-height:1;color:rgba(0,0,0,.62);opacity:0;transition:opacity .15s ease}
+.mterm-bar:hover .mterm-dot i{opacity:1}
+.mterm{transition:opacity .42s ease,transform .42s ease}
+.mterm.mterm--closing{opacity:0;transform:scale(.97);pointer-events:none}
+.mterm.mterm--min{animation:mtermMin .56s cubic-bezier(.5,.05,.7,.02) forwards;pointer-events:none}
+@keyframes mtermMin{60%{opacity:.6}to{transform:translateY(46px) scaleX(.1) scaleY(.02);opacity:0;filter:blur(1.5px)}}
+.mterm-dot--c{background:#ff5f56}.mterm-dot--m{background:#ffbd2e}.mterm-dot--x{background:#27c93f}
+.mterm-title{position:absolute;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.01em;color:#8a8a8a;pointer-events:none}
+.mterm-body{padding:16px 18px 20px;font-size:12px;line-height:1.4;color:#e8e8e8}
+.mterm-prompt{color:#9aa0a6}
+.mterm-cur{display:inline-block;width:8px;height:15px;background:#e8e8e8;vertical-align:-2px;margin-left:2px;animation:mtblink 1.05s steps(1) infinite}
+@keyframes mtblink{50%{opacity:0}}
+.mterm-art{margin:12px 0 0;white-space:pre;font-size:11px;line-height:1.02;color:#eaeaea;min-height:320px}
+@media (max-width:860px){.mterm-art{font-size:7px}}
+@media (prefers-reduced-motion:reduce){.mterm-cur{animation:none}}
 </style>
 </head>
 <body class="theme-tools viewing">
@@ -1008,7 +1031,19 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 <header class="ctx">
       <h2 class="ctx-line">Build with quantum.<br><span class="dim">Open-source tools for creative technologists.</span></h2>
     </header>
-<section class="tools-cta" aria-labelledby="tcta-h">
+<div class="mterm" id="mothTerm" aria-label="Moth Quantum mark, ASCII">
+      <div class="mterm-bar">
+        <span class="mterm-dot mterm-dot--c"><i>×</i></span>
+        <span class="mterm-dot mterm-dot--m"><i>−</i></span>
+        <span class="mterm-dot mterm-dot--x"><i>+</i></span>
+        <span class="mterm-title">moth-website-tools — zsh</span>
+      </div>
+      <div class="mterm-body">
+        <div class="mterm-cmd"><span class="mterm-prompt">moth-quantum@Mac moth-website-tools %</span> <span class="mterm-typed"></span><span class="mterm-cur"></span></div>
+        <pre class="mterm-art" aria-hidden="true"></pre>
+      </div>
+    </div>
+    <section class="tools-cta" aria-labelledby="tcta-h">
   <h2 id="tcta-h">Spin up a job on real quantum hardware.</h2>
   <p class="lede">Platform access opens gradually. Join the waitlist for early access — or create an account to explore what’s live.</p>
   <div class="wait">
@@ -1392,6 +1427,63 @@ addEventListener('pagereveal',function(e){
     g.style.transition='opacity 620ms ease';g.style.opacity='';
   });});
 });
+</script>
+<script id="mterm-js">
+(function(){
+  var term=document.getElementById('mothTerm'); if(!term) return;
+  var REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var typed=term.querySelector('.mterm-typed'), art=term.querySelector('.mterm-art'), cur=term.querySelector('.mterm-cur');
+  var MASK=[
+    "###############              ##############:             ###############",
+    "###############              ##############:             ###############",
+    "###############              ##############:             ###############",
+    "###############              ##############:             ###############",
+    "###############              ##############:             ###############",
+    "################:            ##############:           :################",
+    ":#################:          ##############:         :#################:",
+    " :########################   ##############:  #########################",
+    "  :#######################   ##############:  #######################:",
+    "    :#####################   ##############:  #####################:",
+    "       :##################   ##############:  ##################:",
+    "       :##################   ##############:  ##################:",
+    "    :#####################   ##############:  #####################:",
+    "  :#######################   ##############:  #######################:",
+    " :########################   ##############:  ########################:",
+    ":#################::         ##############:         :#################:",
+    "################:            ##############:           :################",
+    "###############              ##############:             ###############",
+    "###############              ##############:             ###############",
+    "###############              ##############:             ###############",
+    "###############              ##############:             ###############",
+    "###############              ##############:             ###############"
+  ];
+  var CORE="▓▒█#%@&$8WMX*"; var EDGE="░:·.,'-^~";
+  var CMD="./moth --ascii mark.svg";
+  function pick(s){ return s.charAt(Math.floor(Math.random()*s.length)); }
+  function line(row){ return row.replace(/[#:]/g,function(c){ return c==='#'?pick(CORE):pick(EDGE); }); }
+  function full(){ return MASK.map(line).join('\n'); }
+  if(REDUCE){ typed.textContent=CMD; art.textContent=full(); return; }
+  var done=false;
+  function boot(){
+    if(done) return; done=true;
+    var i=0;
+    (function type(){
+      if(i<=CMD.length){ typed.textContent=CMD.slice(0,i++); setTimeout(type,42+Math.random()*46); }
+      else setTimeout(printArt,280);
+    })();
+    function printArt(){
+      var r=0;
+      (function next(){
+        if(r<MASK.length){ art.textContent += (r?'\n':'') + line(MASK[r]); r++; setTimeout(next,72); }
+      })();
+    }
+  }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ boot(); io.disconnect(); } }); },{threshold:0.4});
+  io.observe(term);
+})();
+</script>
+<script id="mterm-controls">
+(function(){var t=document.getElementById("mothTerm");if(!t)return;var c=t.querySelector(".mterm-dot--c"),m=t.querySelector(".mterm-dot--m");function gone(){t.style.display="none";}if(c)c.addEventListener("click",function(){t.classList.add("mterm--closing");setTimeout(gone,440);});if(m)m.addEventListener("click",function(){t.classList.add("mterm--min");setTimeout(gone,580);});})();
 </script>
 </body>
 </html>
