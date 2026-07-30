@@ -57,7 +57,7 @@
     --app:#1f1a15; --ink:#f4f4f0; --soft:#d0d0d6; --mute:#a6a6ae; --faint:#727279;
     --line:#575760; --card-a:#525259; --card-b:#3a3a41;
   }
-  body.theme-tools{--app:#000}
+  body.theme-tools{--app:#101010}
   body.theme-light .navitem{border-top-color:rgba(0,0,0,.13)}
   body.theme-light nav .navitem:last-child{border-bottom-color:rgba(0,0,0,.13)}
   body.theme-grey .navitem{border-top-color:rgba(255,255,255,.13)}
@@ -347,10 +347,10 @@
   /* ---------------- Tools lens (builder hub) ---------------- */
   .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:10px}
   @media (max-width:720px){ .tgrid{grid-template-columns:1fr} }
-  .tcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:0;overflow:hidden;background:#000}
+  .tcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:0;overflow:hidden;background:#101010}
   .tthumb{position:relative;aspect-ratio:16/10;background:linear-gradient(150deg,var(--card-a),var(--card-b));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--mute)}
   .tthumb[data-ph]::after{content:"placeholder";position:absolute;bottom:8px;right:9px;font-family:var(--mono);font-size:7px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
-  .tfig{background:#000}
+  .tfig{background:#101010}
   .tfig .fig{width:100%;height:100%;display:block}
   .tfig .fig path{vector-effect:non-scaling-stroke}
   .tfig .fig path,.tfig .fig circle{stroke-dasharray:600;stroke-dashoffset:0}
@@ -425,7 +425,7 @@
   .platline{margin:0 0 14px;font-size:13px;line-height:1.6;color:var(--soft)}
   .platcta{display:inline-flex;align-items:center;font-family:var(--sans);font-size:12px;font-weight:600;color:var(--app);background:var(--ink);border-radius:0;padding:9px 16px;text-decoration:none;transition:opacity .15s}
   .platcta:hover{opacity:.9}
-  .opennote{max-width:700px;margin:14px auto 0;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.6;color:var(--mute);text-align:center}
+  .opennote{max-width:700px;margin:14px auto 0;padding-top:18px;font-size:11.5px;line-height:1.6;color:var(--mute);text-align:center}
   .trow2,.trow3{display:flex;flex-wrap:wrap;margin-top:34px;max-width:1120px}
   .trow2{gap:56px;margin-top:72px;margin-bottom:72px;max-width:none}
   .trow3{gap:32px;justify-content:space-between}
@@ -796,11 +796,11 @@
 <style>
 /* ===== v3 nav chrome (hamburger / right-side menu + theme toggle) ===== */
 :root{--nav-h:88px;--ease:cubic-bezier(.2,.72,.2,1);--shift:clamp(110px,15vw,240px)}
-.navbar{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:60;display:flex;align-items:center;padding:0 34px}
+.navbar{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:60;display:flex;align-items:center;padding:0 calc(clamp(150px,10vw,160px) + 34px)}
 .brand{display:inline-flex;align-items:center;text-decoration:none}
 .brand-img{height:20px;width:auto;display:block}
 body:not(.theme-light) .brand-img{filter:invert(1)}
-.menu-btn{position:fixed;top:calc((var(--nav-h) - 40px)/2);right:34px;z-index:90;width:40px;height:40px;border:none;background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;border-radius:0;transition:background .25s var(--ease),color .25s var(--ease)}
+.menu-btn{position:fixed;top:calc((var(--nav-h) - 40px)/2);right:calc(clamp(150px,10vw,160px) + 34px);z-index:90;width:40px;height:40px;border:none;background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;border-radius:0;transition:background .25s var(--ease),color .25s var(--ease)}
 .menu-btn:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
 .menu-btn svg{width:24px;height:24px;position:absolute;transition:opacity .25s var(--ease),transform .25s var(--ease)}
 .menu-btn .ic-x{opacity:0;transform:rotate(-45deg)}
@@ -929,22 +929,25 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 .tools-cta .wait.done .ok{display:block}
 </style>
 <style id="tools-split-css">
-#tools.state{position:static !important;display:flex !important;align-items:flex-start;padding:0 !important;overflow:visible}
-.tpane{flex:1 1 50%;min-width:0;padding:calc(var(--nav-h) + 40px) 34px 48px;box-sizing:border-box}
-.tpane-left{position:sticky;top:0;align-self:flex-start;min-height:100vh;border-right:1px solid var(--line);flex:0 0 55%}
-.tpane-right{flex:0 0 45%}
-.tgrid{grid-template-columns:repeat(2,1fr) !important}
+#tools.state{position:static !important;display:flex !important;flex-direction:column;align-items:stretch;padding:0 !important;overflow:visible;max-width:calc(100vw - clamp(300px,20vw,320px)) !important;margin-left:auto !important;margin-right:auto !important}
+.tpane{flex:none;width:100%;min-width:0;padding:calc(var(--nav-h) + 40px) 34px 48px;box-sizing:border-box}
+.tpane-left{position:static;min-height:0;border-bottom:1px solid var(--line);flex:none;width:100%}
+.tpane-right{flex:none;width:100%;padding-top:56px}
+.tgrid{grid-template-columns:repeat(3,1fr) !important}
 .toolgrid{grid-template-columns:1fr !important}
-.trow2{flex-direction:column}
-.trow2 .tcol{flex:none;width:100%}
-.tpane-left .tools-cta{min-height:0;justify-content:flex-start;padding:36px 0 0;margin-top:20px;border-top:1px solid var(--line)}
+.trow2{flex-direction:row}
+.trow2 .tcol{flex:1 1 0;width:auto}
+.tpane-left .tools-cta{min-height:0;justify-content:flex-start;align-items:center;text-align:center;padding:36px 0 0;margin-top:20px;border-top:1px solid var(--line)}
 .tpane-left .tools-cta h2{font-size:clamp(1.15rem,1.7vw,1.6rem);line-height:1.12;letter-spacing:-.02em}
-.tpane-left .tools-cta .lede{margin-top:14px;font-size:.92rem}
-.tpane-left .tools-cta .wait{margin-top:18px}
+.tpane-left .tools-cta .lede{margin:14px auto 0;font-size:.92rem}
+.tpane-left .tools-cta .wait{margin:18px auto 0}
 .toolgrid .tool .tdesc{max-width:none;white-space:nowrap}
 .tpane-left .tools-cta h2{white-space:nowrap}
+.tpane-left .ctx-line{text-align:center;max-width:none;margin-left:auto;margin-right:auto}
 @media (max-width:860px){
-  #tools.state{position:static !important;display:block !important;height:auto;padding:calc(var(--nav-h) + 76px) 34px 110px !important;overflow:visible}
+  #tools.state{position:static !important;display:block !important;height:auto;padding:calc(var(--nav-h) + 76px) 34px 110px !important;overflow:visible;max-width:none !important;margin:0 !important}
+  .navbar{padding:0 34px !important}
+  .menu-btn{right:34px !important}
   .tpane{padding:0;border:none;flex:none}
   .tpane-left{position:static;top:auto;min-height:0}
   .tgrid,.toolgrid{grid-template-columns:1fr !important}
@@ -1003,7 +1006,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 <section class="state" id="tools" aria-label="Tools">
   <div class="tpane tpane-left">
 <header class="ctx">
-      <h2 class="ctx-line">Build with quantum. <span class="dim">Open-source tools for creative technologists.</span></h2>
+      <h2 class="ctx-line">Build with quantum.<br><span class="dim">Open-source tools for creative technologists.</span></h2>
     </header>
 <section class="tools-cta" aria-labelledby="tcta-h">
   <h2 id="tcta-h">Spin up a job on real quantum hardware.</h2>
