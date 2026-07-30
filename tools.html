@@ -978,6 +978,9 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 .mterm-dot{width:12px;height:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .mterm-dot i{font-style:normal;font-size:10px;font-weight:900;line-height:1;color:rgba(0,0,0,.82);opacity:0;transition:opacity .15s ease}
 .mterm-bar:hover .mterm-dot i{opacity:1}
+.mterm-bar{cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none}
+.mterm.mterm--dragging{transition:none;will-change:transform}
+.mterm.mterm--dragging .mterm-bar{cursor:grabbing}
 .mterm{transition:opacity .42s ease,transform .42s ease}
 .mterm.mterm--closing{opacity:0;transform:scale(.97);pointer-events:none}
 .mterm.mterm--min{transform-origin:100% 100%;animation:mtermMin .82s cubic-bezier(.45,.02,.85,.35) forwards;pointer-events:none}
@@ -1029,7 +1032,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 <section class="state" id="tools" aria-label="Tools">
   <div class="tpane tpane-left">
 <header class="ctx">
-      <h2 class="ctx-line">Build with quantum.<br><span class="dim">Open-source tools for creative technologists.</span></h2>
+      <h2 class="ctx-line">Build with Quantum.<br><span class="dim">Open-Source.</span></h2>
     </header>
 <div class="mterm" id="mothTerm" aria-label="Moth Quantum mark, ASCII">
       <div class="mterm-bar">
@@ -1484,6 +1487,9 @@ addEventListener('pagereveal',function(e){
 </script>
 <script id="mterm-controls">
 (function(){var t=document.getElementById("mothTerm");if(!t)return;var c=t.querySelector(".mterm-dot--c"),m=t.querySelector(".mterm-dot--m");function gone(){t.style.display="none";}if(c)c.addEventListener("click",function(){t.classList.add("mterm--closing");setTimeout(gone,440);});if(m)m.addEventListener("click",function(){t.classList.add("mterm--min");setTimeout(gone,840);});})();
+</script>
+<script id="mterm-drag">
+(function(){var t=document.getElementById("mothTerm");if(!t)return;var bar=t.querySelector(".mterm-bar");if(!bar)return;var dx=0,dy=0,sx=0,sy=0,drag=false,raf=0;function apply(){raf=0;t.style.transform="translate3d("+dx+"px,"+dy+"px,0)";}bar.addEventListener("pointerdown",function(e){if(e.target.closest(".mterm-dot"))return;drag=true;sx=e.clientX-dx;sy=e.clientY-dy;t.classList.add("mterm--dragging");bar.setPointerCapture(e.pointerId);e.preventDefault();});bar.addEventListener("pointermove",function(e){if(!drag)return;dx=e.clientX-sx;dy=e.clientY-sy;if(!raf)raf=requestAnimationFrame(apply);});function end(){if(!drag)return;drag=false;if(raf){cancelAnimationFrame(raf);raf=0;}apply();t.classList.remove("mterm--dragging");}bar.addEventListener("pointerup",end);bar.addEventListener("pointercancel",end);})();
 </script>
 </body>
 </html>
