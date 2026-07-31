@@ -1046,7 +1046,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 @media (max-width:860px){.info-grid{grid-template-columns:1fr;gap:32px}.info-lists{grid-template-columns:1fr;row-gap:40px}}
 </style>
 <style id="combo-css">
-.combo{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);background:#0e0e0f;--ink:#f4f4f0;--mute:#9a9aa2;color:var(--ink);min-height:100vh;display:flex;align-items:center;padding:clamp(64px,10vh,120px) calc(clamp(150px,10vw,160px) + 34px)}
+.combo{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);background:#0e0e0f;--ink:#f4f4f0;--mute:#9a9aa2;color:var(--ink);min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:stretch;padding:clamp(64px,10vh,120px) calc(clamp(150px,10vw,160px) + 34px)}
 .combo-panes{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(40px,6vw,100px);width:100%;align-items:start}
 .combo-div{width:1px;align-self:stretch;background:color-mix(in srgb, var(--ink) 20%, transparent)}
 .combo-pane{display:flex;flex-direction:column;min-width:0}
@@ -1149,7 +1149,64 @@ Brooklyn, NY 11205 · United States</p>
   </div>
       </div>
       </div>
+    <div class="careers" aria-labelledby="careers-h">
+      <h2 id="careers-h" class="careers-title">Careers</h2>
+      <div class="acc-list">
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false" aria-controls="acc-fe"><span class="acc-role">Front End Developer</span><span class="acc-ico" aria-hidden="true"></span></button>
+          <div class="acc-panel" id="acc-fe" role="region"><div class="acc-panelinner">
+            <p class="acc-desc">Build and refine the interfaces behind Moth’s tools and creative experiences. You’ll work in modern JavaScript/TypeScript alongside our design and research teams to turn quantum ideas into things people can touch. (Placeholder listing.)</p>
+            <a class="acc-apply" href="https://careers.mothquantum.com/" target="_blank" rel="noopener noreferrer">Apply →</a>
+          </div></div>
+        </div>
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false" aria-controls="acc-be"><span class="acc-role">Backend Developer</span><span class="acc-ico" aria-hidden="true"></span></button>
+          <div class="acc-panel" id="acc-be" role="region"><div class="acc-panelinner">
+            <p class="acc-desc">Design the services and APIs that power our quantum-creative platform. Comfortable with distributed systems, clean architecture and well-tested code that holds up under load. (Placeholder listing.)</p>
+            <a class="acc-apply" href="https://careers.mothquantum.com/" target="_blank" rel="noopener noreferrer">Apply →</a>
+          </div></div>
+        </div>
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false" aria-controls="acc-pm"><span class="acc-role">Project Manager</span><span class="acc-ico" aria-hidden="true"></span></button>
+          <div class="acc-panel" id="acc-pm" role="region"><div class="acc-panelinner">
+            <p class="acc-desc">Keep projects moving across research, engineering and creative. You’ll own timelines, coordinate stakeholders and make sure the right things ship at the right time. (Placeholder listing.)</p>
+            <a class="acc-apply" href="https://careers.mothquantum.com/" target="_blank" rel="noopener noreferrer">Apply →</a>
+          </div></div>
+        </div>
+      </div>
+    </div>
     </section>
+<style id="careers-css">
+.careers{margin-top:clamp(56px,8vh,110px);padding-top:clamp(40px,5vh,64px);border-top:1px solid color-mix(in srgb, var(--ink) 16%, transparent)}
+.careers-title{font-size:clamp(22px,2vw,30px);font-weight:700;letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin:0 0 clamp(28px,4vh,52px)}
+.acc-list{border-top:1px solid color-mix(in srgb, var(--ink) 16%, transparent)}
+.acc{border-bottom:1px solid color-mix(in srgb, var(--ink) 16%, transparent)}
+.acc-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;background:none;border:0;cursor:pointer;text-align:left;padding:clamp(18px,2.8vh,28px) 0;color:var(--ink);font-family:var(--sans)}
+.acc-role{font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
+.acc-ico{position:relative;width:18px;height:18px;flex:none}
+.acc-ico::before,.acc-ico::after{content:"";position:absolute;background:var(--ink);transition:transform .3s ease,opacity .3s ease}
+.acc-ico::before{left:0;top:50%;width:100%;height:2px;transform:translateY(-50%)}
+.acc-ico::after{top:0;left:50%;width:2px;height:100%;transform:translateX(-50%)}
+.acc.acc--open .acc-ico::after{opacity:0;transform:translateX(-50%) scaleY(0)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease}
+.acc.acc--open .acc-panel{grid-template-rows:1fr}
+.acc-panelinner{overflow:hidden;min-height:0}
+.acc-desc{font-size:15px;line-height:1.65;color:var(--mute);max-width:62ch;margin:0 0 20px;padding-top:2px}
+.acc-apply{display:inline-block;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;border:1px solid var(--ink);padding:10px 22px;border-radius:0;transition:background .18s ease,color .18s ease;margin-bottom:clamp(22px,3vh,30px)}
+.acc-apply:hover{background:var(--ink);color:#0e0e0f}
+@media (prefers-reduced-motion: reduce){.acc-panel,.acc-ico::before,.acc-ico::after{transition:none}}
+</style>
+<script id="careers-js">
+(function(){
+  document.querySelectorAll('.careers .acc-head').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var acc=btn.closest('.acc');
+      var open=acc.classList.toggle('acc--open');
+      btn.setAttribute('aria-expanded',String(open));
+    });
+  });
+})();
+</script>
 <footer class="foot" aria-label="Footer">
   <div class="foot-top">
     <div class="foot-identity">

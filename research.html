@@ -1311,38 +1311,5 @@ addEventListener('pagereveal',function(e){
   });});
 });
 </script>
-<script id="quote-glitch">
-(function(){
-  var REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var CH="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  var q=document.querySelector('.pagequote.midq p'); if(!q||REDUCE) return;
-  function glitch(el){
-    var nodes=[].slice.call(el.childNodes).filter(function(n){return n.nodeType===3;});
-    var origs=nodes.map(function(n){return n.nodeValue;});
-    var total=origs.reduce(function(a,s){return a+s.length;},0);
-    var start=performance.now(), last=0;
-    (function tick(now){
-      var pr=(now-start)/750;
-      if(pr>=1){ nodes.forEach(function(n,i){n.nodeValue=origs[i];}); return; }
-      if(now-last>=45){ last=now; var lock=Math.floor(total*pr), seen=0;
-        nodes.forEach(function(n,i){
-          var str=origs[i];
-          n.nodeValue=str.split('').map(function(ch,j){
-            var gi=seen+j;
-            return (gi<lock || !/[A-Za-z0-9]/.test(ch)) ? ch : CH[Math.floor(Math.random()*CH.length)];
-          }).join('');
-          seen+=str.length;
-        });
-      }
-      requestAnimationFrame(tick);
-    })(performance.now());
-  }
-  var done=false;
-  var obs=new IntersectionObserver(function(ents){
-    ents.forEach(function(e){ if(e.isIntersecting && !done){ done=true; glitch(q); obs.disconnect(); } });
-  },{threshold:0.55});
-  obs.observe(q);
-})();
-</script>
 </body>
 </html>
