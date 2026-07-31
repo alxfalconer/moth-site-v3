@@ -314,7 +314,7 @@
   @media(max-width:720px){ .rblocks{grid-template-columns:1fr} }
   .rintro{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:72px 0 100px;align-items:start}
   .rintro /* deck: pre-paragraph header tier */
-.rsub{grid-column:2;margin:0 0 24px;font-family:var(--sans);font-size:clamp(18px,1.4vw,22px);font-weight:700;letter-spacing:-.03em;line-height:1.18;color:var(--ink);text-align:left}
+.rsub{grid-column:2;margin:0 0 24px;font-family:var(--sans);font-size:clamp(22px,2vw,30px);font-weight:700;letter-spacing:-.03em;line-height:1.18;color:var(--ink);text-align:left}
   .rintro .rbody{grid-column:2}
   .rintro .rsub,.rintro .rbody{max-width:70%;justify-self:start}
   .rintro p{font-size:14px;line-height:1.7;color:var(--soft);text-align:justify;margin:0 0 16px}
@@ -438,7 +438,7 @@
   /* scattered page quotes — mono "archival annotation". Wording/face provisional. */
   .pagequote{max-width:52ch;margin:112px auto 36px;text-align:center}
   .midq{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;max-width:none;padding:0 34px;background:#000;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
-  .pagequote.midq p{font-size:clamp(32px,3.4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:0.98;color:#fff;max-width:none;margin:0 auto}
+  .pagequote.midq p{font-size:clamp(32px,3.4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:0.98;color:#fff;max-width:min(920px,84vw);margin:0 auto;text-align:left}.pagequote.midq>p{width:min(920px,84vw);max-width:100%}
   body.theme-work .pagequote.midq p{color:#fff}
   .pagequote.midq .qgap{display:block;height:.45em}
   .pagequote.midq::before{display:none}
@@ -489,7 +489,7 @@
   .qcard p{margin:0;font-size:13.5px;line-height:1.65;color:var(--soft)}
   @media (max-width:1000px){ .qconcepts{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:560px){ .qconcepts{grid-template-columns:1fr;gap:14px} }
-  .spotcards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:44px}
+  .spotcards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:64px}
   .spotcard{position:relative;aspect-ratio:4/5;border-radius:0;background:#000;
     text-decoration:none;overflow:hidden;transition:background .35s cubic-bezier(.2,.72,.2,1),color .35s ease}
   .spotcard .spotcat{position:absolute;top:18px;left:18px;font-family:var(--mono);font-size:10px;
@@ -947,10 +947,10 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 </style>
 <style id="research-relayout">
 .rintro{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important;align-items:start;margin:clamp(88px,12vh,160px) 0;background:transparent!important;border:none!important;max-width:none!important}
-.rintro .rsub{grid-column:1!important;max-width:none!important;margin:0;font-size:clamp(20px,1.8vw,26px)}
+.rintro .rsub{grid-column:1!important;max-width:none!important;margin:0;font-size:clamp(22px,2vw,30px)}
 .rintro .rbody{grid-column:2!important;max-width:none!important}
 @media (max-width:720px){ .rintro{grid-template-columns:1fr!important} .rintro .rsub,.rintro .rbody{grid-column:1!important} }
-.grouphdr.deckhdr{font-family:var(--sans);font-size:clamp(18px,1.4vw,22px);font-weight:700;letter-spacing:-.03em;text-transform:none;color:var(--ink);margin:34px 0 clamp(28px,4vh,56px)}
+.grouphdr.deckhdr{font-family:var(--sans);font-size:clamp(22px,2vw,30px);font-weight:700;letter-spacing:-.03em;text-transform:none;color:var(--ink);margin:clamp(72px,10vh,120px) 0 clamp(28px,4vh,56px)}
 </style>
 <style id="mq-cols-css">
 .pagequote.midq .mq-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,84px);max-width:min(920px,84vw);margin:clamp(40px,6vh,72px) auto 0;text-align:left}
@@ -1013,9 +1013,9 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
       <article class="qcard"><div class="qc-illo"><svg viewBox="0 0 576 576" preserveAspectRatio="xMidYMid slice" class="moth-diagram qc-uncertain" data-concept="Uncertainty" role="img"><title>Uncertainty</title><g class="frame"><line class="reg" x1="48" y1="48" x2="63" y2="48"></line><line class="reg" x1="48" y1="48" x2="48" y2="63"></line><line class="reg" x1="528" y1="48" x2="513" y2="48"></line><line class="reg" x1="528" y1="48" x2="528" y2="63"></line><line class="reg" x1="48" y1="528" x2="63" y2="528"></line><line class="reg" x1="48" y1="528" x2="48" y2="513"></line><line class="reg" x1="528" y1="528" x2="513" y2="528"></line><line class="reg" x1="528" y1="528" x2="528" y2="513"></line></g><g class="construction"><ellipse class="contour" cx="300" cy="300" rx="152" ry="96" transform="rotate(-18 300 300)"></ellipse><line class="guide" x1="240" y1="300" x2="360" y2="300" transform="rotate(-18 300 300)"></line></g><g class="figure"><circle class="pt" cx="295.5" cy="333.5" r="1.7" style="--tx:4.5px;--ty:-33.5px"></circle><circle class="pt" cx="292.8" cy="308.2" r="1.7" style="--tx:7.2px;--ty:-8.2px"></circle><circle class="pt" cx="330.9" cy="243.0" r="1.7" style="--tx:-30.9px;--ty:57.0px"></circle><circle class="pt" cx="277.5" cy="304.4" r="1.7" style="--tx:22.5px;--ty:-4.4px"></circle><circle class="pt" cx="304.8" cy="352.6" r="1.7" style="--tx:-4.8px;--ty:-52.6px"></circle><circle class="pt" cx="244.3" cy="290.8" r="1.7" style="--tx:55.7px;--ty:9.2px"></circle><circle class="pt" cx="226.3" cy="310.6" r="1.7" style="--tx:73.7px;--ty:-10.6px"></circle><circle class="pt" cx="188.8" cy="399.3" r="1.7" style="--tx:111.2px;--ty:-99.3px"></circle><circle class="pt" cx="282.0" cy="311.3" r="1.7" style="--tx:18.0px;--ty:-11.3px"></circle><circle class="pt" cx="366.0" cy="278.3" r="1.7" style="--tx:-66.0px;--ty:21.7px"></circle><circle class="pt" cx="239.6" cy="346.8" r="1.7" style="--tx:60.4px;--ty:-46.8px"></circle><circle class="pt" cx="321.3" cy="344.9" r="1.7" style="--tx:-21.3px;--ty:-44.9px"></circle><circle class="pt" cx="320.3" cy="238.7" r="1.7" style="--tx:-20.3px;--ty:61.3px"></circle><circle class="pt" cx="360.0" cy="265.3" r="1.7" style="--tx:-60.0px;--ty:34.7px"></circle><circle class="pt" cx="245.4" cy="309.1" r="1.7" style="--tx:54.6px;--ty:-9.1px"></circle><circle class="pt" cx="338.6" cy="275.8" r="1.7" style="--tx:-38.6px;--ty:24.2px"></circle><circle class="pt" cx="329.0" cy="371.4" r="1.7" style="--tx:-29.0px;--ty:-71.4px"></circle><circle class="pt" cx="360.9" cy="355.3" r="1.7" style="--tx:-60.9px;--ty:-55.3px"></circle><circle class="pt" cx="272.2" cy="278.4" r="1.7" style="--tx:27.8px;--ty:21.6px"></circle><circle class="pt" cx="259.6" cy="285.7" r="1.7" style="--tx:40.4px;--ty:14.3px"></circle><circle class="pt" cx="274.7" cy="329.1" r="1.7" style="--tx:25.3px;--ty:-29.1px"></circle><circle class="pt" cx="252.1" cy="307.4" r="1.7" style="--tx:47.9px;--ty:-7.4px"></circle><circle class="pt" cx="252.8" cy="266.5" r="1.7" style="--tx:47.2px;--ty:33.5px"></circle><circle class="pt" cx="371.8" cy="207.3" r="1.7" style="--tx:-71.8px;--ty:92.7px"></circle><circle class="pt" cx="309.8" cy="269.6" r="1.7" style="--tx:-9.8px;--ty:30.4px"></circle><circle class="pt" cx="232.8" cy="320.6" r="1.7" style="--tx:67.2px;--ty:-20.6px"></circle><circle class="pt" cx="291.4" cy="289.3" r="1.7" style="--tx:8.6px;--ty:10.7px"></circle><circle class="pt" cx="349.1" cy="323.5" r="1.7" style="--tx:-49.1px;--ty:-23.5px"></circle><circle class="pt" cx="327.2" cy="288.3" r="1.7" style="--tx:-27.2px;--ty:11.7px"></circle><circle class="pt" cx="253.0" cy="281.9" r="1.7" style="--tx:47.0px;--ty:18.1px"></circle><circle class="pt" cx="206.6" cy="285.5" r="1.7" style="--tx:93.4px;--ty:14.5px"></circle><circle class="pt" cx="309.6" cy="263.6" r="1.7" style="--tx:-9.6px;--ty:36.4px"></circle><circle class="pt" cx="336.0" cy="267.1" r="1.7" style="--tx:-36.0px;--ty:32.9px"></circle><circle class="pt" cx="241.6" cy="324.3" r="1.7" style="--tx:58.4px;--ty:-24.3px"></circle><circle class="pt" cx="391.9" cy="261.2" r="1.7" style="--tx:-91.9px;--ty:38.8px"></circle><circle class="pt" cx="267.0" cy="317.6" r="1.7" style="--tx:33.0px;--ty:-17.6px"></circle><circle class="pt" cx="317.8" cy="285.5" r="1.7" style="--tx:-17.8px;--ty:14.5px"></circle><circle class="pt" cx="274.8" cy="254.3" r="1.7" style="--tx:25.2px;--ty:45.7px"></circle><circle class="pt" cx="316.2" cy="317.1" r="1.7" style="--tx:-16.2px;--ty:-17.1px"></circle><circle class="pt" cx="339.2" cy="321.4" r="1.7" style="--tx:-39.2px;--ty:-21.4px"></circle><circle class="pt" cx="332.8" cy="298.8" r="1.7" style="--tx:-32.8px;--ty:1.2px"></circle><circle class="pt" cx="273.0" cy="307.6" r="1.7" style="--tx:27.0px;--ty:-7.6px"></circle><circle class="pt" cx="355.7" cy="309.6" r="1.7" style="--tx:-55.7px;--ty:-9.6px"></circle><circle class="pt" cx="231.0" cy="317.2" r="1.7" style="--tx:69.0px;--ty:-17.2px"></circle><circle class="pt" cx="338.5" cy="296.1" r="1.7" style="--tx:-38.5px;--ty:3.9px"></circle><circle class="pt" cx="315.6" cy="247.8" r="1.7" style="--tx:-15.6px;--ty:52.2px"></circle><circle class="mean" cx="300" cy="300" r="4" fill="var(--paper)" stroke="var(--ink)" stroke-width="var(--line)" vector-effect="non-scaling-stroke"></circle></g></svg></div><h3>Uncertainty</h3><p>You can’t pin down every property of a quantum system at once: sharpen one and another blurs.</p><p>Treated as a material rather than a limit, it becomes expressive: controlled ambiguity, a blur that carries information instead of noise. The idea behind QuantumBlur.</p></article>
     </div>
 
-    <blockquote class="pagequote midq"><p>We’re not waiting for fault tolerant computers.</p><div class="mq-cols"><p>The full power of quantum computing will be unlocked with fault-tolerance. We’re finding concrete ways that quantum advantages can empower creatives and the creative industries, looking at both near-term quantum utility and longterm quantum advantage. At the same time, we know that creatives are inspired by new perspectives.</p><p>Usefulness does not just come from computational power, but from providing new opportunities for expression and aesthetic innovation. This makes NISQ quantum hardware useful for creativity even before quantum advantages emerge. Through our research we find ever more sophisticated ways to bring near-term quantum hardware to games, music and visual media.</p></div></blockquote>
+    <blockquote class="pagequote midq"><p>We’re not waiting for<br>fault tolerant computers.</p><div class="mq-cols"><p>The full power of quantum computing will be unlocked with fault-tolerance. We’re finding concrete ways that quantum advantages can empower creatives and the creative industries, looking at both near-term quantum utility and longterm quantum advantage. At the same time, we know that creatives are inspired by new perspectives.</p><p>Usefulness does not just come from computational power, but from providing new opportunities for expression and aesthetic innovation. This makes NISQ quantum hardware useful for creativity even before quantum advantages emerge. Through our research we find ever more sophisticated ways to bring near-term quantum hardware to games, music and visual media.</p></div></blockquote>
 
-    <div class="grouphdr deckhdr">Thinking</div>
+    <div class="grouphdr deckhdr">Whitepapers, Thoughts &amp; Talks.</div>
     <div class="spotcards">
       <a class="spotcard" data-cat="whitepaper" href="https://arxiv.org/abs/2606.29989" target="_blank" rel="noopener noreferrer"><span class="spotcat">Whitepaper</span><h3 class="spottl">Rendering Coherent Scattering via Quantum Collision Models</h3></a>
       <a class="spotcard" data-cat="blog" href="https://mothquantum.substack.com/p/a-new-way-to-think-about-quantum" target="_blank" rel="noopener noreferrer"><span class="spotcat">Blog</span><h3 class="spottl">A new way to think about quantum programming</h3></a>
@@ -1317,14 +1317,22 @@ addEventListener('pagereveal',function(e){
   var CH="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   var q=document.querySelector('.pagequote.midq p'); if(!q||REDUCE) return;
   function glitch(el){
-    var original=el.textContent, start=performance.now(), last=0;
+    var nodes=[].slice.call(el.childNodes).filter(function(n){return n.nodeType===3;});
+    var origs=nodes.map(function(n){return n.nodeValue;});
+    var total=origs.reduce(function(a,s){return a+s.length;},0);
+    var start=performance.now(), last=0;
     (function tick(now){
       var pr=(now-start)/750;
-      if(pr>=1){ el.textContent=original; return; }
-      if(now-last>=45){ last=now; var lock=Math.floor(original.length*pr);
-        el.textContent=original.split('').map(function(ch,i){
-          return (i<lock || !/[A-Za-z0-9]/.test(ch)) ? ch : CH[Math.floor(Math.random()*CH.length)];
-        }).join('');
+      if(pr>=1){ nodes.forEach(function(n,i){n.nodeValue=origs[i];}); return; }
+      if(now-last>=45){ last=now; var lock=Math.floor(total*pr), seen=0;
+        nodes.forEach(function(n,i){
+          var str=origs[i];
+          n.nodeValue=str.split('').map(function(ch,j){
+            var gi=seen+j;
+            return (gi<lock || !/[A-Za-z0-9]/.test(ch)) ? ch : CH[Math.floor(Math.random()*CH.length)];
+          }).join('');
+          seen+=str.length;
+        });
       }
       requestAnimationFrame(tick);
     })(performance.now());
