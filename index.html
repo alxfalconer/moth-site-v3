@@ -516,6 +516,7 @@ html.js #coinLoader.gone{display:none}
 .coin-logo{display:none;align-items:center;gap:10px}
 .coin-logo.show{display:flex}
 .coin-logo img{height:26px;width:auto;display:block}
+.coin-logo .coin-svg{height:24px}
 .coin-logo span{font:800 clamp(20px,2.2vw,30px)/1 var(--sans);letter-spacing:-.02em;color:var(--ink)}
 html[data-theme="dark"] .coin-logo img,html[data-theme="dark"] .coin-mark img{filter:invert(1)}
 .coin{position:absolute;left:50%;top:50%;width:104px;height:104px;margin:-52px 0 0 -52px;transform-style:preserve-3d;transform:translateY(0) rotateX(70deg) scale(1);will-change:transform}
@@ -591,17 +592,9 @@ window.revealHome=function(){ if(window.__reveal.done) return; window.__reveal.d
     <a href="./tools.html">Tools</a>
     <a href="./company.html">Company</a>
     <a href="./news.html">News</a>
-    <a href="mailto:hello@mothquantum.com">Contact</a>
+    <a href="./company.html#information">Contact</a>
     <a class="sidenav-cta" href="#early-access">Platform <span class="hero-cta-arrow" aria-hidden="true">→</span></a>
   </nav>
-  <div class="sidenav-social" aria-label="Social">
-    <a href="https://discord.com/invite/tbrZgtxTF" target="_blank" rel="noopener noreferrer">Discord</a>
-    <a href="https://github.com/moth-quantum" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="https://mothquantum.substack.com/" target="_blank" rel="noopener noreferrer">Substack</a>
-    <a href="https://www.instagram.com/mothquantum" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://x.com/Moth_Quantum" target="_blank" rel="noopener noreferrer">X</a>
-    <a href="https://www.linkedin.com/company/mothquantum" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  </div>
 </aside>
 
 <!-- ============ nav ============ -->
@@ -881,6 +874,7 @@ window.revealHome=function(){ if(window.__reveal.done) return; window.__reveal.d
     <nav class="foot-legal" aria-label="Legal">
       <a href="#" data-stub="Compliance page — next pass">Compliance</a>
       <a href="#" data-stub="Careers page — next pass">Careers</a>
+      <a href="#" data-stub="Cookie Policy page — next pass">Cookie Policy</a>
     </nav>
     <div class="foot-social">
       <a href="https://discord.com/invite/tbrZgtxTF" target="_blank" rel="noopener noreferrer">Discord</a>
@@ -1352,6 +1346,7 @@ async function run(THREE, gsap){
 (function(){
   var REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var MOTH_MARK = (document.querySelector('.brand-img')||{}).src || '';
+  var MOTH_SVG = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODIzIiBoZWlnaHQ9IjE0NyIgdmlld0JveD0iMCAwIDgyMyAxNDciIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNTExLjE5NSAyQzU0OS4yOTMgMi4wMDAwOCA1NzYuNTg4IDMxLjY2NzggNTc2LjU4OCA3My4xOTA0QzU3Ni41ODggMTE0LjcxMyA1NDkuMjkzIDE0NC4zOCA1MTEuMTk1IDE0NC4zOEM0NzIuOTE0IDE0NC4zOCA0NDUuNjE1IDExNC43MTcgNDQ1LjYxNSA3My4xOTA0QzQ0NS42MTUgMzEuNjYzNyA0NzIuOTE0IDIgNTExLjE5NSAyWk0zMzEuMTMgNC4wNTY2NEwzMzEuNTc5IDUuNDM5NDVMMzYwLjcxMyA5NS4xMjIxTDM4OS42NzEgNS40NDIzOEwzOTAuMTE4IDQuMDU2NjRINDMxLjE2MVYxNDIuMzIzSDQwMC45OFY1NC40NDQzTDM3Mi41MjkgMTQwLjk0OEwzNzIuMDc3IDE0Mi4zMjNIMzQ4LjIzOEwzNDcuNzg2IDE0MC45NDhMMzE5LjMzNSA1NC40NDQzVjE0Mi4zMjNIMjg5LjM0MlY0LjA1NjY0SDMzMS4xM1pNNjg5LjUxIDQuMDU2NjRWMzEuODA1N0g2NDcuNDM1VjE0Mi4zMjNINjE1Ljc1OVYzMS44MDU3SDU3My42ODRWNC4wNTY2NEg2ODkuNTFaTTczMy4zMjEgNC4wNTY2NFY1Ny41MzkxSDc4OC43ODdWNC4wNTY2NEg4MjAuMjc2VjE0Mi4zMjNINzg4Ljc4N1Y4NS4yODgxSDczMy4zMjFWMTQyLjMyM0g3MDEuNjQ2VjQuMDU2NjRINzMzLjMyMVpNNTExLjE5NSAzMC4xMjNDNTAxLjIzMyAzMC4xMjMgNDkyLjgyOCAzNC4yNDYgNDg2Ljg3NCA0MS42MDY0QzQ4MC44OTIgNDkuMDAxIDQ3Ny4yOTEgNTkuNzg5MSA0NzcuMjkxIDczLjE5MDRDNDc3LjI5MSA4Ni41OTE3IDQ4MC44OTIgOTcuMzc5OSA0ODYuODc0IDEwNC43NzRDNDkyLjgyOCAxMTIuMTM1IDUwMS4yMzMgMTE2LjI1NyA1MTEuMTk1IDExNi4yNTdDNTIxLjA1OSAxMTYuMjU3IDUyOS40MTcgMTEyLjEzOCA1MzUuMzUxIDEwNC43NzZDNTQxLjMxMSA5Ny4zODA3IDU0NC45MTIgODYuNTkxNCA1NDQuOTEyIDczLjE5MDRDNTQ0LjkxMiA1OS43ODkyIDU0MS4zMTEgNDguOTk5MyA1MzUuMzUxIDQxLjYwMzVDNTI5LjQxNyAzNC4yNDE0IDUyMS4wNTkgMzAuMTIzMSA1MTEuMTk1IDMwLjEyM1oiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjQiLz4KPHBhdGggZD0iTTIzNS4zNjggNC4xOTIwMlYyOS40NjQ1QzIzNS4zNjggNDAuNDk2MSAyMzAuOTc4IDUxLjA3NzEgMjIzLjE2MyA1OC44Nzg1QzIxNS41OTEgNjYuNDM3MSAyMDUuNDA3IDcwLjc4NzggMTk0LjcyNyA3MS4wNTI0TDE5My42OTEgNzEuMDY1MVY3NS4zMTdDMjA0Ljc0NyA3NS4zMTcgMjE1LjM0NyA3OS43MDExIDIyMy4xNjMgODcuNTAzNUMyMzAuOTc4IDk1LjMwNTEgMjM1LjM2OCAxMDUuODg2IDIzNS4zNjggMTE2LjkxOVYxNDIuMTlIMTkyLjEyMVYxMjUuMzQ4QzE5Mi4xMjEgMTA4LjQ1OSAxNzguNDA3IDk0Ljc3MzEgMTYxLjQ5NiA5NC43NzMxSDE1NC4xMjJWNTEuNjA5SDE2MS40OTZDMTc4LjQwNyA1MS42MDkgMTkyLjEyMSAzNy45MjI5IDE5Mi4xMjEgMjEuMDMyOFY0LjE5MjAySDIzNS4zNjhaTTE0MC4zNyA0LjE5MjAyVjE0Mi4xOUg5Ny4xMjRWNC4xOTIwMkgxNDAuMzdaTTQ1LjM3MyA0LjE5MjAyVjIxLjAzMjhDNDUuMzczIDM3LjkyMjkgNTkuMDg3NiA1MS42MDkgNzUuOTk4IDUxLjYwOUg4My4zNzIxVjk0Ljc3MzFINzUuOTk4QzU5LjA4NzcgOTQuNzczMSA0NS4zNzMzIDEwOC40NTkgNDUuMzczIDEyNS4zNDhWMTQyLjE5SDIuMTI1OThWMTE2LjkxOUMyLjEyNTk4IDEwNS44ODYgNi41MTY4MiA5NS4zMDUxIDE0LjMzMiA4Ny41MDM1QzIyLjE0NzUgNzkuNzAxMiAzMi43NDgyIDc1LjMxNyA0My44MDI3IDc1LjMxN1Y3MS4wNjUxTDQyLjc2NzYgNzEuMDUyNEMzMi4wODgxIDcwLjc4NzkgMjEuOTAzMyA2Ni40MzcgMTQuMzMyIDU4Ljg3ODVDNi41MTY4OSA1MS4wNzcxIDIuMTI2MDcgNDAuNDk2MiAyLjEyNTk4IDI5LjQ2NDVWNC4xOTIwMkg0NS4zNzNaIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSI0LjI1MjUxIi8+Cjwvc3ZnPgo=";
   function runCoinLoader(reveal){
     var loader = document.getElementById('coinLoader');
     if(!loader){ reveal(); return; }
@@ -1379,7 +1374,7 @@ async function run(THREE, gsap){
     var logosWrap=loader.querySelector('.coin-logos'); var logos=[];
     for(var li=0; li<5; li++){
       var lg=document.createElement('div'); lg.className='coin-logo';
-      lg.innerHTML=(MOTH_MARK?'<img src="'+MOTH_MARK+'" alt="">':'')+'<span>MOTH</span>';
+      lg.innerHTML='<img class="coin-svg" src="'+MOTH_SVG+'" alt="MOTH">';
       logosWrap.appendChild(lg); logos.push(lg);
     }
     // rAF flip: gravity arc + decelerating spin + damped landing settle
