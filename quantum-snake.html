@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Snake — a one-qubit interferometer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0D0F;
+    --ink:#EDECE8;
+    --ink-64:rgba(237,236,232,.64);
+    --ink-40:rgba(237,236,232,.40);
+    --ink-24:rgba(237,236,232,.24);
+    --rule:rgba(237,236,232,.15);
+    --sans:"Inter","Inter var",-apple-system,system-ui,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink)}
+  body{
+    font-family:var(--sans);font-size:13px;font-weight:400;line-height:24px;
+    -webkit-font-smoothing:antialiased;
+    padding:48px 24px 72px;display:flex;justify-content:center;
+  }
+  .sheet{width:100%;max-width:636px}
+  .tnum{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+  .masthead{border-bottom:1px solid var(--ink);padding-bottom:11px;margin-bottom:11px}
+  h1{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;margin:0;line-height:24px}
+
+  /* the entire persistent HUD */
+  .state{
+    display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+    height:24px;overflow:hidden;margin-bottom:11px;
+    font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
+  }
+  .state #psi{font-weight:500;white-space:nowrap}
+  .state #verdict{color:var(--ink-40);white-space:nowrap}
+  .state .spacer{flex:1}
+  .state #score{color:var(--ink-40);white-space:nowrap}
+  .state #score b{font-weight:500;color:var(--ink)}
+
+  .stage{position:relative;border:1px solid var(--rule);line-height:0}
+  canvas{display:block;width:100%;height:auto}
+
+  .veil{
+    position:absolute;inset:0;background:rgba(13,13,15,.94);
+    display:flex;flex-direction:column;justify-content:center;padding:0 40px;line-height:24px;
+  }
+  .veil[hidden]{display:none}
+  .veil h2{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;margin:0 0 12px}
+  .veil p{margin:0;color:var(--ink-64);max-width:40em}
+  .veil p+p{margin-top:24px}
+  .veil .dim{color:var(--ink-40)}
+  .speeds{margin:24px 0;display:table;border-spacing:0}
+  .speeds div{display:table-row;color:var(--ink-64)}
+  .speeds div span{display:table-cell;padding-right:20px;white-space:nowrap}
+  .speeds div span:first-child{color:var(--ink);font-weight:500}
+  .speeds div span:last-child{color:var(--ink-40);padding-right:0}
+  kbd{
+    font:inherit;font-size:11px;font-weight:500;border:1px solid var(--ink-24);
+    border-radius:2px;padding:1px 6px;color:var(--ink)
+  }
+
+  /* terminal-style event tail */
+  .log{
+    margin-top:11px;padding-top:11px;border-top:1px solid var(--rule);
+    height:72px;font-size:12px;color:var(--ink-40);
+    font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
+  }
+  .log div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .log div:last-child{color:var(--ink-64)}
+
+  .pad{display:none;margin-top:24px;grid-template-columns:repeat(3,1fr);gap:8px;max-width:280px}
+  .pad button{
+    height:48px;background:none;border:1px solid var(--ink-24);border-radius:2px;
+    font:inherit;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink);cursor:pointer;-webkit-user-select:none;user-select:none
+  }
+  .pad button:active{background:var(--ink);color:var(--bg)}
+  .pad .mid{grid-column:2}
+  @media (hover:none),(max-width:560px){ .pad{display:grid} }
+
+  :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead"><h1>Quantum Snake</h1></div>
+
+  <div class="state">
+    <span id="psi">ψ = |L⟩</span>
+    <span id="verdict">definite</span>
+    <span class="spacer"></span>
+    <span id="score">length <b>5</b></span>
+  </div>
+
+  <div class="stage">
+    <canvas id="board" width="588" height="420"></canvas>
+    <div class="veil" id="veil">
+      <h2 id="veil-title">Quantum Snake</h2>
+      <p id="veil-body"></p>
+      <div class="speeds" id="speeds">
+        <div><span><kbd>1</kbd> slow</span><span>340 ms</span><span>room to count cells</span></div>
+        <div><span><kbd>2</kbd> standard</span><span>240 ms</span><span></span></div>
+        <div><span><kbd>3</kbd> fast</span><span>170 ms</span><span>no time to think</span></div>
+      </div>
+      <p id="veil-hint"></p>
+      <p id="veil-foot"></p>
+    </div>
+  </div>
+
+  <div class="log" id="log"></div>
+
+  <div class="pad">
+    <button class="mid" id="k-up">Up</button>
+    <button id="k-left">Left</button>
+    <button id="k-split">Split</button>
+    <button id="k-right">Right</button>
+    <button class="mid" id="k-down">Down</button>
+  </div>
+
+</div>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------------------------------------------------------------
+   Board
+   --------------------------------------------------------------- */
+const COLS = 21, ROWS = 15, CELL = 28;
+const N = 0, E = 1, S = 2, W = 3;
+const DIRS = [[0,-1],[1,0],[0,1],[-1,0]];
+const START_LEN = 5, PLATES = 7;
+const BG = "#0D0D0F", INK = "#EDECE8";
+
+/* tick in ms, and coherence budget in ticks — roughly constant wall clock */
+const SPEEDS = [
+  { ms:340, coh:12, name:"slow" },
+  { ms:240, coh:15, name:"standard" },
+  { ms:170, coh:20, name:"fast" }
+];
+
+const cvs = document.getElementById("board");
+const ctx = cvs.getContext("2d");
+
+function fitCanvas(){
+  const dpr = window.devicePixelRatio || 1;
+  cvs.width  = COLS*CELL*dpr;
+  cvs.height = ROWS*CELL*dpr;
+  cvs.style.aspectRatio = (COLS*CELL)+"/"+(ROWS*CELL);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+fitCanvas();
+addEventListener("resize", () => { fitCanvas(); draw(); });
+
+const key = (x,y) => x+","+y;
+const inBounds = (x,y) => x>=0 && y>=0 && x<COLS && y<ROWS;
+
+/* Measurements draw from the CSPRNG, not Math.random. */
+function rand(){
+  const b = new Uint32Array(1);
+  crypto.getRandomValues(b);
+  return b[0]/4294967296;
+}
+const randInt = n => Math.floor(rand()*n);
+
+/* ---------------------------------------------------------------
+   State
+   --------------------------------------------------------------- */
+let branches, plates, target, len, merges, collapses, tickNo;
+let preSplitDir, splitCell, axis, coh, queue, mode, timer, mark, lines;
+let speed = SPEEDS[1];
+
+const $ = id => document.getElementById(id);
+const isSplit = () => branches.length === 2;
+
+/* Absolute input, reflected for the mirrored branch.
+   axis "h": mirror line is horizontal, so N and S swap.
+   axis "v": mirror line is vertical,   so E and W swap. */
+function reflect(d, flip){
+  if (!flip) return d;
+  if (axis === "h") return d===N ? S : d===S ? N : d;
+  return d===E ? W : d===W ? E : d;
+}
+
+function branch(x,y,dir,amp,flip,trail){
+  return { x, y, dir, amp, flip, trail: trail || new Map() };
+}
+
+function reset(toMenu){
+  len = START_LEN; merges = 0; collapses = 0; coh = 0; tickNo = 0;
+  queue = []; preSplitDir = E; splitCell = null; axis = "h"; mark = null;
+  lines = [];
+
+  const b = branch(4, (ROWS-1)>>1, E, 1, false);
+  b.trail.set(key(b.x,b.y), len);
+  branches = [b];
+
+  plates = new Set();
+  while (plates.size < PLATES){
+    const x = 7 + randInt(COLS-9), y = randInt(ROWS);
+    if (!b.trail.has(key(x,y))) plates.add(key(x,y));
+  }
+  placeTarget();
+
+  clearInterval(timer); timer = 0;
+  renderLog();
+  syncUI(); draw();
+
+  if (toMenu){ mode = "ready"; menu(); }
+  else start();
+}
+
+function menu(){
+  $("speeds").hidden = false;
+  showVeil("Quantum Snake",
+    "Arrow keys steer. <kbd>space</kbd> splits the snake into two branches at once — " +
+    "both read the same key, but one reads it mirrored across the axis drawn on the board. " +
+    "Land the two heads on one cell and they interfere.",
+    "In phase they merge and you grow. Out of phase they cancel and the snake is gone. " +
+    "Diagonal plates flip a branch's phase. The axis shortens as coherence runs out; " +
+    "when it disappears you are measured where you stand.",
+    "<span class='dim'>Choose a speed to begin.</span>");
+}
+
+function occupied(x,y){
+  const k = key(x,y);
+  return plates.has(k) || branches.some(b => b.trail.has(k));
+}
+function placeTarget(){
+  let x, y, guard = 0;
+  do { x = randInt(COLS); y = randInt(ROWS); } while (occupied(x,y) && ++guard < 800);
+  target = {x,y};
+}
+
+/* ---------------------------------------------------------------
+   The qubit
+   --------------------------------------------------------------- */
+/* RY(pi/2) on |L>: amplitudes 1/sqrt2 each, both real. A plate is a sign
+   flip, so interference is plain addition: same sign grows, opposite cancels.
+   theta is still a parameter — pass something else to get a weighted split. */
+function split(theta){
+  if (isSplit() || mode !== "run") return;
+  const s = branches[0];
+  const horizontal = (s.dir === E || s.dir === W);
+  const perp = horizontal ? N : E;
+
+  // refuse a split that would put a branch straight into a wall or the body
+  for (const d of [perp, reflectWith(perp, horizontal ? "h" : "v")]){
+    const x = s.x+DIRS[d][0], y = s.y+DIRS[d][1];
+    if (!inBounds(x,y) || s.trail.has(key(x,y))){
+      return log("split refused · no room on both sides");
+    }
+  }
+
+  preSplitDir = s.dir;
+  splitCell = { x:s.x, y:s.y };
+  axis = horizontal ? "h" : "v";
+
+  const a = Math.cos(theta/2), b = Math.sin(theta/2);
+  branches = [
+    branch(s.x, s.y, s.dir, a, false, new Map(s.trail)),
+    branch(s.x, s.y, s.dir, b, true,  new Map(s.trail))
+  ];
+  coh = 0; queue = [perp];
+  log("split · mirror " + (axis === "h" ? "horizontal" : "vertical"));
+  syncUI(); draw();
+}
+function reflectWith(d, ax){
+  if (ax === "h") return d===N ? S : d===S ? N : d;
+  return d===E ? W : d===W ? E : d;
+}
+
+function measure(reason){
+  const [L,R] = branches;
+  const p0 = L.amp*L.amp, r = rand();
+  const win  = r < p0 ? L : R;
+  const lost = win === L ? R : L;
+  const erased = lost.trail.size;
+  win.amp = 1; win.flip = false;
+  branches = [win];
+  collapses++; coh = 0; queue = []; splitCell = null;
+  log(reason + " · measured " + (win === L ? "L" : "R") +
+      " · " + erased + " cells of the other history erased");
+  return win;
+}
+
+/* Both heads on one cell — the amplitudes add. */
+function interfere(){
+  const [L,R] = branches;
+  const sum = L.amp + R.amp;
+
+  if (sum*sum < 0.02){
+    mark = { x:L.x, y:L.y };
+    return dead("Cancelled",
+      "The two branches arrived out of phase and summed to zero. " +
+      "Nothing was hit — the snake interfered itself out of existence.");
+  }
+
+  const m = branch(L.x, L.y, preSplitDir, 1, false, new Map(L.trail));
+  for (const [k,v] of R.trail) m.trail.set(k, Math.max(v, m.trail.get(k) || 0));
+
+  // the loop is body now, so leaving it may need a turn the player never made
+  for (const d of [preSplitDir, (preSplitDir+1)%4, (preSplitDir+3)%4]){
+    const x = m.x+DIRS[d][0], y = m.y+DIRS[d][1];
+    if (inBounds(x,y) && !m.trail.has(key(x,y))){ m.dir = d; break; }
+  }
+
+  branches = [m];
+  merges++; len++; coh = 0; queue = []; splitCell = null;
+  log("merge · in phase · length " + len + " · the loop is body now");
+}
+
+/* ---------------------------------------------------------------
+   Tick
+   --------------------------------------------------------------- */
+function step(){
+  tickNo++;
+  const input = queue.length ? queue.shift() : null;
+
+  // age the trails first so the tail tip clears in time to be entered
+  for (const b of branches)
+    for (const [k,v] of b.trail){
+      if (v <= 1) b.trail.delete(k); else b.trail.set(k, v-1);
+    }
+
+  const moves = branches.map(b => {
+    const dir = input === null ? b.dir : reflect(input, b.flip);
+    return { b, dir, x: b.x+DIRS[dir][0], y: b.y+DIRS[dir][1] };
+  });
+
+  /* Branches never collide with each other — only with walls and their own
+     history. Interference is the only channel between them. */
+  const blocked = moves.filter(m => !inBounds(m.x,m.y) || m.b.trail.has(key(m.x,m.y)));
+
+  if (blocked.length){
+    if (!isSplit()){
+      return dead("Crashed", inBounds(blocked[0].x, blocked[0].y)
+        ? "Ran into its own body, with a perfectly definite position."
+        : "Ran into the wall, with a perfectly definite position.");
+    }
+    if (blocked.length === 2)
+      return dead("Both branches blocked",
+        "Every path in the superposition terminated on the same tick.");
+
+    const doomed = blocked[0].b;
+    const win = measure("branch blocked");
+    if (win === doomed)
+      return dead("Measured into a blocked branch",
+        "The draw landed on the branch with nowhere to go. " +
+        "Splitting spreads the risk; it never removes it.");
+    syncUI();
+    return draw();
+  }
+
+  for (const m of moves){
+    m.b.dir = m.dir; m.b.x = m.x; m.b.y = m.y;
+    m.b.trail.set(key(m.x,m.y), len);
+    if (plates.has(key(m.x,m.y))){
+      m.b.amp = -m.b.amp;
+      if (isSplit()) log("plate · one branch inverted");
+    }
+  }
+
+  if (isSplit() && branches[0].x === branches[1].x && branches[0].y === branches[1].y){
+    interfere();
+    if (mode !== "run") return;
+  }
+
+  const eater = branches.find(b => b.x === target.x && b.y === target.y);
+  if (eater){
+    if (isSplit()){
+      const win = measure("target reached");
+      if (win === eater){ len++; placeTarget(); log("target · length " + len); }
+      else log("target · untouched, wrong branch survived");
+    } else {
+      len++; placeTarget();
+      log("target · length " + len);
+    }
+  }
+
+  if (isSplit() && ++coh >= speed.coh) measure("decoherence");
+
+  syncUI(); draw();
+}
+
+/* ---------------------------------------------------------------
+   Render
+   --------------------------------------------------------------- */
+function draw(){
+  const W_ = COLS*CELL, H_ = ROWS*CELL;
+  ctx.clearRect(0,0,W_,H_);
+  ctx.fillStyle = BG; ctx.fillRect(0,0,W_,H_);
+
+  // counting dots — the grid you do path arithmetic on
+  ctx.fillStyle = "rgba(237,236,232,.18)";
+  for (let x=0;x<COLS;x++) for (let y=0;y<ROWS;y++)
+    ctx.fillRect(x*CELL+CELL/2-0.5, y*CELL+CELL/2-0.5, 1, 1);
+
+  /* Mirror axis. Its length is the coherence budget: it retreats toward the
+     split cell and forced measurement happens when it runs out. */
+  if (isSplit() && splitCell){
+    const frac = Math.max(0, 1 - coh/speed.coh);
+    ctx.strokeStyle = INK; ctx.globalAlpha = .3; ctx.lineWidth = 1;
+    ctx.setLineDash([1,5]);
+    ctx.beginPath();
+    if (axis === "h"){
+      const y = splitCell.y*CELL + CELL/2 + .5, half = W_*frac;
+      ctx.moveTo(Math.max(0, splitCell.x*CELL+CELL/2-half), y);
+      ctx.lineTo(Math.min(W_, splitCell.x*CELL+CELL/2+half), y);
+    } else {
+      const x = splitCell.x*CELL + CELL/2 + .5, half = H_*frac;
+      ctx.moveTo(x, Math.max(0, splitCell.y*CELL+CELL/2-half));
+      ctx.lineTo(x, Math.min(H_, splitCell.y*CELL+CELL/2+half));
+    }
+    ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha = 1;
+  }
+
+  // phase plates
+  ctx.strokeStyle = INK; ctx.lineWidth = 1; ctx.globalAlpha = .5;
+  for (const k of plates){
+    const [x,y] = k.split(",").map(Number), px = x*CELL, py = y*CELL;
+    ctx.beginPath();
+    ctx.moveTo(px+5.5, py+CELL-5.5); ctx.lineTo(px+CELL-5.5, py+5.5);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
+  // target
+  const tx = target.x*CELL+CELL/2, ty = target.y*CELL+CELL/2;
+  ctx.lineWidth = 1.5; ctx.strokeStyle = INK;
+  ctx.beginPath(); ctx.arc(tx,ty,8,0,Math.PI*2); ctx.stroke();
+  ctx.fillStyle = INK;
+  ctx.beginPath(); ctx.arc(tx,ty,2.5,0,Math.PI*2); ctx.fill();
+
+  const spread = isSplit();
+  for (const b of branches){
+    const dashed = spread && b.amp < 0;
+    for (const [k,life] of b.trail){
+      const [x,y] = k.split(",").map(Number);
+      const head = (x===b.x && y===b.y), px = x*CELL, py = y*CELL;
+      ctx.globalAlpha = Math.min(1, .34 + .66*(life/Math.max(1,len)));
+
+      if (!spread){
+        const i = head ? 3 : 6;
+        ctx.fillStyle = INK;
+        ctx.fillRect(px+i, py+i, CELL-i*2, CELL-i*2);
+      } else {
+        const i = head ? 3.5 : 6.5;
+        ctx.strokeStyle = INK;
+        ctx.lineWidth = head ? 1.75 : 1.15;
+        ctx.setLineDash(dashed ? [2.5,2.5] : []);
+        ctx.strokeRect(px+i, py+i, CELL-i*2, CELL-i*2);
+        ctx.setLineDash([]);
+        if (head){
+          ctx.fillStyle = INK;
+          ctx.fillRect(px+CELL/2-2.5, py+CELL/2-2.5, 5, 5);
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // annihilation mark
+  if (mark){
+    const mx = mark.x*CELL+CELL/2, my = mark.y*CELL+CELL/2;
+    ctx.strokeStyle = INK; ctx.lineWidth = 1;
+    for (const r of [7,12,17]){
+      ctx.globalAlpha = .1 + .5/(r/7);
+      ctx.beginPath(); ctx.arc(mx,my,r,0,Math.PI*2); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Chrome
+   --------------------------------------------------------------- */
+function log(s){
+  lines.push(String(tickNo).padStart(4,"0") + "  " + s);
+  if (lines.length > 3) lines.shift();
+  renderLog();
+}
+function renderLog(){
+  $("log").innerHTML = lines.map(l => "<div>" + l + "</div>").join("");
+}
+
+function syncUI(){
+  $("score").innerHTML = "length <b>" + len + "</b>";
+  if (isSplit()){
+    const [L,R] = branches;
+    const neg = (L.amp < 0) !== (R.amp < 0);
+    const f = n => (n<0?"−":"") + Math.abs(n).toFixed(3);
+    $("psi").textContent = "ψ = " + f(L.amp) + "|L⟩ " + (R.amp<0?"−":"+") +
+                           " " + Math.abs(R.amp).toFixed(3) + "|R⟩";
+    $("verdict").textContent = neg ? "merging now would cancel" : "merging now would grow";
+  } else {
+    $("psi").textContent = "ψ = |L⟩";
+    $("verdict").textContent = "definite";
+  }
+}
+
+function showVeil(title, bodyHTML, hint, footHTML){
+  $("veil").hidden = false;
+  $("veil-title").textContent = title;
+  $("veil-body").innerHTML = bodyHTML || "";
+  $("veil-hint").innerHTML = hint || "";
+  $("veil-hint").hidden = !hint;
+  $("veil-foot").innerHTML = footHTML || "";
+  $("veil-foot").hidden = !footHTML;
+}
+
+function dead(title, body){
+  mode = "dead";
+  clearInterval(timer); timer = 0;
+  log(title.toLowerCase());
+  $("speeds").hidden = true;
+  showVeil(title, body,
+    "<span class='dim'>length " + len + " · " + merges + " merges · " +
+    collapses + " collapses · " + speed.name + "</span>",
+    "<kbd>space</kbd> play again &nbsp; <kbd>R</kbd> change speed");
+  syncUI(); draw();
+}
+
+function start(){
+  mode = "run";
+  $("veil").hidden = true;
+  clearInterval(timer);
+  timer = setInterval(step, speed.ms);
+}
+
+/* ---------------------------------------------------------------
+   Input
+   --------------------------------------------------------------- */
+/* Reversal is illegal, as in classic Snake. The two headings are mirror
+   images, so a reversal for one branch is a reversal for both. */
+function steer(d){
+  if (mode !== "run" || queue.length >= 2) return;
+  const last = queue.length ? queue[queue.length-1] : branches[0].dir;
+  if (d === (last+2) % 4) return;
+  queue.push(d);
+}
+function primary(){
+  if (mode === "run") split(Math.PI/2);
+  else if (mode === "dead") reset(false);
+  else reset(false);
+}
+
+const KEYS = { arrowup:N, w:N, arrowright:E, d:E, arrowdown:S, s:S, arrowleft:W, a:W };
+
+addEventListener("keydown", e => {
+  const k = e.key.toLowerCase();
+
+  if (mode === "ready"){
+    const i = "123".indexOf(k);
+    if (i >= 0){ speed = SPEEDS[i]; reset(false); }
+    return;
+  }
+  if (k in KEYS){ e.preventDefault(); steer(KEYS[k]); return; }
+  if (k === " "){ e.preventDefault(); primary(); return; }
+  if (k === "r"){ reset(true); return; }
+  if (k === "p" && mode === "run"){
+    if (timer){ clearInterval(timer); timer = 0; log("paused"); }
+    else { timer = setInterval(step, speed.ms); log("running"); }
+  }
+});
+
+$("k-up").onclick    = () => steer(N);
+$("k-down").onclick  = () => steer(S);
+$("k-left").onclick  = () => steer(W);
+$("k-right").onclick = () => steer(E);
+$("k-split").onclick = () => { if (mode === "ready"){ speed = SPEEDS[1]; reset(false); } else primary(); };
+
+mode = "ready";
+reset(true);
+})();
+</script>
+<script>addEventListener("keydown",function(e){if(e.key==="Escape"&&window.parent!==window){window.parent.postMessage("snake-dismiss","*");}});</script>
+</body>
+</html>

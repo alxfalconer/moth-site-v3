@@ -1494,11 +1494,23 @@ addEventListener('pagereveal',function(e){
   io.observe(term);
 })();
 </script>
+
 <script id="mterm-controls">
-(function(){var t=document.getElementById("mothTerm");if(!t)return;var c=t.querySelector(".mterm-dot--c"),m=t.querySelector(".mterm-dot--m");function gone(){t.style.display="none";}if(c)c.addEventListener("click",function(){t.classList.add("mterm--closing");setTimeout(gone,440);});if(m)m.addEventListener("click",function(){t.classList.add("mterm--min");setTimeout(gone,840);});})();
-</script>
-<script id="mterm-drag">
-(function(){var t=document.getElementById("mothTerm");if(!t)return;var bar=t.querySelector(".mterm-bar");if(!bar)return;var dx=0,dy=0,sx=0,sy=0,drag=false,raf=0;function apply(){raf=0;t.style.transform="translate3d("+dx+"px,"+dy+"px,0)";}bar.addEventListener("pointerdown",function(e){if(e.target.closest(".mterm-dot"))return;drag=true;sx=e.clientX-dx;sy=e.clientY-dy;t.classList.add("mterm--dragging");bar.setPointerCapture(e.pointerId);e.preventDefault();});bar.addEventListener("pointermove",function(e){if(!drag)return;dx=e.clientX-sx;dy=e.clientY-sy;if(!raf)raf=requestAnimationFrame(apply);});function end(){if(!drag)return;drag=false;if(raf){cancelAnimationFrame(raf);raf=0;}apply();t.classList.remove("mterm--dragging");}bar.addEventListener("pointerup",end);bar.addEventListener("pointercancel",end);})();
+(function(){
+  var t=document.getElementById("mothTerm"); if(!t) return;
+  var c=t.querySelector(".mterm-dot--c"), m=t.querySelector(".mterm-dot--m"), bar=t.querySelector(".mterm-bar");
+  function gone(){ t.style.display="none"; }
+  if(c) c.addEventListener("click",function(){ t.classList.add("mterm--closing"); setTimeout(gone,440); });
+  if(m) m.addEventListener("click",function(){ t.classList.add("mterm--min"); setTimeout(gone,840); });
+  if(bar){
+    var dx=0,dy=0,sx=0,sy=0,drag=false,raf=0;
+    function apply(){ raf=0; t.style.transform="translate3d("+dx+"px,"+dy+"px,0)"; }
+    bar.addEventListener("pointerdown",function(e){ if(e.target.closest(".mterm-dot")) return; drag=true; sx=e.clientX-dx; sy=e.clientY-dy; t.classList.add("mterm--dragging"); bar.setPointerCapture(e.pointerId); e.preventDefault(); });
+    bar.addEventListener("pointermove",function(e){ if(!drag) return; dx=e.clientX-sx; dy=e.clientY-sy; if(!raf) raf=requestAnimationFrame(apply); });
+    function end(){ if(!drag) return; drag=false; if(raf){cancelAnimationFrame(raf);raf=0;} apply(); t.classList.remove("mterm--dragging"); }
+    bar.addEventListener("pointerup",end); bar.addEventListener("pointercancel",end);
+  }
+})();
 </script>
 <script id="tools-tw-js">
 (function(){var h=document.getElementById("toolsHeadline");if(!h)return;var a=h.querySelector(".tw-a"),b=h.querySelector(".tw-b");var ta=a.textContent,tb=b.textContent;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;a.textContent="";b.textContent="";var started=false;function type(){if(started)return;started=true;var i=0,j=0;(function step(){if(i<ta.length){a.textContent=ta.slice(0,++i);setTimeout(step,46+Math.random()*52);}else if(j<tb.length){b.textContent=tb.slice(0,++j);setTimeout(step,46+Math.random()*52);}})();}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){type();io.disconnect();}});},{threshold:0.5});io.observe(h);})();
