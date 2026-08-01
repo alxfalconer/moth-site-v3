@@ -294,10 +294,10 @@ html[data-theme="dark"] .field{border-color:#fff}
 .mani-media{width:100%}
 .mani-media video{width:100%;height:auto;display:block;border-radius:6px;border:1px solid var(--line)}
 @media (max-width:820px){ .manifesto{grid-template-columns:1fr;gap:36px} .mani-media{max-width:520px} }
-.manifesto .big{font-weight:700;font-size:clamp(2rem,4.6vw,4.4rem);line-height:.96;
+.manifesto .big{font-weight:300;font-size:clamp(2rem,4.6vw,4.4rem);line-height:.96;
   letter-spacing:-.045em;color:var(--ink);max-width:none}
 .manifesto .big em{font-style:italic}
-.manifesto .support{margin-top:clamp(18px,2.4vh,32px);max-width:none;font-size:clamp(2rem,4.6vw,4.4rem);font-weight:700;line-height:.96;letter-spacing:-.045em;color:var(--ink)}
+.manifesto .support{margin-top:clamp(18px,2.4vh,32px);max-width:none;font-size:clamp(2rem,4.6vw,4.4rem);font-weight:300;line-height:.96;letter-spacing:-.045em;color:var(--ink)}
 .manifesto .support + .support{margin-top:16px}
 .manifesto a{text-decoration:none;transition:opacity .15s}
 .manifesto a:hover{opacity:.68}
@@ -365,7 +365,8 @@ html.js .fig-wrap.in .fig .stroke{stroke-dashoffset:0}
 @media (max-width:520px){ .repo .rd{display:none} }
 
 /* platform / waitlist band before footer */
-.cta-band{align-items:flex-start;gap:calc(var(--u)*1.5)}
+.cta-band{align-items:flex-start;gap:calc(var(--u)*1.5);--paper:#ffffff;--paper-2:#f2f1ee;--ink:#000;--body:#3f3f43;--muted:#6b6b70;--faint:#73737a;--dim:#8c8c92;--line:#e4e3df}
+.cta-band .field{border-color:var(--ink)!important}
 .cta-band .h-sec{max-width:16ch}
 
 /* ---------------- footer (giant wordmark, 100vh) ---------------- */
@@ -677,7 +678,7 @@ body.theme-light .sidenav-logo img{filter:none}
 <!-- ============ 2 · MANIFESTO (the ripple idea) ============ -->
 <section class="section section--tint manifesto" aria-labelledby="mani-h">
   <div class="mani-text">
-    <p class="big reveal" id="mani-h" style="--d:80ms">MOTH is the cultural arm of quantum computing. Grounded in <a href="./research.html" style="color:#DBF900">research↗</a> by our team of working quantum physicists, we’re building the first <a href="./projects.html" style="color:#FF322E">products↗</a>, <a href="./tools.html" style="color:#0026FF">software↗</a> and <a href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer" style="color:#00FF09">platform↗</a> to let creatives harness the power of real quantum hardware.</p>
+    <p class="big reveal" id="mani-h" style="--d:80ms"><span style="font-weight:700">MOTH</span> is the cultural arm of quantum computing. Grounded in <a href="./research.html" style="color:#DBF900">research↗</a> by our team of working quantum physicists, we’re building the first <a href="./projects.html" style="color:#FF322E">products↗</a>, <a href="./tools.html" style="color:#0026FF">software↗</a> and <a href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer" style="color:#00FF09">platform↗</a> to let creatives harness the power of real quantum hardware.</p>
   </div>
   <div class="credits-grid">
     <div class="credits-col">
@@ -703,115 +704,6 @@ body.theme-light .sidenav-logo img{filter:none}
 .credits-list li{font-size:clamp(15px,1.35vw,18px);line-height:1.4;color:var(--ink);font-weight:500}
 @media (max-width:760px){.credits-grid{grid-template-columns:1fr;gap:36px}}
 </style>
-
-<!-- ============ 3 · RESEARCH overview ============ -->
-<section class="section" id="research" aria-labelledby="res-h">
-  <div class="ov-head">
-    <div>
-      <h2 class="h-sec reveal" id="res-h" style="--d:60ms">Shaping the mechanics of the next media era. <span class="dim">Through scientific rigor, exploration and community-building, we’re uncovering how quantum will define it.</span></h2>
-    </div>
-    <a class="arrow reveal" style="--d:160ms" href="#" data-stub="Research page — next pass">All research →</a>
-  </div>
-  <div class="spot">
-    <a class="reveal" style="--d:80ms" href="#" data-stub="Research page">
-      <div class="pic"><img src="https://af-pull.b-cdn.net/moth-site/research/1e990d3e203408b223aacaf70ed385be4aab7d46-2464x2392.avif" alt="LAS Art Foundation — We Felt A Star Dying" loading="lazy" decoding="async"></div>
-      <span class="tag">Event</span><div class="st">LAS Art Foundation: We Felt A Star Dying</div>
-    </a>
-    <a class="reveal" style="--d:160ms" href="#" data-stub="Research page">
-      <div class="pic"><img src="https://af-pull.b-cdn.net/moth-site/research/space-moths.webp" alt="Space Moths" loading="lazy" decoding="async"></div>
-      <span class="tag">Release</span><div class="st">Space Moths</div>
-    </a>
-    <a class="reveal" style="--d:240ms" href="#" data-stub="Research page">
-      <div class="pic"><img src="https://af-pull.b-cdn.net/moth-site/research/884de43773f9b5e97d8d32e1c363dfa527f4042b.webp" alt="New Scientist — Quantum Backrooms" loading="lazy" decoding="async"></div>
-      <span class="tag">Press</span><div class="st">New Scientist — Quantum Backrooms</div>
-    </a>
-  </div>
-</section>
-
-<!-- ============ 4 · STUDIOS overview ============ -->
-<section class="section section--tint studios" id="studios" aria-labelledby="stu-h">
-  <div class="ov-head">
-    <div>
-      <h2 class="h-sec reveal" id="stu-h" style="--d:60ms">Projects &amp; collaborations. <span class="dim">Unlocking new ways to create, process and experience content — from immersive games and virtual worlds to new audio formats and generative visual tools.</span></h2>
-    </div>
-    <a class="arrow reveal" style="--d:160ms" href="#" data-stub="Studios page — next pass">All studios work →</a>
-  </div>
-  <div class="worklist">
-    <article class="witem reveal">
-      <div class="wmedia"><img src="https://af-pull.b-cdn.net/moth-site/work/space-moths.jpg" alt="Space Moths — a Roblox game powered by a quantum processing unit" loading="lazy" decoding="async"><span class="k">Gaming</span><span class="r">MTH-01</span></div>
-      <div>
-        <h3 class="wtitle">Space Moths</h3>
-        <p class="wlead">A Roblox game built on our Quantum Reservoir Computing system and powered on-demand by a quantum processing unit (QPU).</p>
-        <p class="wdesc">The first demonstration of quantum algorithms integrated directly into a live, massively-multiplayer game to supply its content. A collaboration with Onward Studios, made possible by VTT, IBM and IQM providing quantum hardware access.</p>
-      </div>
-    </article>
-    <article class="witem reveal">
-      <div class="wmedia"><img src="https://af-pull.b-cdn.net/moth-site/work/roman-lipsky.jpg" alt="Roman Lipski + Quantum Blur" loading="lazy" decoding="async"><span class="k">Visual arts</span><span class="r">MTH-03</span></div>
-      <div>
-        <h3 class="wtitle">Roman Lipski + Quantum Blur</h3>
-        <p class="wplace">Placeholder description — real project copy to follow.</p>
-      </div>
-    </article>
-    <article class="witem reveal">
-      <div class="wmedia"><img src="https://af-pull.b-cdn.net/moth-site/work/ila-recurse-2.jpg" alt="Ila — Recurse" loading="lazy" decoding="async"><span class="k">Music</span><span class="r">MTH-02</span></div>
-      <div>
-        <h3 class="wtitle">Ila — Recurse</h3>
-        <p class="wplace">Placeholder description — real project copy to follow.</p>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ============ 5 · TOOLS overview ============ -->
-<section class="section tools" id="tools" aria-labelledby="tool-h">
-  <div class="tgrid">
-    <div>
-      <p class="phil reveal" id="tool-h" style="--d:60ms">Real quantum tools, in the hands of creative technologists. <span class="dim">Open-source, installable, documented — real code, not vaporware, so the next idea can come from anywhere.</span></p>
-      <p class="honesty reveal" style="--d:200ms">We label what’s genuinely quantum vs. quantum-inspired: several tools run today on classical simulators, while the platform connects to real QPUs.</p>
-    </div>
-    <div class="fig-wrap reveal" style="--d:120ms">
-      <span class="fig-lbl">FIG 0.1 — ENCODE · PROCESS · DECODE</span>
-      <svg class="fig" viewBox="0 0 320 240" role="img" aria-label="Line diagram: signal encoded into a quantum state, processed, then decoded back to a signal">
-        <!-- incoming signal -->
-        <polyline class="stroke" points="8,120 20,116 28,132 36,104 44,138 52,110 60,120"/>
-        <line class="stroke faint" x1="60" y1="120" x2="96" y2="120"/>
-        <!-- encode cube (isometric) -->
-        <path class="stroke" d="M96,96 L128,80 L160,96 L128,112 Z"/>
-        <path class="stroke" d="M96,96 L96,140 L128,156 L128,112"/>
-        <path class="stroke" d="M160,96 L160,140 L128,156"/>
-        <!-- state: concentric orbit -->
-        <circle class="stroke faint" cx="128" cy="118" r="9"/>
-        <circle class="stroke faint" cx="128" cy="118" r="17"/>
-        <line class="stroke faint" x1="160" y1="118" x2="196" y2="118"/>
-        <!-- decode cube -->
-        <path class="stroke" d="M196,96 L228,80 L260,96 L228,112 Z"/>
-        <path class="stroke" d="M196,96 L196,140 L228,156 L228,112"/>
-        <path class="stroke" d="M260,96 L260,140 L228,156"/>
-        <!-- outgoing signal -->
-        <line class="stroke faint" x1="260" y1="120" x2="296" y2="120"/>
-        <polyline class="stroke" points="296,120 300,112 306,130 312,104 316,120"/>
-        <!-- tick labels -->
-        <line class="stroke faint" x1="8" y1="196" x2="312" y2="196"/>
-        <line class="stroke faint" x1="8" y1="192" x2="8" y2="200"/>
-        <line class="stroke faint" x1="128" y1="192" x2="128" y2="200"/>
-        <line class="stroke faint" x1="228" y1="192" x2="228" y2="200"/>
-        <line class="stroke faint" x1="312" y1="192" x2="312" y2="200"/>
-      </svg>
-    </div>
-  </div>
-
-  <div class="repos">
-    <span class="kick rlbl reveal">Open-source · selected repositories</span>
-    <div class="rgrid">
-      <a class="repo reveal" href="https://github.com/moth-quantum/quantum-audio" target="_blank" rel="noopener"><span class="rn">01</span><span class="rname">quantum-audio</span><span class="rd">Quantum representations of audio</span></a>
-      <a class="repo reveal" style="--d:40ms" href="https://github.com/moth-quantum/QuantumBrush" target="_blank" rel="noopener"><span class="rn">02</span><span class="rname">QuantumBrush</span><span class="rd">Quantum digital painting</span></a>
-      <a class="repo reveal" style="--d:80ms" href="https://github.com/moth-quantum/QuantumBlur" target="_blank" rel="noopener"><span class="rn">03</span><span class="rname">QuantumBlur</span><span class="rd">Image &amp; geometry via states</span></a>
-      <a class="repo reveal" href="https://github.com/moth-quantum/MicroMoth" target="_blank" rel="noopener"><span class="rn">04</span><span class="rname">MicroMoth</span><span class="rd">Lightweight toolkit (C#)</span></a>
-      <a class="repo reveal" style="--d:40ms" href="https://github.com/moth-quantum/Actias" target="_blank" rel="noopener"><span class="rn">05</span><span class="rname">Actias</span><span class="rd">Quantum software synthesizer</span></a>
-      <a class="repo reveal" style="--d:80ms" href="https://github.com/moth-quantum/Hello-Quantum" target="_blank" rel="noopener"><span class="rn">06</span><span class="rname">Hello-Quantum</span><span class="rd">An intro to quantum</span></a>
-    </div>
-  </div>
-</section>
 
 <!-- ============ 6 · EARLY-ACCESS band (conversion recap) ============ -->
 <section class="section section--tint cta-band" aria-labelledby="cta-h">
