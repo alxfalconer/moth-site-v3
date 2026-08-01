@@ -848,6 +848,7 @@ body.nav-open .sidenav a:nth-child(7){--rd:.50s}
 body.nav-open .navbar,body.nav-open #research{transform:translateX(calc(-1 * var(--shift)));opacity:.45;filter:blur(3px)}
 body.nav-open #research{pointer-events:none}
 #research.state{padding:calc(var(--nav-h) + 76px) 34px 110px !important;max-width:calc(100vw - clamp(300px,20vw,320px))!important;margin-left:auto!important;margin-right:auto!important}
+@media (max-width:1024px){#research.state{max-width:none!important;margin-left:0!important;margin-right:0!important}}
 #research .ctx-line{font-size:clamp(32px,3.4vw,48px)}
 body:not(.theme-light) .pagequote.midq p{color:#fff}
 @media (prefers-reduced-motion:reduce){ .sidenav a{transition:opacity .2s,background .16s,color .16s;transform:none;filter:none} body.nav-open .sidenav a{transition-delay:0 !important} }

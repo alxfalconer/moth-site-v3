@@ -846,6 +846,7 @@ body.nav-open .navbar,body.nav-open #work{transform:translateX(calc(-1 * var(--s
 body.nav-open #work{pointer-events:none}
 /* keep #work as the scroll container (pinned work-scroll + reveal root depend on it); centre content to 1200 */
 #work.state{padding:0 calc(clamp(150px,10vw,160px) + 34px) 0 !important}
+@media (max-width:1024px){#work.state{padding-left:34px!important;padding-right:34px!important}#work .foot{margin-left:-34px!important;margin-right:-34px!important}}
 #work .ctx-line{font-size:clamp(32px,3.4vw,48px)}
 @media (prefers-reduced-motion:reduce){ .sidenav a{transition:opacity .2s,background .16s,color .16s;transform:none;filter:none} body.nav-open .sidenav a{transition-delay:0 !important} }
 </style>
