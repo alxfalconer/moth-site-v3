@@ -1582,5 +1582,62 @@ addEventListener('pagereveal',function(e){
   });});
 });
 </script>
+<!-- REVIEW-ONLY Adjust panel (remove before publishing) -->
+<style id="riforma-face">
+@font-face{font-family:'Riforma';src:url('./RiformaLL-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Riforma';src:url('./RiformaLL-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Riforma';src:url('./RiformaLL-Bold.otf') format('opentype');font-weight:600 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Riforma';src:url('./RiformaLL-Italic.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
+</style>
+<style id="review-adjust-css">
+#revAdjust{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:99999;font-family:ui-monospace,SFMono-Regular,Menlo,'Roboto Mono',monospace}
+#revAdjust *{box-sizing:border-box}
+#revToggle{font:600 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:#111;border:1px solid rgba(255,255,255,.28);padding:6px 13px;border-radius:0;cursor:pointer;transition:background .18s}
+#revToggle:hover{background:#000}
+#revPanel{position:absolute;bottom:calc(100% + 10px);left:50%;width:236px;background:#111;border:1px solid rgba(255,255,255,.28);padding:6px;opacity:0;transform:translateX(-50%) translateY(8px) scale(.98);transform-origin:bottom center;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+#revAdjust.rev-open #revPanel{opacity:1;transform:translateX(-50%) translateY(0) scale(1);pointer-events:auto}
+.rev-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 12px}
+.rev-row + .rev-row{border-top:1px solid rgba(255,255,255,.12)}
+.rev-row span{font:500 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#fff}
+.rev-sw{position:relative;width:38px;height:20px;border-radius:999px;background:rgba(255,255,255,.24);border:0;cursor:pointer;flex:none;transition:background .18s}
+.rev-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .18s}
+.rev-sw[aria-checked="true"]{background:#4ade80}
+.rev-sw[aria-checked="true"]::after{transform:translateX(18px)}
+@media print{#revAdjust{display:none}}
+.theme-toggle{display:none!important}
+</style>
+<div id="revAdjust">
+  <div id="revPanel" role="group" aria-label="Review adjustments">
+    <div class="rev-row"><span>Dark mode</span><button class="rev-sw" id="revTheme" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button></div>
+    <div class="rev-row"><span>Riforma font</span><button class="rev-sw" id="revFont" role="switch" aria-checked="false" aria-label="Toggle Riforma font"></button></div>
+  </div>
+  <button id="revToggle" aria-expanded="false" aria-controls="revPanel">Adjust</button>
+</div>
+<script id="review-adjust-js">
+(function(){
+  var wrap=document.getElementById('revAdjust');
+  var btn=document.getElementById('revToggle');
+  var revTheme=document.getElementById('revTheme');
+  var revFont=document.getElementById('revFont');
+  var pageToggle=document.getElementById('themeToggle');
+  if(!wrap||!btn) return;
+  btn.addEventListener('click',function(){var o=wrap.classList.toggle('rev-open');btn.setAttribute('aria-expanded',String(o));});
+  function isDark(){
+    var de=document.documentElement, b=document.body;
+    var dt=de.getAttribute('data-theme');
+    if(dt) return dt!=='light';
+    return !(b&&b.classList.contains('theme-light'));
+  }
+  function syncTheme(){ revTheme.setAttribute('aria-checked',String(isDark())); }
+  revTheme.addEventListener('click',function(){ if(pageToggle){pageToggle.click();} setTimeout(syncTheme,20); });
+  syncTheme();
+  revFont.addEventListener('click',function(){
+    var on=document.documentElement.classList.toggle('rev-riforma');
+    revFont.setAttribute('aria-checked',String(on));
+  });
+})();
+</script>
+
 </body>
 </html>
