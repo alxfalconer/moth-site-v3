@@ -810,9 +810,10 @@ body.theme-light .sidenav-logo img{filter:none}
 
   <div class="foot-bottom">
     <nav class="foot-legal" aria-label="Legal">
-      <a href="#" data-stub="Compliance page — next pass">Compliance</a>
-      <a href="#" data-stub="Careers page — next pass">Careers</a>
+      <a href="./compliance.html">Compliance</a>
+      <a href="https://careers.mothquantum.com/" target="_blank" rel="noopener noreferrer">Careers</a>
       <a href="#" data-stub="Cookie Policy page — next pass">Cookie Policy</a>
+      <a href="./faq.html">FAQ</a>
     </nav>
     <div class="foot-social">
       <a href="https://discord.com/invite/tbrZgtxTF" target="_blank" rel="noopener noreferrer">Discord</a>
@@ -1203,10 +1204,11 @@ async function run(THREE, gsap){
   MOUNT.addEventListener('pointerleave',()=>{ hovering=false; ptrX=-1; hideHover(); });
   MOUNT.addEventListener('pointermove',(e)=>{ const r=MOUNT.getBoundingClientRect(); ptrX=e.clientX-r.left; ptrY=e.clientY-r.top; });
   MOUNT.addEventListener('wheel',(e)=>{
-    const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    if(!d) return;
-    e.preventDefault();                 // capture scroll while over the slider
-    target += d;
+    // horizontal scroll drives the slider; vertical scroll passes through to the page
+    if(Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    if(!e.deltaX) return;
+    e.preventDefault();
+    target += e.deltaX;
   }, {passive:false});
 
   function updateHover(){
