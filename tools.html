@@ -786,6 +786,8 @@
   .newsfeature:hover .nf-thumb{transform:translateY(-5px)}
   @media (max-width:720px){ .newsfeature{flex-direction:column;align-items:stretch;gap:22px} .nf-text{flex:none;max-width:none} }
 
+.ad-gif{flex:0 0 auto;height:112px;width:auto;display:block;image-rendering:auto}
+@media (max-width:560px){.ad-gif{height:84px}}
 </style>
 <style>
   html,body{height:auto}
@@ -1042,6 +1044,69 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 .tools-cta .note{color:rgba(255,255,255,.72)}
 .tools-cta .note a{color:#ffffff !important;text-decoration:underline;text-underline-offset:2px}
 </style>
+<style id="ad-banner-css">
+/* ===== Retro leaderboard banner (Tools "Spin up a job") — crunchy black + pure green, Times ===== */
+.tools-cta.admode{min-height:0;justify-content:flex-start;align-items:center;text-align:center;padding:8px 34px 64px;margin:0;border-top:none}
+.adbanner{position:relative;width:100%;margin:0 auto;cursor:pointer;
+  font-family:'Times New Roman',Times,serif;background:#000;overflow:hidden;
+  border:4px solid #DBF900;
+  box-shadow:0 0 0 4px #000, 0 0 0 8px #FF322E, 0 0 0 11px #000, 14px 14px 0 0 #FF322E}
+/* hazard rail */
+.ad-hazard{height:12px;background:repeating-linear-gradient(45deg,#FF322E 0 12px,#DBF900 12px 24px)}
+/* marquee strip */
+.ad-marquee{height:26px;display:flex;align-items:center;overflow:hidden;
+  background:#000;border-top:3px solid #DBF900;border-bottom:3px solid #FF322E;white-space:nowrap}
+.ad-marquee span{display:inline-block;color:#00ff00;font-family:'Times New Roman',Times,serif;
+  font-weight:700;font-size:14px;letter-spacing:.03em;padding-left:8px;text-shadow:2px 2px 0 #004d1c;
+  animation:ad-marq 15s linear infinite}
+@keyframes ad-marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* body — hard CRT scanlines + checker corners, no soft gradients */
+.ad-body{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 32px;text-align:left;padding:16px 20px 18px;
+  background:repeating-linear-gradient(0deg,#00350f 0 2px,#000 2px 5px)}
+.ad-copy{flex:1 1 320px;min-width:0}
+.tools-cta .ad-head{margin:0;font-family:'Times New Roman',Times,serif;font-weight:700;font-style:italic;
+  font-size:clamp(20px,3.6vw,30px);line-height:1.02;letter-spacing:0;color:#DBF900;
+  text-shadow:3px 3px 0 #FF322E,5px 5px 0 #000}
+.ad-head .ad-bang{color:#fff}
+.ad-head .ad-cur{display:inline-block;width:.55em;height:1em;margin-left:.1em;
+  background:#DBF900;vertical-align:-.12em;animation:ad-cursor 1s steps(1,end) infinite}
+@keyframes ad-cursor{50%{opacity:0}}
+.ad-sub{margin:8px 0 0;font-family:'Times New Roman',Times,serif;font-size:14px;font-weight:700;
+  color:#00ff00;text-shadow:2px 2px 0 #000}
+.ad-sub b{color:#fff;background:#FF322E;padding:0 4px}
+/* field + hard green button */
+.tools-cta.admode .wait{flex:0 0 auto;width:min(360px,100%);max-width:360px;margin:0}
+.tools-cta.admode .field button{background:#00ff00 !important;color:#000 !important;
+  font:700 15px/1 'Times New Roman',Times,serif !important;text-transform:uppercase;letter-spacing:.04em;
+  padding:11px 16px !important;
+  box-shadow:inset 3px 3px 0 #a3ffb8,inset -3px -3px 0 #006622, 3px 3px 0 #000 !important}
+.tools-cta.admode .field button:hover{background:#4dff4d !important}
+.tools-cta.admode .field button:active{box-shadow:inset 0 3px 0 #006622, 1px 1px 0 #000 !important}
+.tools-cta.admode .note{margin-top:14px;font-family:'Times New Roman',Times,serif;color:#00ff00;font-weight:700}
+.tools-cta.admode .note a{color:#fff !important;background:#006622;padding:0 3px}
+.tools-cta.admode .ok{color:#00ff00;font-weight:700;font-family:'Times New Roman',Times,serif;text-shadow:2px 2px 0 #000}
+/* NEW! starburst — hard, no glow */
+.ad-starburst{position:absolute;z-index:5;top:-14px;left:-14px;width:60px;height:60px;
+  display:grid;place-items:center;transform:rotate(-16deg);animation:ad-pulse .7s steps(2,end) infinite}
+.ad-starburst::before{content:"";position:absolute;inset:0;background:#FF322E;
+  clip-path:polygon(50% 0,61% 20%,83% 12%,79% 35%,100% 43%,82% 57%,95% 79%,68% 76%,60% 100%,44% 80%,20% 90%,26% 66%,3% 62%,22% 46%,8% 24%,33% 30%,38% 6%)}
+.ad-starburst span{position:relative;z-index:1;color:#DBF900;font-family:'Times New Roman',Times,serif;font-weight:700;font-size:15px}
+@keyframes ad-pulse{50%{transform:rotate(-16deg) scale(1.18)}}
+/* Click Here! blinking tab — hard */
+.ad-clickhere{position:absolute;z-index:5;top:34px;right:-4px;background:#DBF900;color:#FF322E;
+  border:3px solid #000;font-family:'Times New Roman',Times,serif;font-weight:700;font-size:14px;line-height:1.05;text-align:center;
+  padding:5px 9px;text-decoration:none;transform:rotate(8deg);box-shadow:3px 3px 0 #000;
+  animation:ad-blink .8s steps(1,end) infinite}
+.ad-clickhere:hover{background:#fff}
+@keyframes ad-blink{50%{opacity:0}}
+@media (max-width:560px){.ad-clickhere{display:none}.ad-starburst{width:48px;height:48px}}
+/* honor reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .ad-marquee span{animation:none;padding-left:8px}
+  .ad-starburst,.ad-clickhere,.ad-head .ad-cur{animation:none}
+  .ad-clickhere,.ad-head .ad-cur{opacity:1}
+}
+</style>
 </head>
 <body class="theme-tools viewing">
 <div class="grain" aria-hidden="true"></div>
@@ -1069,7 +1134,7 @@ body.theme-light .sidenav-logo img{filter:none}
 <a href="./research.html">Research</a>
     <a href="./projects.html">Projects</a>
     <a href="./tools.html">Tools</a>
-    <a href="./company.html">Company</a>
+    <a href="./company.html">People</a>
     <a href="./news.html">News</a>
     <a href="./company.html#information">Contact</a>
     <a class="sidenav-cta" href="#early-access">Platform <span class="arw" aria-hidden="true">&#8594;</span></a>
@@ -1093,20 +1158,7 @@ body.theme-light .sidenav-logo img{filter:none}
         <pre class="mterm-art" aria-hidden="true"></pre>
       </div>
     </div>
-    <section class="tools-cta" aria-labelledby="tcta-h">
-  <h2 id="tcta-h">Spin up a job on<br>real quantum hardware.</h2>
-  <p class="lede">Platform access opens gradually. Join the waitlist for early access — or create an account to explore what’s live.</p>
-  <div class="wait">
-    <form id="waitForm2" novalidate>
-      <div class="field">
-        <input type="email" id="waitEmail2" name="email" placeholder="you@studio.com" autocomplete="email" required aria-label="Email for early access">
-        <button type="submit">Get early access</button>
-      </div>
-      <p class="note">Prefer to dive in? <a href="https://platform.mothquantum.com/create-account" target="_blank" rel="noopener">Create an account →</a></p>
-    </form>
-    <p class="ok" role="status" aria-live="polite">You’re on the list. We’ll reach out as access opens — welcome.</p>
-  </div>
-</section>
+    
       <p class="opennote">Every tool here is open-source under its own license. We label what's genuinely quantum vs. quantum-inspired: several tools run today on classical simulators, while the platform connects to real QPUs.</p>
 
   </div>
@@ -1199,18 +1251,44 @@ body.theme-light .sidenav-logo img{filter:none}
   
 
   </div>
+
+<section class="tools-cta admode" aria-labelledby="tcta-h">
+  <div class="adbanner" role="group" aria-label="Early access">
+    <div class="ad-starburst" aria-hidden="true"><span>NEW!</span></div>
+    <a class="ad-clickhere" href="#waitEmail2" aria-hidden="true">Click<br>Here!</a>
+    <div class="ad-hazard" aria-hidden="true"></div>
+    <div class="ad-marquee" aria-hidden="true"><span>&#9733;&nbsp; SPIN UP A JOB ON REAL QUANTUM HARDWARE &nbsp;&#9733;&nbsp; FREE EARLY ACCESS &nbsp;&#9733;&nbsp; LIMITED SLOTS — ACT NOW!!! &nbsp;&#9733;&nbsp; SPIN UP A JOB ON REAL QUANTUM HARDWARE &nbsp;&#9733;&nbsp; FREE EARLY ACCESS &nbsp;&#9733;&nbsp; LIMITED SLOTS — ACT NOW!!! &nbsp;&#9733;&nbsp;</span></div>
+    <div class="ad-body">
+      <div class="ad-copy">
+        <h2 id="tcta-h" class="ad-head">Spin up a job on real<br>quantum hardware<span class="ad-bang">!</span><span class="ad-cur" aria-hidden="true"></span></h2>
+        <p class="ad-sub" aria-hidden="true">&#9733; Platform access opens gradually — <b>join the waitlist!</b> &#9733;</p>
+      </div>
+      <img class="ad-gif" src="./butterfly-fly.gif" alt="" aria-hidden="true" width="125" height="137">
+      <div class="wait">
+        <form id="waitForm2" novalidate>
+          <div class="field">
+            <input type="email" id="waitEmail2" name="email" placeholder="you@studio.com" autocomplete="email" required aria-label="Email for early access">
+            <button type="submit">Get access!</button>
+          </div>
+          <p class="note">Prefer to dive in? <a href="https://platform.mothquantum.com/create-account" target="_blank" rel="noopener">Create an account →</a></p>
+        </form>
+        <p class="ok" role="status" aria-live="polite">You’re on the list. We’ll reach out as access opens — welcome.</p>
+      </div>
+    </div>
+  </div>
+</section>
 </section>
 <footer class="foot" aria-label="Footer">
   <div class="foot-top">
     <div class="foot-identity">
-      <p class="foot-tag">Quantum for<br>Culture &amp; Creativity.</p>
+      <p class="foot-tag">Bending Quantum<br>toward Culture.</p>
       <p class="foot-contact"><a href="mailto:hello@mothquantum.com">hello@mothquantum.com</a></p>
     </div>
     <nav class="foot-nav" aria-label="Footer">
       <a href="./research.html">Research</a>
       <a href="./projects.html">Projects</a>
       <a href="./tools.html">Tools</a>
-      <a href="./company.html">Company</a>
+      <a href="./company.html">People</a>
       <a href="./news.html">News</a>
     </nav>
     <div class="foot-form">
