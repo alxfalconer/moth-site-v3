@@ -370,8 +370,11 @@ html.js .fig-wrap.in .fig .stroke{stroke-dashoffset:0}
 .cta-band .h-sec{max-width:16ch}
 
 /* ---------------- footer (giant wordmark, 100vh) ---------------- */
-.foot{min-height:100vh;padding:clamp(28px,4vh,44px) 34px clamp(8px,1.5vh,16px);
+.foot{--paper:#ffffff;--paper-2:#f2f1ee;--ink:#000;--body:#3f3f43;--muted:#6b6b70;--faint:#73737a;--dim:#8c8c92;--line:#e4e3df;background:#ffffff;color:var(--ink);min-height:100vh;padding:clamp(28px,4vh,44px) 34px clamp(8px,1.5vh,16px);
   display:flex;flex-direction:column;justify-content:flex-start;position:relative}
+html[data-theme="dark"] .foot .foot-nav a{color:var(--ink)}
+html[data-theme="dark"] .foot .footmark{filter:none}
+.foot .field{border-color:var(--ink)!important}
 
 .foot-mid{order:1;margin-top:auto}
 .foot-bottom{order:3;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;margin-top:10px}
@@ -1033,8 +1036,8 @@ const M = (window.MQ_MEDIA)||{img:{},poster:{},video:{}};
 // videos are embedded inline (same-origin data URIs) so they play even on file://
 
 const DATA = [
-  {type:'video', src:M.poster.gasoline, video:M.video.gasoline, brand:'Gasoline',        desc:'Placeholder — info TBD'},
   {type:'image', src:M.img.cezanne,                             brand:'Cézanne',         desc:'Placeholder — info TBD'},
+  {type:'video', src:M.poster.gasoline, video:M.video.gasoline, brand:'Gasoline',        desc:'Placeholder — info TBD'},
   {type:'image', src:M.img.ila,                                 brand:'Ila — Recurse',   desc:'Placeholder — info TBD'},
   {type:'video', src:M.poster.recurse,  video:M.video.recurse,  brand:'Recurse',         desc:'Placeholder — info TBD'},
   {type:'image', src:M.img.backrooms,                           brand:'Backrooms',       desc:'Placeholder — info TBD'},
