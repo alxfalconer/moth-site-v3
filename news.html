@@ -876,7 +876,7 @@ body:not(.theme-light) .pagequote.midq p{color:var(--ink)}
 @media (max-width:720px){ .offices{gap:16px} }
 .office .city{font:700 14px/1.2 var(--sans);letter-spacing:normal;text-transform:none;color:var(--ink);margin-bottom:8px}
 .office .addr{font-size:13px;line-height:1.5;color:var(--muted)}
-.foot-bottom{order:3;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;margin-top:10px}
+.foot-bottom{order:3;display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:10px}
 .foot-legal{display:flex;gap:14px;flex-wrap:wrap;margin:0;max-width:none;justify-self:start}
 .foot-legal a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .15s}
 .foot-legal a:hover{color:var(--ink)}
@@ -1103,17 +1103,14 @@ body.theme-light .sidenav-logo img{filter:none}
       <a href="./news.html">News</a>
       <a href="./company.html">Company</a>
     </nav>
-    <div class="foot-form">
-      <div class="wait">
-        <form id="waitForm3" novalidate>
-          <div class="field">
-            <input type="email" id="footEmail" name="email" placeholder="Enter email for early Platform access" autocomplete="email" required aria-label="Email for early Platform access">
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-        <p class="ok" role="status" aria-live="polite">You’re on the list. We’ll reach out as access opens.</p>
-      </div>
-    </div>
+    <nav class="foot-nav foot-social-nav" aria-label="Social">
+      <a href="https://discord.com/invite/tbrZgtxTF" target="_blank" rel="noopener noreferrer">Discord</a>
+      <a href="https://github.com/moth-quantum" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://mothquantum.substack.com/" target="_blank" rel="noopener noreferrer">Substack</a>
+      <a href="https://www.instagram.com/mothquantum" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://x.com/Moth_Quantum" target="_blank" rel="noopener noreferrer">X</a>
+      <a href="https://www.linkedin.com/company/mothquantum" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </nav>
     <div class="offices">
       <div class="office">
         <svg class="foot-clock" viewBox="0 0 100 100" data-tz="Europe/London" role="img" aria-label="Current time in London">
@@ -1167,14 +1164,6 @@ body.theme-light .sidenav-logo img{filter:none}
       <a href="./faq.html">FAQ</a>
       <a href="./bloch.html">Bloch</a>
     </nav>
-    <div class="foot-social">
-      <a href="https://discord.com/invite/tbrZgtxTF" target="_blank" rel="noopener noreferrer">Discord</a>
-      <a href="https://github.com/moth-quantum" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://mothquantum.substack.com/" target="_blank" rel="noopener noreferrer">Substack</a>
-      <a href="https://www.instagram.com/mothquantum" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <a href="https://x.com/Moth_Quantum" target="_blank" rel="noopener noreferrer">X</a>
-      <a href="https://www.linkedin.com/company/mothquantum" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    </div>
     <p class="foot-copy">© 2026 Moth Quantum</p>
   </div>
 </footer>
