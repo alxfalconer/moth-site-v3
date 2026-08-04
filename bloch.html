@@ -978,6 +978,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 .bloch-sphere .bs-axislabel{font-size:15px;font-style:italic;opacity:.7}
 .bloch-sphere .bs-theta-lbl{font-size:14px;font-style:italic;opacity:.85}
 .bloch-vec{transform-box:view-box;transform-origin:150px 150px;transform:rotate(var(--v-angle,0deg));transition:transform .9s cubic-bezier(.2,.72,.2,1)}
+.bloch-sphere .bs-meridian{fill:none;stroke:currentColor;stroke-width:1;opacity:.15;transform-box:view-box;transform-origin:150px 150px;transition:transform .9s cubic-bezier(.2,.72,.2,1)}
 .bloch-maxim{grid-row:1;max-width:32ch;margin:0;font-weight:700;font-size:clamp(26px,2.8vw,40px);line-height:1.05;letter-spacing:-.03em;color:var(--ink);opacity:0;pointer-events:none;transition:opacity .75s ease}
 .bloch-maxim[data-side="l"]{grid-column:1;justify-self:end;text-align:right}
 .bloch-maxim[data-side="r"]{grid-column:3;justify-self:start;text-align:left}
@@ -1077,6 +1078,9 @@ body.theme-light .sidenav-logo img{filter:none}
           <circle class="bs-sphere" cx="150" cy="150" r="104"/>
           <path class="bs-eq-back" d="M46 150 A 104 30 0 0 1 254 150"/>
           <path class="bs-eq-front" d="M46 150 A 104 30 0 0 0 254 150"/>
+          <ellipse class="bs-meridian" cx="150" cy="150" rx="104" ry="104"/>
+          <ellipse class="bs-meridian m2" cx="150" cy="150" rx="104" ry="104"/>
+          <ellipse class="bs-meridian m3" cx="150" cy="150" rx="104" ry="104"/>
           <circle cx="150" cy="46" r="2.4" fill="currentColor" stroke="none"/>
           <circle cx="150" cy="254" r="2.4" fill="currentColor" stroke="none"/>
           <circle cx="150" cy="150" r="2.6" fill="currentColor" stroke="none"/>
@@ -1408,6 +1412,8 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
   var maxims=Array.prototype.slice.call(document.querySelectorAll(".bloch-maxim"));
   if(!scroll||!svg||!maxims.length) return;
   var arc=svg.querySelector(".bs-theta"), lbl=svg.querySelector(".bs-theta-lbl");
+  var meridians=Array.prototype.slice.call(svg.querySelectorAll(".bs-meridian"));
+  function spinMeridians(a){ for(var i=0;i<meridians.length;i++){ meridians[i].style.transform="scaleX("+Math.cos(a+i*2*Math.PI/3).toFixed(3)+")"; } }
   var angles=[42,-48,86], C=150, R=44, rad=Math.PI/180;
   function setTheta(a){
     var a1=-90+a, y0=C-R, x1=C+R*Math.cos(a1*rad), y1=C+R*Math.sin(a1*rad), sweep=a>=0?1:0;
@@ -1421,13 +1427,14 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
     if(idx===cur) return; cur=idx;
     svg.style.setProperty("--v-angle",angles[idx]+"deg");
     setTheta(angles[idx]);
+    spinMeridians(idx*2.3);
     var side=maxims[idx].getAttribute("data-side");
     svg.style.setProperty("--sphere-shift", side==="r" ? "-42px" : "42px");
     maxims.forEach(function(m,i){ if(i===idx){m.classList.add("is-active","in");} else {m.classList.remove("is-active","in");} });
   }
   if(matchMedia("(prefers-reduced-motion:reduce)").matches){
     maxims.forEach(function(m){m.classList.add("is-active","in");});
-    svg.style.setProperty("--v-angle",angles[0]+"deg"); setTheta(angles[0]); return;
+    svg.style.setProperty("--v-angle",angles[0]+"deg"); setTheta(angles[0]); spinMeridians(0); return;
   }
   function update(){ ticking=false;
     var vh=window.innerHeight, total=scroll.offsetHeight-vh;

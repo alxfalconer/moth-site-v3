@@ -591,6 +591,12 @@ html.trad-nav .topnav a:hover{opacity:1!important}
 html.trad-nav .topnav a.topnav-cta{display:inline-block!important;margin:0!important;transform:none!important;filter:none!important;opacity:1!important;font:600 14px/1 var(--sans,'Inter',sans-serif)!important;background:var(--ink)!important;color:var(--app,var(--paper,#000))!important;padding:.5em 1.1em!important;border-radius:999px}
 @media (max-width:860px){html.trad-nav .topnav{gap:11px}html.trad-nav .topnav a{font-size:12.5px!important}}
 </style>
+<style id="hero-platform-css">
+.hero-platform{display:inline-flex;align-items:center;gap:.45em;align-self:flex-start;margin-top:clamp(20px,3vh,34px);background:var(--ink);color:var(--paper);font:600 15px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:.72em 1.5em;border-radius:999px;transition:opacity .15s}
+.hero-platform:hover{opacity:.88}
+.hero-platform:hover .hero-cta-arrow{transform:translateX(4px)}
+.hero-platform .hero-cta-arrow{transition:transform .18s}
+</style>
 </head>
 <body>
 <script>
@@ -659,15 +665,7 @@ body.theme-light .sidenav-logo img{filter:none}
 <section class="section hero" aria-labelledby="hero-h">
   <div class="hero-stage">
     <h1 class="hero-cap" id="hero-h"><span class="hero-lead">Bending Quantum toward Culture.</span><br><span class="muted-sentence">Pioneering the first consumer<br>wave of quantum computing for<br>Media, Entertainment &amp; Creativity.</span></h1>
-    <div class="wait hero-wait">
-      <form id="waitForm" novalidate>
-        <div class="field">
-          <input type="email" id="waitEmail" name="email" placeholder="Enter email for early platform access" autocomplete="email" required aria-label="Email for early platform access">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-      <p class="ok" role="status" aria-live="polite">You’re on the list. We’ll reach out as access opens.</p>
-    </div>
+    <a class="hero-platform reveal" href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer">Platform <span class="hero-cta-arrow" aria-hidden="true">→</span></a>
     <p class="hero-sub reveal" style="--d:120ms">Pioneering the first consumer wave of Quantum for Media, Entertainment &amp; the Arts.</p>
     <div class="hero-carousel" id="mqc" aria-label="Selected work carousel">
       <canvas class="mqc-canvas"></canvas>
