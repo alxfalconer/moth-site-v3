@@ -970,6 +970,14 @@ html.trad-nav .topnav a:hover{opacity:1!important}
 html.trad-nav .topnav a.topnav-cta{display:inline-block!important;margin:0!important;transform:none!important;filter:none!important;opacity:1!important;font:600 14px/1 var(--sans,'Inter',sans-serif)!important;background:var(--ink)!important;color:var(--app,var(--paper,#000))!important;padding:.5em 1.1em!important;border-radius:999px}
 @media (max-width:860px){html.trad-nav .topnav{gap:11px}html.trad-nav .topnav a{font-size:12.5px!important}}
 </style>
+<style id="ghost-css">
+.ghost .ghost-w{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.14em);transition:opacity .95s ease, filter 1.05s ease, transform .95s cubic-bezier(.2,.72,.2,1);transition-delay:calc(var(--wi,0) * 55ms)}
+.ghost.in .ghost-w{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.ghost .ghost-w{opacity:1;filter:none;transform:none;transition:none}}
+</style>
+<style id="company-radius-css">
+.pfp,.modal-shot{border-radius:10px !important}
+</style>
 </head>
 <body class="theme-light viewing">
 <!-- v3 nav chrome -->
@@ -1021,7 +1029,7 @@ body.theme-light .sidenav-logo img{filter:none}
 
 <section class="state" id="people" aria-label="People">
     <div class="pintro">
-      <p>Moth began in 2022, when two communities that rarely met converged; artists curious about quantum computing, and quantum researchers curious about art. Out of that union, co-founder <span style="color:var(--mute)">Harry Kumar</span> and Quantinuum’s <span style="color:var(--mute)">Ilyas Khan</span> set out to bend quantum towards culture.</p>
+      <p class="ghost" data-ghost="line">Moth began in 2022, when two communities that rarely met converged; artists curious about quantum computing, and quantum researchers curious about art. Out of that union, co-founder <span style="color:var(--mute)">Harry Kumar</span> and Quantinuum’s <span style="color:var(--mute)">Ilyas Khan</span> set out to bend quantum towards culture.</p>
     </div>
     <div class="grouphdr">Leadership</div>
     <div class="leadpin" id="leadPin">
@@ -1444,7 +1452,7 @@ Brooklyn, NY 11205 · United States</p>
   }
   // scroll reveal
   (function(){
-    const SR_SEL='.grouphdr,.lead,.trow,.pintro';
+    const SR_SEL='.grouphdr,.lead,.trow';
     const els=[...document.querySelectorAll(SR_SEL)];
     els.forEach(e=> e.classList.add('sr'));
     if(REDUCE){ els.forEach(e=> e.classList.add('in')); return; }
@@ -1661,5 +1669,42 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
 })();
 </script>
 
+<script id="ghost-js">
+(function(){
+  function walk(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(child){
+      if(child.nodeType===3){
+        var toks=child.nodeValue.split(/(\s+)/), frag=document.createDocumentFragment();
+        toks.forEach(function(t){
+          if(t==="") return;
+          if(/^\s+$/.test(t)){ frag.appendChild(document.createTextNode(t)); return; }
+          var sp=document.createElement("span"); sp.className="ghost-w"; sp.textContent=t; frag.appendChild(sp);
+        });
+        node.replaceChild(frag,child);
+      } else if(child.nodeType===1 && child.tagName!=="BR"){ walk(child); }
+    });
+  }
+  function words(el){ return Array.prototype.slice.call(el.querySelectorAll(".ghost-w")); }
+  function assignWord(el){ words(el).forEach(function(w,i){ w.style.setProperty("--wi", i); }); }
+  function assignLine(el){
+    var idx=-1, prev=null;
+    words(el).forEach(function(w){
+      var t=Math.round(w.offsetTop);
+      if(prev===null || t!==prev){ idx++; prev=t; }
+      w.style.setProperty("--wi", idx);
+    });
+  }
+  function assign(el){ if(el.getAttribute("data-ghost")==="line") assignLine(el); else assignWord(el); }
+  function ghostify(el){ if(el.getAttribute("data-ghost-init")) return; el.setAttribute("data-ghost-init","1"); walk(el); assign(el); }
+  var els=Array.prototype.slice.call(document.querySelectorAll(".ghost"));
+  if(!els.length) return;
+  els.forEach(ghostify);
+  var lineEls=els.filter(function(e){return e.getAttribute("data-ghost")==="line";});
+  if(lineEls.length){ var rt; window.addEventListener("resize",function(){ clearTimeout(rt); rt=setTimeout(function(){ lineEls.forEach(assignLine); },150); }); }
+  if(!("IntersectionObserver" in window)){ els.forEach(function(e){e.classList.add("in");}); return; }
+  var io=new IntersectionObserver(function(ents){ ents.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }); },{threshold:0.3,rootMargin:"0px 0px -12% 0px"});
+  els.filter(function(e){return !e.hasAttribute("data-ghost-manual");}).forEach(function(e){ io.observe(e); });
+})();
+</script>
 </body>
 </html>
