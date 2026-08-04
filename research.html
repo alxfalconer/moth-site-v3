@@ -487,6 +487,7 @@
   .qc-illo .moth-diagram .fade{opacity:1}
   .qc-illo .moth-diagram text{fill:var(--ink-latent);font-family:var(--font);font-size:9px;letter-spacing:.08em;text-transform:uppercase}
   .qconcepts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 14px;margin:8px 0 56px}
+.qconcepts .qcard:has(.qc-interfere),.qconcepts .qcard:has(.qc-uncertain),.qconcepts .qcard:has(.qc-measure){display:none}
   .qcard{display:flex;flex-direction:column;gap:12px;background:#f7f7f5;border-radius:0;padding:20px}
 .qc-link{margin-top:auto;padding-top:16px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:5px;align-self:flex-start;transition:opacity .15s}
 .qc-link:hover{opacity:.6}
@@ -496,13 +497,13 @@
   @media (max-width:1000px){ .qconcepts{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:560px){ .qconcepts{grid-template-columns:1fr;gap:14px} }
   .spotcards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:64px}
-  .spotcard{position:relative;aspect-ratio:4/5;border-radius:0;background:#000;
+  .spotcard{position:relative;aspect-ratio:4/5;border-radius:0;background:#eae9e6;
     text-decoration:none;overflow:hidden;transition:background .35s cubic-bezier(.2,.72,.2,1),color .35s ease}
   .spotcard .spotcat{position:absolute;top:18px;left:18px;font-family:var(--mono);font-size:10px;
-    letter-spacing:.1em;text-transform:uppercase;color:#000;background:#e8e8e4;padding:5px 9px;border-radius:0;
+    letter-spacing:.1em;text-transform:uppercase;color:#eae9e6;background:#0b0b0d;padding:5px 9px;border-radius:0;
     transition:background .35s ease,color .35s ease}
   .spotcard .spottl{position:absolute;left:22px;right:22px;bottom:22px;margin:0;font-family:var(--sans);
-    font-weight:700;font-size:clamp(21px,1.7vw,27px);line-height:1.1;letter-spacing:-.02em;color:#f4f4f0;
+    font-weight:700;font-size:clamp(21px,1.7vw,27px);line-height:1.1;letter-spacing:-.02em;color:#0b0b0d;
     transition:color .35s ease}
   .spotcard:hover{background:#E5FF00}
   .spotcard:hover .spottl{color:#000}
@@ -857,7 +858,7 @@ body:not(.theme-light) .pagequote.midq p{color:#fff}
 @media (prefers-reduced-motion:reduce){ .sidenav a{transition:opacity .2s,background .16s,color .16s;transform:none;filter:none} body.nav-open .sidenav a{transition-delay:0 !important} }
 </style>
 <style>
-.grain{position:fixed;inset:-50%;z-index:70;pointer-events:none;opacity:.21;
+.grain{position:fixed;inset:-50%;z-index:70;pointer-events:none;opacity:.12;
   background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.82'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:200px 200px;will-change:transform;animation:grain .5s steps(1) infinite}
 @keyframes grain{0%{transform:translate(0,0)}10%{transform:translate(-4%,-3%)}20%{transform:translate(-6%,2%)}30%{transform:translate(4%,-4%)}40%{transform:translate(-2%,5%)}50%{transform:translate(-6%,3%)}60%{transform:translate(5%,4%)}70%{transform:translate(-4%,2%)}80%{transform:translate(-2%,-5%)}90%{transform:translate(3%,4%)}100%{transform:translate(0,0)}}
@@ -967,7 +968,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 </style>
 <style id="wpg-css">
 /* ===== Whitepaper gallery (Research) ===== */
-.wpgallery{background:#ecebe7;padding:clamp(28px,3.6vw,52px);margin:clamp(44px,6vh,84px) 0}
+.wpgallery{background:#eae9e6;padding:clamp(28px,3.6vw,52px);margin:clamp(44px,6vh,84px) 0}
 .wpg-h{margin:0 0 clamp(20px,3vh,30px);font:600 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
 .wpg-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:clamp(28px,4vw,60px);align-items:start}
 .wpg-feature{min-width:0}
