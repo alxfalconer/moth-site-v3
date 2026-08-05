@@ -1038,8 +1038,8 @@ body.theme-light .sidenav-logo img{filter:none}
 
 <section class="state" id="people" aria-label="People">
     <style id="company-hero-css">
-      #people .pintro{min-height:100vh;margin-top:calc(-1 * (var(--nav-h) + 76px));margin-bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:center}
-      #people .pintro p{text-align:center;max-width:56ch;margin:0 auto}
+      #people .pintro{min-height:100vh;margin-top:calc(-1 * (var(--nav-h) + 76px));margin-bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+      #people .pintro p{text-align:left;max-width:56ch;margin:0}
       #people .people-deck{margin:0 0 clamp(28px,5vh,64px);font-weight:700;font-size:clamp(32px,4vw,60px);letter-spacing:-.03em;line-height:1;color:var(--ink)}
       @media (prefers-reduced-motion:reduce){#people .pintro{min-height:0;margin-top:0}}
     </style>
@@ -1049,7 +1049,7 @@ body.theme-light .sidenav-logo img{filter:none}
     <style id="bloch-embed-css">
   @media (prefers-reduced-motion:reduce){.blochblock{background:#0b0b0d;--bl-ink:#f4f4f0}}
   .blochblock{--bl-ink:#0b0b0d;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);background:transparent}
-  .blochblock .bloch-scroll{position:relative;height:440vh;background:transparent}
+  .blochblock .bloch-scroll{position:relative;height:560vh;background:transparent}
   .blochblock .bloch-stage{position:sticky;top:calc(-1 * (var(--nav-h) + 76px));height:100vh;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(20px,4vw,72px);padding:0 clamp(24px,5vw,96px)}
   .blochblock .bloch-sphere{grid-column:2;grid-row:1;width:min(42vh,340px);height:auto;display:block;overflow:visible;color:var(--bl-ink);transform:translateX(var(--sphere-shift,0));transition:transform .9s cubic-bezier(.2,.72,.2,1)}
   .blochblock .bloch-sphere .bs-sphere{stroke-width:1.5;opacity:.9}
@@ -1068,6 +1068,8 @@ body.theme-light .sidenav-logo img{filter:none}
   .blochblock .bloch-maxim[data-side="l"]{grid-column:1;justify-self:end;text-align:right}
   .blochblock .bloch-maxim[data-side="r"]{grid-column:3;justify-self:start;text-align:left}
   .blochblock .bloch-maxim.is-active{opacity:1}
+  .blochblock .bloch-eyebrow{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;opacity:.5;margin-bottom:.7em;line-height:1}
+  .blochblock .bloch-mtext{display:block}
   @media (max-width:1100px){
     .blochblock .bloch-stage{grid-template-columns:1fr;grid-template-rows:auto auto;justify-items:center;align-content:center;gap:clamp(28px,6vh,64px);padding:0 24px}
     .blochblock .bloch-sphere{grid-column:1;grid-row:1;transform:none!important;width:min(38vh,300px)}
@@ -1107,9 +1109,9 @@ body.theme-light .sidenav-logo img{filter:none}
             <text class="bs-axislabel" x="16" y="220">x</text>
             <g class="bloch-vec"><line class="bs-vec" x1="150" y1="150" x2="150" y2="58" marker-end="url(#bfar-c)"/></g>
           </svg>
-          <p class="bloch-maxim ghost" data-side="r" data-ghost-manual>A new kind of computer, in the hands of artists.</p>
-          <p class="bloch-maxim ghost" data-side="l" data-ghost-manual>You don&#8217;t need to know the physics to make something.</p>
-          <p class="bloch-maxim ghost" data-side="r" data-ghost-manual>Real quantum hardware &#8212; available today.</p>
+          <div class="bloch-maxim ghost" data-side="r" data-ghost-manual><span class="bloch-eyebrow">PRINCIPLE</span><span class="bloch-mtext">This is an example of a magnificent maxim.</span></div>
+          <div class="bloch-maxim ghost" data-side="l" data-ghost-manual><span class="bloch-eyebrow">PRINCIPLE</span><span class="bloch-mtext">This is an example of a magnificent maxim.</span></div>
+          <div class="bloch-maxim ghost" data-side="r" data-ghost-manual><span class="bloch-eyebrow">PRINCIPLE</span><span class="bloch-mtext">This is an example of a magnificent maxim.</span></div>
         </div>
       </div>
     </section>
@@ -1199,7 +1201,7 @@ body.theme-light .sidenav-logo img{filter:none}
             </ul>
           </div>
           <div class="info-group">
-            <h3 class="info-gt">Platforms</h3>
+            <h3 class="info-gt">Social</h3>
             <ul class="info-list">
               <li><a href="https://www.instagram.com/mothquantum" target="_blank" rel="noopener noreferrer">Instagram</a></li>
               <li><a href="https://x.com/Moth_Quantum" target="_blank" rel="noopener noreferrer">X</a></li>
@@ -1838,7 +1840,9 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
   function update(){ ticking=false;
     var vh=window.innerHeight, total=scroll.offsetHeight-vh;
     var p= total>0 ? Math.min(1,Math.max(0,(-scroll.getBoundingClientRect().top)/total)) : 0;
-    setActive(Math.min(N-1,Math.floor(p*N)));
+    var bounds=[0.30,0.70], idx=N-1;
+    for(var bi=0;bi<bounds.length;bi++){ if(p<bounds[bi]){ idx=bi; break; } }
+    setActive(idx);
   }
   function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
   var scroller=root.closest(".state");
