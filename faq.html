@@ -948,7 +948,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 #faq .faq-intro,#faq .qa,#faq .qa-a{max-width:none}
 </style>
 <style id="foot-cta-css">
-.foot-nav a.foot-cta{display:inline-flex;align-items:center;gap:.32em;align-self:flex-start;background:var(--ink)!important;color:var(--paper)!important;padding:.42em .74em;border-radius:0;font-weight:700;margin-bottom:6px;transition:opacity .15s}
+.foot-nav a.foot-cta{display:inline-flex;align-items:center;gap:.32em;align-self:flex-start;background:var(--ink)!important;color:var(--paper)!important;padding:.5em .9em .34em;border-radius:999px;font-weight:700;margin-bottom:6px;transition:opacity .15s}
 .foot-nav a.foot-cta:hover{opacity:.85}
 </style>
 <style id="trad-nav-css">
@@ -961,6 +961,10 @@ html.trad-nav .navpage{display:inline-block!important;color:var(--ink)!important
 html.trad-nav .topnav{position:static!important;display:flex!important;align-items:center;flex-wrap:nowrap;gap:clamp(12px,1.4vw,26px);margin:0 0 0 auto!important;padding:0!important;max-width:none!important;width:auto!important;height:auto!important;inset:auto!important;background:none!important;opacity:1!important;visibility:visible!important;min-width:0}
 html.trad-nav .topnav a{display:inline-block!important;margin:0!important;padding:0!important;transform:none!important;filter:none!important;opacity:.82!important;font:500 14px/1 var(--sans,'Inter',sans-serif)!important;letter-spacing:-.01em;color:var(--ink);text-decoration:none;transition:opacity .15s}
 html.trad-nav .topnav a:hover{opacity:1!important}
+.topnav a:not(.topnav-cta){position:relative}
+.topnav a:not(.topnav-cta)::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:1px;background:var(--ink);transition:right .28s cubic-bezier(.2,.72,.2,1)}
+.topnav a:not(.topnav-cta):hover::after{right:0}
+@media (prefers-reduced-motion:reduce){.topnav a:not(.topnav-cta)::after{transition:none}}
 html.trad-nav .topnav a.topnav-cta{display:inline-flex!important;align-items:center!important;line-height:1!important;margin:0!important;transform:none!important;filter:none!important;opacity:1!important;font:600 14px/1 var(--sans,'Inter',sans-serif)!important;background:var(--ink)!important;color:var(--app,var(--paper,#000))!important;padding:.58em 1.1em .46em!important;border-radius:999px}
 @media (max-width:860px){html.trad-nav .topnav{gap:11px}html.trad-nav .topnav a{font-size:12.5px!important}}
 </style>
@@ -1019,7 +1023,7 @@ body.theme-light .sidenav-logo img{filter:none}
 </aside>
 
 <section class="state" id="faq" aria-label="FAQ">
-    <header class="ctx"><h2 class="ctx-line">Questions. <span class="dim">About Moth — for people and agents.</span></h2></header>
+    <header class="ctx"><h2 class="ctx-line">Questions about MOTH.<br><span class="dim">For people and agents.</span></h2></header>
     <div class="faq-intro">
       <p class="faq-name">Moth Quantum — the cultural arm of quantum computing.</p>
       <p class="faq-sum">Moth builds the first consumer products, software and platform that let creatives harness real quantum hardware, bending quantum computing toward media, entertainment and culture. Founded 2022; teams in London, Basel and Brooklyn.</p>
@@ -1071,7 +1075,7 @@ body.theme-light .sidenav-logo img{filter:none}
         <div class="qa">
           <span class="qa-num">08</span>
           <p class="qa-q">How can I get Moth Platform access?</p>
-          <p class="qa-a">Access opens gradually. Join the waitlist for early access, or create an account to explore what’s live at <a href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer">platform.mothquantum.com</a>.</p>
+          <p class="qa-a">Create an account to explore what’s live at <a href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer">platform.mothquantum.com</a>.</p>
         </div>
         <div class="qa">
           <span class="qa-num">09</span>
@@ -1100,7 +1104,8 @@ body.theme-light .sidenav-logo img{filter:none}
       <p class="foot-contact"><a href="mailto:hello@mothquantum.com">hello@mothquantum.com</a></p>
     </div>
     <nav class="foot-nav" aria-label="Footer">
-      <a class="foot-cta" href="#early-access">Platform <span class="arw" aria-hidden="true">&#8594;</span></a>
+      <a class="foot-cta" href="#early-access">Platform<span class="arw" aria-hidden="true">&#8594;</span></a>
+      <a href="./index.html">Home</a>
       <a href="./projects.html">Studios</a>
       <a href="./tools.html">Technology</a>
       <a href="./research.html">Research</a>
