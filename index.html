@@ -300,6 +300,10 @@ html[data-theme="dark"] .field{border-color:#fff}
 .manifesto .support{margin-top:clamp(18px,2.4vh,32px);max-width:none;font-size:clamp(2rem,4.6vw,4.4rem);font-weight:300;line-height:.96;letter-spacing:-.045em;color:var(--ink)}
 .manifesto .support + .support{margin-top:16px}
 .manifesto a{position:relative;text-decoration:none;opacity:1}
+.manifesto .mani-info{color:#bcbcc2;display:inline-flex;vertical-align:super;font-size:.348em;margin-left:.14em;line-height:0;transition:opacity .15s}
+.manifesto .mani-info svg{width:1em;height:1em;display:block}
+.manifesto a.mani-info::after{display:none}
+.manifesto .mani-info:hover{opacity:.75}
 .manifesto a::after{content:"";position:absolute;left:0;right:0;bottom:-.02em;height:.06em;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .34s cubic-bezier(.2,.72,.2,1)}
 .manifesto a:hover::after{transform:scaleX(1)}
 @media (prefers-reduced-motion:reduce){.manifesto a::after{transition:none}}
@@ -727,7 +731,7 @@ body.theme-light .sidenav-logo img{filter:none}
 <!-- ============ 2 · MANIFESTO (the ripple idea) ============ -->
 <section class="section section--tint manifesto" aria-labelledby="mani-h">
   <div class="mani-text">
-    <p class="big ghost" id="mani-h" data-ghost="line" style="--d:80ms"><span style="font-weight:700">MOTH</span> is the cultural arm of quantum computing. We’re building the first <a href="./projects.html" style="color:#DBF900">products↗</a>, <a href="./tools.html" style="color:#DBF900">tools↗</a> and <a href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer" style="color:#DBF900">platform↗</a> to let creatives harness the power of real quantum hardware, grounded in peer-reviewed <a href="./research.html" style="color:#DBF900">research↗</a> by our team of working quantum physicists. Frontier technology in creative hands reshapes everything downstream.</p>
+    <p class="big ghost" id="mani-h" data-ghost="line" style="--d:80ms"><span style="font-weight:700">MOTH</span> is the cultural arm of quantum computing<span class="ghost-w"><a class="mani-info" href="./what-is-quantum-computing.pdf" target="_blank" rel="noopener noreferrer" aria-label="What is quantum computing? (PDF)"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="8.3"/><line x1="10" y1="9" x2="10" y2="14.2"/><circle cx="10" cy="5.6" r="1" fill="currentColor" stroke="none"/></svg></a></span>. We’re building the first <a href="./projects.html" style="color:#DBF900">products↗</a>, <a href="./tools.html" style="color:#DBF900">tools↗</a> and <a href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer" style="color:#DBF900">platform↗</a> to let creatives harness the power of real quantum hardware, grounded in peer-reviewed <a href="./research.html" style="color:#DBF900">research↗</a> by our team of working quantum physicists. Frontier technology in creative hands reshapes everything downstream.</p>
   </div>
   <div class="credits-grid">
     <div class="credits-col">
