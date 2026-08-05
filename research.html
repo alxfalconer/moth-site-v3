@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="rev-riforma trad-nav">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -246,7 +246,8 @@
   .state .back:hover{color:var(--ink)}
   .kicker{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
   .ctx{margin-bottom:64px}
-  .state:has(.rintro) .ctx, .state:has(.pintro) .ctx{margin-bottom:36px}   /* tighter headline→body on Research/People */
+  .state:has(.rintro) .ctx, .state:has(.pintro) .ctx{margin-bottom:36px}
+  #research .ctx{margin-bottom:clamp(52px,7.5vh,92px)}   /* tighter headline→body on Research/People */
   .ctx-line{font-size:clamp(32px,3.4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:0.98;color:var(--ink);max-width:60ch;margin-top:12px}
   .ctx-line .dim{color:var(--mute)}
   .ctx-line .word{display:inline-block;opacity:0;transform:translateY(.14em);filter:blur(10px);transition:opacity .95s ease, filter 1.05s ease, transform .95s cubic-bezier(.2,.72,.2,1);transition-delay:calc(var(--wi,0) * 55ms)}
@@ -1333,7 +1334,7 @@ body.theme-light .sidenav-logo img{filter:none}
 .pdemo{position:relative;background:#000;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);min-height:100vh;display:flex;flex-direction:column;padding:clamp(48px,8vh,110px) clamp(24px,6vw,90px) clamp(56px,8vh,104px);overflow:hidden;color:var(--ink);box-sizing:border-box}
 .pdemo-head{width:100%;max-width:1180px;margin:0 auto;flex:0 0 auto}
 .pd-header{margin:0 0 clamp(18px,2.6vh,30px);font-weight:700;font-size:clamp(28px,3.2vw,46px);line-height:1.03;letter-spacing:-.03em;color:#f4f4f0}
-.pd-cta{display:inline-flex;align-items:center;gap:.4em;background:#f4f4f0;color:#0b0b0d;font:600 15px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:.72em 1.5em;border-radius:999px;transition:opacity .15s}
+.pd-cta{display:inline-flex;align-items:center;gap:.5em;background:#f4f4f0;color:#0b0b0d;font:600 clamp(19px,1.7vw,26px)/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:1.05em 2.3em .95em;border-radius:999px;transition:opacity .15s}
 .pd-cta:hover{opacity:.88}
 .pdemo-stage{position:relative;flex:1 1 auto;min-height:0;margin-top:clamp(22px,3.5vh,46px)}
 .pd-back{position:absolute;top:0;right:-4%;height:94%;width:auto;z-index:1;display:block}
@@ -1522,8 +1523,8 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
 <div id="revAdjust">
   <div id="revPanel" role="group" aria-label="Review adjustments">
     <div class="rev-row"><span>Dark mode</span><button class="rev-sw" id="revTheme" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button></div>
-    <div class="rev-row"><span>Riforma font</span><button class="rev-sw" id="revFont" role="switch" aria-checked="false" aria-label="Toggle Riforma font"></button></div>
-    <div class="rev-row"><span>Trad nav</span><button class="rev-sw" id="revNav" role="switch" aria-checked="false" aria-label="Toggle traditional nav"></button></div>
+    <div class="rev-row"><span>Riforma font</span><button class="rev-sw" id="revFont" role="switch" aria-checked="true" aria-label="Toggle Riforma font"></button></div>
+    <div class="rev-row"><span>Trad nav</span><button class="rev-sw" id="revNav" role="switch" aria-checked="true" aria-label="Toggle traditional nav"></button></div>
   </div>
   <button id="revToggle" aria-expanded="false" aria-controls="revPanel">Adjust</button>
 </div>
