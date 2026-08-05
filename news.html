@@ -930,7 +930,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 }
 </style>
 <style id="foot-cta-css">
-.foot-nav a.foot-cta{display:inline-flex;align-items:center;gap:.32em;align-self:flex-start;background:var(--ink)!important;color:var(--paper)!important;padding:.42em .74em;border-radius:0;font-weight:700;margin-bottom:6px;transition:opacity .15s}
+.foot-nav a.foot-cta{display:inline-flex;align-items:center;gap:.32em;align-self:flex-start;background:var(--ink)!important;color:var(--paper)!important;padding:.5em .9em .34em;border-radius:999px;font-weight:700;margin-bottom:6px;transition:opacity .15s}
 .foot-nav a.foot-cta:hover{opacity:.85}
 </style>
 <style id="trad-nav-css">
@@ -943,6 +943,10 @@ html.trad-nav .navpage{display:inline-block!important;color:var(--ink)!important
 html.trad-nav .topnav{position:static!important;display:flex!important;align-items:center;flex-wrap:nowrap;gap:clamp(12px,1.4vw,26px);margin:0 0 0 auto!important;padding:0!important;max-width:none!important;width:auto!important;height:auto!important;inset:auto!important;background:none!important;opacity:1!important;visibility:visible!important;min-width:0}
 html.trad-nav .topnav a{display:inline-block!important;margin:0!important;padding:0!important;transform:none!important;filter:none!important;opacity:.82!important;font:500 14px/1 var(--sans,'Inter',sans-serif)!important;letter-spacing:-.01em;color:var(--ink);text-decoration:none;transition:opacity .15s}
 html.trad-nav .topnav a:hover{opacity:1!important}
+.topnav a:not(.topnav-cta){position:relative}
+.topnav a:not(.topnav-cta)::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:1px;background:var(--ink);transition:right .28s cubic-bezier(.2,.72,.2,1)}
+.topnav a:not(.topnav-cta):hover::after{right:0}
+@media (prefers-reduced-motion:reduce){.topnav a:not(.topnav-cta)::after{transition:none}}
 html.trad-nav .topnav a.topnav-cta{display:inline-flex!important;align-items:center!important;line-height:1!important;margin:0!important;transform:none!important;filter:none!important;opacity:1!important;font:600 14px/1 var(--sans,'Inter',sans-serif)!important;background:var(--ink)!important;color:var(--app,var(--paper,#000))!important;padding:.58em 1.1em .46em!important;border-radius:999px}
 @media (max-width:860px){html.trad-nav .topnav{gap:11px}html.trad-nav .topnav a{font-size:12.5px!important}}
 </style>
@@ -1005,70 +1009,146 @@ body.theme-light .sidenav-logo img{filter:none}
   </nav>
 </aside>
 
+<style id="news-index-css">
+  .newsfilter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 clamp(36px,5vh,64px)}
+  .flt-chip{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:color .15s,background .15s,border-color .15s}
+  .flt-chip:hover{color:var(--ink);border-color:var(--mute)}
+  .flt-chip.is-active{color:var(--app);background:var(--ink);border-color:var(--ink)}
+  .newstag{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:3px 8px;white-space:nowrap}
+  .newsmeta{display:flex;align-items:center;gap:10px;margin-top:2px}
+  .nf-meta{display:flex;align-items:center;gap:12px}
+  .newsindex{margin-top:clamp(52px,7vh,96px)}
+  .nx-h{margin:0 0 6px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+  .nx-list{list-style:none;margin:0;padding:0}
+  .nx-row{display:grid;grid-template-columns:34px 1fr auto auto 18px;align-items:center;gap:clamp(14px,2vw,32px);padding:15px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit;transition:padding-left .2s ease}
+  .nx-item:last-child .nx-row{border-bottom:1px solid var(--line)}
+  .nx-row:hover{padding-left:8px}
+  .nx-num{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .nx-title{font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+  .nx-tag{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap}
+  .nx-date{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--mute);white-space:nowrap}
+  .nx-arw{font-family:var(--mono);font-size:12px;color:var(--faint);justify-self:end}
+  .nx-row:hover .nx-arw{color:var(--ink)}
+  .news-hidden{display:none!important}
+  @media (max-width:680px){ .nx-row{grid-template-columns:26px 1fr auto;gap:12px} .nx-date,.nx-arw{display:none} }
+</style>
+
 <section class="state" id="news" aria-label="News">
-    <header class="ctx"><h2 class="ctx-line">Out in the world. <span class="dim">Press, Events, Interviews &amp; Releases.</span></h2></header>
-    <a class="newsfeature" href="https://en.wikipedia.org/wiki/Quantum_computing" target="_blank" rel="noopener noreferrer">
+    <header class="ctx"><h2 class="ctx-line">Out in the world. <span class="dim">Announcements, Events &amp; Press.</span></h2></header>
+    <div class="newsfilter" role="group" aria-label="Filter news by type">
+      <button type="button" class="flt-chip is-active" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="flt-chip" data-filter="Article" aria-pressed="false">Article</button>
+      <button type="button" class="flt-chip" data-filter="Interview" aria-pressed="false">Interview</button>
+      <button type="button" class="flt-chip" data-filter="Blog" aria-pressed="false">Blog</button>
+      <button type="button" class="flt-chip" data-filter="Release" aria-pressed="false">Release</button>
+      <button type="button" class="flt-chip" data-filter="Event" aria-pressed="false">Event</button>
+    </div>
+    <a class="newsfeature" data-type="Article" href="https://en.wikipedia.org/wiki/Quantum_computing" target="_blank" rel="noopener noreferrer">
       <div class="nf-text">
         <h3 class="nf-title">The studio bringing quantum computing to culture</h3>
         <p class="nf-body">A long-form profile on how Moth turns superposition, interference and measurement into creative tools for music, games and visual art.</p>
-        <span class="nf-date">Mar 2026</span>
+        <div class="nf-meta"><span class="newstag">Article</span><span class="nf-date">Mar 2026</span></div>
       </div>
       <div class="nf-thumb"></div>
     </a>
     <div class="newsgrid">
-        <a class="newscard" href="https://en.wikipedia.org/wiki/Quantum_computing" target="_blank" rel="noopener noreferrer">
+        <a class="newscard" data-type="Interview" href="https://en.wikipedia.org/wiki/Quantum_computing" target="_blank" rel="noopener noreferrer">
           <div class="newsthumb"></div>
           <h3 class="newstitle">Featured in a design-press profile</h3>
           <p class="newsbody">A look at how Moth is bringing quantum computation into music, games and visual art.</p>
-          <span class="newsdate">Mar 2026</span>
+          <div class="newsmeta"><span class="newstag">Interview</span><span class="newsdate">Mar 2026</span></div>
         </a>
-        <a class="newscard" href="https://en.wikipedia.org/wiki/Generative_art" target="_blank" rel="noopener noreferrer">
+        <a class="newscard" data-type="Event" href="https://en.wikipedia.org/wiki/Generative_art" target="_blank" rel="noopener noreferrer">
           <div class="newsthumb"></div>
           <h3 class="newstitle">Speaking at a creative-tech festival</h3>
           <p class="newsbody">Joining the interactive programme to demo quantum-native creative tools live.</p>
-          <span class="newsdate">Mar 2026</span>
+          <div class="newsmeta"><span class="newstag">Event</span><span class="newsdate">Mar 2026</span></div>
         </a>
-        <a class="newscard" href="https://en.wikipedia.org/wiki/Roblox" target="_blank" rel="noopener noreferrer">
+        <a class="newscard" data-type="Release" href="https://en.wikipedia.org/wiki/Roblox" target="_blank" rel="noopener noreferrer">
           <div class="newsthumb"></div>
           <h3 class="newstitle">Space Moths goes live on Roblox</h3>
           <p class="newsbody">Our quantum-powered game ships, running on real QPUs on demand.</p>
-          <span class="newsdate">Feb 2026</span>
+          <div class="newsmeta"><span class="newstag">Release</span><span class="newsdate">Feb 2026</span></div>
         </a>
-        <a class="newscard" href="https://en.wikipedia.org/wiki/Quantum_superposition" target="_blank" rel="noopener noreferrer">
+        <a class="newscard" data-type="Release" href="https://en.wikipedia.org/wiki/Quantum_superposition" target="_blank" rel="noopener noreferrer">
           <div class="newsthumb"></div>
           <h3 class="newstitle">QuantumBlur gets a major update</h3>
           <p class="newsbody">A faster, more expressive release of our open-source image-effects library.</p>
-          <span class="newsdate">Feb 2026</span>
+          <div class="newsmeta"><span class="newstag">Release</span><span class="newsdate">Feb 2026</span></div>
         </a>
-        <a class="newscard" href="https://en.wikipedia.org/wiki/Brian_Eno" target="_blank" rel="noopener noreferrer">
+        <a class="newscard" data-type="Interview" href="https://en.wikipedia.org/wiki/Brian_Eno" target="_blank" rel="noopener noreferrer">
           <div class="newsthumb"></div>
           <h3 class="newstitle">Residency exploring infinite-mix</h3>
           <p class="newsbody">An artist collaboration around a continuously generating real-time stream of music.</p>
-          <span class="newsdate">Jan 2026</span>
+          <div class="newsmeta"><span class="newstag">Interview</span><span class="newsdate">Jan 2026</span></div>
         </a>
-        <a class="newscard" href="https://en.wikipedia.org/wiki/Quantum_entanglement" target="_blank" rel="noopener noreferrer">
+        <a class="newscard" data-type="Event" href="https://en.wikipedia.org/wiki/Quantum_entanglement" target="_blank" rel="noopener noreferrer">
           <div class="newsthumb"></div>
           <h3 class="newstitle">Conference talk on quantum media</h3>
           <p class="newsbody">A session on the emerging mechanics of a quantum-native creative practice.</p>
-          <span class="newsdate">Jan 2026</span>
+          <div class="newsmeta"><span class="newstag">Event</span><span class="newsdate">Jan 2026</span></div>
         </a>
-        <a class="newscard" href="https://en.wikipedia.org/wiki/Brooklyn" target="_blank" rel="noopener noreferrer">
+        <a class="newscard" data-type="Blog" href="https://en.wikipedia.org/wiki/Brooklyn" target="_blank" rel="noopener noreferrer">
           <div class="newsthumb"></div>
           <h3 class="newstitle">New studio opens in Brooklyn</h3>
           <p class="newsbody">A second base to grow the team and collaborations across the Atlantic.</p>
-          <span class="newsdate">Dec 2025</span>
+          <div class="newsmeta"><span class="newstag">Blog</span><span class="newsdate">Dec 2025</span></div>
         </a>
-        <a class="newscard" href="https://en.wikipedia.org/wiki/IBM" target="_blank" rel="noopener noreferrer">
+        <a class="newscard" data-type="Article" href="https://en.wikipedia.org/wiki/IBM" target="_blank" rel="noopener noreferrer">
           <div class="newsthumb"></div>
           <h3 class="newstitle">Hardware partnership announced</h3>
           <p class="newsbody">Working with quantum hardware providers to power our latest experiments.</p>
-          <span class="newsdate">Dec 2025</span>
+          <div class="newsmeta"><span class="newstag">Article</span><span class="newsdate">Dec 2025</span></div>
         </a>
     </div>
+    <div class="newsindex">
+      <h3 class="nx-h">Index</h3>
+      <ol class="nx-list">
+        <li class="nx-item" data-type="Article"><a class="nx-row" href="https://en.wikipedia.org/wiki/Quantum_computing" target="_blank" rel="noopener noreferrer"><span class="nx-num">01</span><span class="nx-title">The studio bringing quantum computing to culture</span><span class="nx-tag">Article</span><span class="nx-date">Mar 2026</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Interview"><a class="nx-row" href="https://en.wikipedia.org/wiki/Quantum_computing" target="_blank" rel="noopener noreferrer"><span class="nx-num">02</span><span class="nx-title">Featured in a design-press profile</span><span class="nx-tag">Interview</span><span class="nx-date">Mar 2026</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Event"><a class="nx-row" href="https://en.wikipedia.org/wiki/Generative_art" target="_blank" rel="noopener noreferrer"><span class="nx-num">03</span><span class="nx-title">Speaking at a creative-tech festival</span><span class="nx-tag">Event</span><span class="nx-date">Mar 2026</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Release"><a class="nx-row" href="https://en.wikipedia.org/wiki/Roblox" target="_blank" rel="noopener noreferrer"><span class="nx-num">04</span><span class="nx-title">Space Moths goes live on Roblox</span><span class="nx-tag">Release</span><span class="nx-date">Feb 2026</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Release"><a class="nx-row" href="https://en.wikipedia.org/wiki/Quantum_superposition" target="_blank" rel="noopener noreferrer"><span class="nx-num">05</span><span class="nx-title">QuantumBlur gets a major update</span><span class="nx-tag">Release</span><span class="nx-date">Feb 2026</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Interview"><a class="nx-row" href="https://en.wikipedia.org/wiki/Brian_Eno" target="_blank" rel="noopener noreferrer"><span class="nx-num">06</span><span class="nx-title">Residency exploring infinite-mix</span><span class="nx-tag">Interview</span><span class="nx-date">Jan 2026</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Event"><a class="nx-row" href="https://en.wikipedia.org/wiki/Quantum_entanglement" target="_blank" rel="noopener noreferrer"><span class="nx-num">07</span><span class="nx-title">Conference talk on quantum media</span><span class="nx-tag">Event</span><span class="nx-date">Jan 2026</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Blog"><a class="nx-row" href="https://en.wikipedia.org/wiki/Brooklyn" target="_blank" rel="noopener noreferrer"><span class="nx-num">08</span><span class="nx-title">New studio opens in Brooklyn</span><span class="nx-tag">Blog</span><span class="nx-date">Dec 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Article"><a class="nx-row" href="https://en.wikipedia.org/wiki/IBM" target="_blank" rel="noopener noreferrer"><span class="nx-num">09</span><span class="nx-title">Hardware partnership announced</span><span class="nx-tag">Article</span><span class="nx-date">Dec 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Article"><a class="nx-row" href="https://en.wikipedia.org/wiki/Quantum_computing" target="_blank" rel="noopener noreferrer"><span class="nx-num">10</span><span class="nx-title">QuantumBlur featured in an art-tech roundup</span><span class="nx-tag">Article</span><span class="nx-date">Nov 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Interview"><a class="nx-row" href="https://en.wikipedia.org/wiki/Qubit" target="_blank" rel="noopener noreferrer"><span class="nx-num">11</span><span class="nx-title">Podcast: designing for real qubits</span><span class="nx-tag">Interview</span><span class="nx-date">Nov 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Blog"><a class="nx-row" href="https://en.wikipedia.org/wiki/Randomness" target="_blank" rel="noopener noreferrer"><span class="nx-num">12</span><span class="nx-title">Field notes on quantum randomness in games</span><span class="nx-tag">Blog</span><span class="nx-date">Oct 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Release"><a class="nx-row" href="https://en.wikipedia.org/wiki/Software_development_kit" target="_blank" rel="noopener noreferrer"><span class="nx-num">13</span><span class="nx-title">Moth SDK v0.3 released</span><span class="nx-tag">Release</span><span class="nx-date">Oct 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Event"><a class="nx-row" href="https://en.wikipedia.org/wiki/Generative_music" target="_blank" rel="noopener noreferrer"><span class="nx-num">14</span><span class="nx-title">Workshop at a generative-audio meetup</span><span class="nx-tag">Event</span><span class="nx-date">Oct 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Blog"><a class="nx-row" href="https://en.wikipedia.org/wiki/Wave_function_collapse" target="_blank" rel="noopener noreferrer"><span class="nx-num">15</span><span class="nx-title">How measurement collapse shapes our tools</span><span class="nx-tag">Blog</span><span class="nx-date">Sep 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Interview"><a class="nx-row" href="https://en.wikipedia.org/wiki/Quantum_mechanics" target="_blank" rel="noopener noreferrer"><span class="nx-num">16</span><span class="nx-title">Interview with our lead quantum physicist</span><span class="nx-tag">Interview</span><span class="nx-date">Sep 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Release"><a class="nx-row" href="https://en.wikipedia.org/wiki/Software_release_life_cycle" target="_blank" rel="noopener noreferrer"><span class="nx-num">17</span><span class="nx-title">Infinite-mix engine enters open beta</span><span class="nx-tag">Release</span><span class="nx-date">Aug 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Event"><a class="nx-row" href="https://en.wikipedia.org/wiki/Quantum_computing" target="_blank" rel="noopener noreferrer"><span class="nx-num">18</span><span class="nx-title">Panel: the culture of quantum computing</span><span class="nx-tag">Event</span><span class="nx-date">Aug 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Article"><a class="nx-row" href="https://en.wikipedia.org/wiki/Recording_studio" target="_blank" rel="noopener noreferrer"><span class="nx-num">19</span><span class="nx-title">Profiled among studios to watch</span><span class="nx-tag">Article</span><span class="nx-date">Jul 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+        <li class="nx-item" data-type="Article"><a class="nx-row" href="https://en.wikipedia.org/wiki/Digital_art" target="_blank" rel="noopener noreferrer"><span class="nx-num">20</span><span class="nx-title">First look at the Quantum Brush toolset</span><span class="nx-tag">Article</span><span class="nx-date">Jul 2025</span><span class="nx-arw" aria-hidden="true">&#8599;</span></a></li>
+      </ol>
+    </div>
   </section>
+<script id="news-filter-js">
+(function(){
+  var wrap=document.getElementById('news'); if(!wrap) return;
+  var chips=[].slice.call(wrap.querySelectorAll('.flt-chip'));
+  var items=[].slice.call(wrap.querySelectorAll('[data-type]'));
+  if(!chips.length) return;
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      var f=c.getAttribute('data-filter');
+      chips.forEach(function(x){var on=x===c;x.classList.toggle('is-active',on);x.setAttribute('aria-pressed',on?'true':'false');});
+      items.forEach(function(it){
+        var show = f==='all' || it.getAttribute('data-type')===f;
+        it.classList.toggle('news-hidden',!show);
+      });
+    });
+  });
+})();
+</script>
+
 
   <style id="pdemo-css">
-.pdemo{position:relative;background:#000;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);min-height:100vh;display:flex;flex-direction:column;padding:clamp(48px,8vh,110px) clamp(24px,6vw,90px) clamp(30px,5vh,64px);overflow:hidden;color:var(--ink);box-sizing:border-box}
+.pdemo{position:relative;background:#000;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);min-height:100vh;display:flex;flex-direction:column;padding:clamp(48px,8vh,110px) clamp(24px,6vw,90px) clamp(56px,8vh,104px);overflow:hidden;color:var(--ink);box-sizing:border-box}
 .pdemo-head{width:100%;max-width:1180px;margin:0 auto;flex:0 0 auto}
 .pd-header{margin:0 0 clamp(18px,2.6vh,30px);font-weight:700;font-size:clamp(28px,3.2vw,46px);line-height:1.03;letter-spacing:-.03em;color:#f4f4f0}
 .pd-cta{display:inline-flex;align-items:center;gap:.4em;background:#f4f4f0;color:#0b0b0d;font:600 15px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:.72em 1.5em;border-radius:999px;transition:opacity .15s}
@@ -1105,7 +1185,8 @@ body.theme-light .sidenav-logo img{filter:none}
       <p class="foot-contact"><a href="mailto:hello@mothquantum.com">hello@mothquantum.com</a></p>
     </div>
     <nav class="foot-nav" aria-label="Footer">
-      <a class="foot-cta" href="#early-access">Platform <span class="arw" aria-hidden="true">&#8594;</span></a>
+      <a class="foot-cta" href="#early-access">Platform<span class="arw" aria-hidden="true">&#8594;</span></a>
+      <a href="./index.html">Home</a>
       <a href="./projects.html">Studios</a>
       <a href="./tools.html">Technology</a>
       <a href="./research.html">Research</a>
