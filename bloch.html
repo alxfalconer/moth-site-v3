@@ -1015,8 +1015,13 @@ html.trad-nav .navpage{display:inline-block!important;color:var(--ink)!important
 html.trad-nav .topnav{position:static!important;display:flex!important;align-items:center;flex-wrap:nowrap;gap:clamp(12px,1.4vw,26px);margin:0 0 0 auto!important;padding:0!important;max-width:none!important;width:auto!important;height:auto!important;inset:auto!important;background:none!important;opacity:1!important;visibility:visible!important;min-width:0}
 html.trad-nav .topnav a{display:inline-block!important;margin:0!important;padding:0!important;transform:none!important;filter:none!important;opacity:.82!important;font:500 14px/1 var(--sans,'Inter',sans-serif)!important;letter-spacing:-.01em;color:var(--ink);text-decoration:none;transition:opacity .15s}
 html.trad-nav .topnav a:hover{opacity:1!important}
-html.trad-nav .topnav a.topnav-cta{display:inline-block!important;margin:0!important;transform:none!important;filter:none!important;opacity:1!important;font:600 14px/1 var(--sans,'Inter',sans-serif)!important;background:var(--ink)!important;color:var(--app,var(--paper,#000))!important;padding:.5em 1.1em!important;border-radius:999px}
+html.trad-nav .topnav a.topnav-cta{display:inline-flex!important;align-items:center!important;line-height:1!important;margin:0!important;transform:none!important;filter:none!important;opacity:1!important;font:600 14px/1 var(--sans,'Inter',sans-serif)!important;background:var(--ink)!important;color:var(--app,var(--paper,#000))!important;padding:.58em 1.1em .46em!important;border-radius:999px}
 @media (max-width:860px){html.trad-nav .topnav{gap:11px}html.trad-nav .topnav a{font-size:12.5px!important}}
+</style>
+<style id="foot-reveal-css">
+.foot .foot-reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.72,.2,1);transition-delay:calc(var(--fi,0) * 45ms)}
+.foot.foot-lit .foot-reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.foot .foot-reveal{opacity:1!important;transform:none!important;transition:none}}
 </style>
 </head>
 <body class="viewing">
@@ -1455,6 +1460,20 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
   window.addEventListener("scroll",onScroll,{passive:true});
   window.addEventListener("resize",onScroll);
   update();
+})();
+</script>
+<script id="foot-reveal-js">
+(function(){
+  var foot=document.querySelector(".foot"); if(!foot) return;
+  var items=Array.prototype.slice.call(foot.querySelectorAll(".foot-tag,.foot-contact a,.foot-nav a,.foot-social-nav a,.office .city,.office .addr,.footmark,.foot-legal a,.foot-copy"));
+  if(!items.length) return;
+  items.forEach(function(el){el.classList.add("foot-reveal");});
+  function assign(){ items.slice().sort(function(a,b){return a.getBoundingClientRect().left-b.getBoundingClientRect().left;}).forEach(function(el,i){el.style.setProperty("--fi",i);}); }
+  assign();
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches || !("IntersectionObserver" in window)){ foot.classList.add("foot-lit"); return; }
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(e){if(e.isIntersecting){assign();foot.classList.add("foot-lit");io.unobserve(e.target);}});},{threshold:0.06});
+  io.observe(foot);
+  window.addEventListener("resize",assign);
 })();
 </script>
 </body>

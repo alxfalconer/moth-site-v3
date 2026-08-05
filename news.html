@@ -943,8 +943,18 @@ html.trad-nav .navpage{display:inline-block!important;color:var(--ink)!important
 html.trad-nav .topnav{position:static!important;display:flex!important;align-items:center;flex-wrap:nowrap;gap:clamp(12px,1.4vw,26px);margin:0 0 0 auto!important;padding:0!important;max-width:none!important;width:auto!important;height:auto!important;inset:auto!important;background:none!important;opacity:1!important;visibility:visible!important;min-width:0}
 html.trad-nav .topnav a{display:inline-block!important;margin:0!important;padding:0!important;transform:none!important;filter:none!important;opacity:.82!important;font:500 14px/1 var(--sans,'Inter',sans-serif)!important;letter-spacing:-.01em;color:var(--ink);text-decoration:none;transition:opacity .15s}
 html.trad-nav .topnav a:hover{opacity:1!important}
-html.trad-nav .topnav a.topnav-cta{display:inline-block!important;margin:0!important;transform:none!important;filter:none!important;opacity:1!important;font:600 14px/1 var(--sans,'Inter',sans-serif)!important;background:var(--ink)!important;color:var(--app,var(--paper,#000))!important;padding:.5em 1.1em!important;border-radius:999px}
+html.trad-nav .topnav a.topnav-cta{display:inline-flex!important;align-items:center!important;line-height:1!important;margin:0!important;transform:none!important;filter:none!important;opacity:1!important;font:600 14px/1 var(--sans,'Inter',sans-serif)!important;background:var(--ink)!important;color:var(--app,var(--paper,#000))!important;padding:.58em 1.1em .46em!important;border-radius:999px}
 @media (max-width:860px){html.trad-nav .topnav{gap:11px}html.trad-nav .topnav a{font-size:12.5px!important}}
+</style>
+<style id="foot-reveal-css">
+.foot .foot-reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.72,.2,1);transition-delay:calc(var(--fi,0) * 45ms)}
+.foot.foot-lit .foot-reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.foot .foot-reveal{opacity:1!important;transform:none!important;transition:none}}
+</style>
+<style id="ghost-css">
+.ghost .ghost-w{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.14em);transition:opacity .95s ease, filter 1.05s ease, transform .95s cubic-bezier(.2,.72,.2,1);transition-delay:calc(var(--wi,0) * 55ms)}
+.ghost.in .ghost-w{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.ghost .ghost-w{opacity:1;filter:none;transform:none;transition:none}}
 </style>
 </head>
 <body class="theme-light viewing">
@@ -1057,38 +1067,37 @@ body.theme-light .sidenav-logo img{filter:none}
     </div>
   </section>
 
-  <style id="mq-cta-css">
-.mq-cta{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);background:#000;color:#f4f4f0;font-family:"Inter",system-ui,sans-serif;padding:clamp(90px,16vh,190px) clamp(24px,8vw,160px);text-align:center}
-.mq-cta h2{font-weight:700;font-size:clamp(2rem,4.6vw,4.4rem);line-height:.96;letter-spacing:-.045em;color:#f4f4f0;margin:0 0 clamp(20px,3vh,32px)}
-.mq-cta .mq-cta-sub{font-size:clamp(15px,1.4vw,18px);line-height:1.5;color:rgba(244,244,240,.55);margin:0 auto clamp(28px,4vh,46px);max-width:56ch}
-.mq-cta form{max-width:620px;margin:0 auto}
-.mq-cta .field{display:flex;align-items:stretch;border:1px solid rgba(244,244,240,.85);background:transparent}
-.mq-cta input{flex:1;min-width:0;background:transparent;border:0;color:#f4f4f0;font-family:inherit;font-size:16px;padding:16px 18px;outline:none}
-.mq-cta input::placeholder{color:rgba(244,244,240,.4)}
-.mq-cta button{border:0;background:#f4f4f0;color:#101010;font-family:inherit;font-size:15px;font-weight:600;padding:0 26px;cursor:pointer;white-space:nowrap;transition:opacity .15s}
-.mq-cta button:hover{opacity:.85}
-.mq-cta .note{font-size:14px;color:rgba(244,244,240,.55);margin:16px 0 0}
-.mq-cta .note a{color:#f4f4f0;text-decoration:underline;text-underline-offset:2px}
-.mq-cta .ok{font-size:15px;color:#f4f4f0;margin:16px 0 0;display:none}
-.mq-cta.sent .ok{display:block}
-.mq-cta.sent form{display:none}
-@media (max-width:640px){.mq-cta{padding:clamp(64px,12vh,120px) 24px}.mq-cta .field{flex-direction:column}.mq-cta button{padding:14px}}
+  <style id="pdemo-css">
+.pdemo{position:relative;background:#000;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);min-height:100vh;display:flex;flex-direction:column;padding:clamp(48px,8vh,110px) clamp(24px,6vw,90px) clamp(30px,5vh,64px);overflow:hidden;color:var(--ink);box-sizing:border-box}
+.pdemo-head{width:100%;max-width:1180px;margin:0 auto;flex:0 0 auto}
+.pd-header{margin:0 0 clamp(18px,2.6vh,30px);font-weight:700;font-size:clamp(28px,3.2vw,46px);line-height:1.03;letter-spacing:-.03em;color:#f4f4f0}
+.pd-cta{display:inline-flex;align-items:center;gap:.4em;background:#f4f4f0;color:#0b0b0d;font:600 15px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:.72em 1.5em;border-radius:999px;transition:opacity .15s}
+.pd-cta:hover{opacity:.88}
+.pdemo-stage{position:relative;flex:1 1 auto;min-height:0;margin-top:clamp(22px,3.5vh,46px)}
+.pd-back{position:absolute;top:0;right:-4%;height:94%;width:auto;z-index:1;display:block}
+.pd-fade{position:absolute;top:0;bottom:0;left:calc(-1 * clamp(24px,6vw,90px));right:calc(-1 * clamp(24px,6vw,90px));z-index:2;pointer-events:none;background:linear-gradient(to bottom,#000 0%,rgba(0,0,0,0) 26%),linear-gradient(to left,#000 0%,rgba(0,0,0,0) 40%),linear-gradient(to top,#000 0%,rgba(0,0,0,0) 14%)}
+.pd-front{position:absolute;bottom:0;left:max(clamp(24px,6vw,90px),calc(50% - 590px));height:80%;z-index:3;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.09);box-shadow:0 44px 110px rgba(0,0,0,.72)}
+.pd-front img{height:100%;width:auto;display:block}
+@media (max-width:860px){
+  .pdemo{min-height:0;display:block;padding-bottom:clamp(40px,7vh,72px)}
+  .pdemo-stage{margin-top:28px}
+  .pd-back{position:relative;top:auto;right:auto;height:auto;width:100%;opacity:.4}
+  .pd-fade{display:none}
+  .pd-front{position:relative;bottom:auto;left:auto;height:auto;width:88%;margin:-28% auto 0}
+  .pd-front img{height:auto;width:100%}
+}
 </style>
-<section class="mq-cta" aria-labelledby="mqcta-h">
-  <h2 id="mqcta-h">Spin up a job on real<br>quantum hardware.</h2>
-  <p class="mq-cta-sub">Access opens gradually. Join the waitlist for early access — or create an account to explore what’s live.</p>
-  <form class="mq-cta-form" novalidate>
-    <div class="field">
-      <input type="email" name="email" placeholder="you@studio.com" autocomplete="email" required aria-label="Email for early access">
-      <button type="submit">Get early access</button>
-    </div>
-    <p class="note">Prefer to dive in? <a href="https://platform.mothquantum.com/create-account" target="_blank" rel="noopener">Create an account →</a></p>
-  </form>
-  <p class="ok" role="status" aria-live="polite">You’re on the list. We’ll reach out as access opens — welcome.</p>
+<section class="pdemo" aria-labelledby="pdemo-h">
+  <div class="pdemo-head">
+    <h2 class="pd-header ghost" id="pdemo-h">Spin up a job on<br>real hardware.</h2>
+    <a class="pd-cta" href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer">Platform <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="pdemo-stage">
+    <img class="pd-back" src="./platform-jobs-2.jpg" alt="Moth platform jobs list" loading="lazy">
+    <div class="pd-fade" aria-hidden="true"></div>
+    <div class="pd-front"><img src="./platform-front.jpg" alt="Moth platform dashboard" loading="lazy"></div>
+  </div>
 </section>
-<script>
-(function(){var s=document.currentScript.previousElementSibling;var f=s.querySelector(".mq-cta-form");if(f)f.addEventListener("submit",function(e){e.preventDefault();var i=f.querySelector("input");if(i.checkValidity()){s.classList.add("sent");}else{i.reportValidity();}});})();
-</script>
 <footer class="foot" aria-label="Footer">
   <div class="foot-top">
     <div class="foot-identity">
@@ -1368,5 +1377,56 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
 })();
 </script>
 
+<script id="foot-reveal-js">
+(function(){
+  var foot=document.querySelector(".foot"); if(!foot) return;
+  var items=Array.prototype.slice.call(foot.querySelectorAll(".foot-tag,.foot-contact a,.foot-nav a,.foot-social-nav a,.office .city,.office .addr,.footmark,.foot-legal a,.foot-copy"));
+  if(!items.length) return;
+  items.forEach(function(el){el.classList.add("foot-reveal");});
+  function assign(){ items.slice().sort(function(a,b){return a.getBoundingClientRect().left-b.getBoundingClientRect().left;}).forEach(function(el,i){el.style.setProperty("--fi",i);}); }
+  assign();
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches || !("IntersectionObserver" in window)){ foot.classList.add("foot-lit"); return; }
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(e){if(e.isIntersecting){assign();foot.classList.add("foot-lit");io.unobserve(e.target);}});},{threshold:0.06});
+  io.observe(foot);
+  window.addEventListener("resize",assign);
+})();
+</script>
+<script id="ghost-js">
+(function(){
+  function walk(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(child){
+      if(child.nodeType===3){
+        var toks=child.nodeValue.split(/(\s+)/), frag=document.createDocumentFragment();
+        toks.forEach(function(t){
+          if(t==="") return;
+          if(/^\s+$/.test(t)){ frag.appendChild(document.createTextNode(t)); return; }
+          var sp=document.createElement("span"); sp.className="ghost-w"; sp.textContent=t; frag.appendChild(sp);
+        });
+        node.replaceChild(frag,child);
+      } else if(child.nodeType===1 && child.tagName!=="BR"){ walk(child); }
+    });
+  }
+  function words(el){ return Array.prototype.slice.call(el.querySelectorAll(".ghost-w")); }
+  function assignWord(el){ words(el).forEach(function(w,i){ w.style.setProperty("--wi", i); }); }
+  function assignLine(el){
+    var idx=-1, prev=null;
+    words(el).forEach(function(w){
+      var t=Math.round(w.offsetTop);
+      if(prev===null || t!==prev){ idx++; prev=t; }
+      w.style.setProperty("--wi", idx);
+    });
+  }
+  function assign(el){ if(el.getAttribute("data-ghost")==="line") assignLine(el); else assignWord(el); }
+  function ghostify(el){ if(el.getAttribute("data-ghost-init")) return; el.setAttribute("data-ghost-init","1"); walk(el); assign(el); }
+  var els=Array.prototype.slice.call(document.querySelectorAll(".ghost"));
+  if(!els.length) return;
+  els.forEach(ghostify);
+  var lineEls=els.filter(function(e){return e.getAttribute("data-ghost")==="line";});
+  if(lineEls.length){ var rt; window.addEventListener("resize",function(){ clearTimeout(rt); rt=setTimeout(function(){ lineEls.forEach(assignLine); },150); }); }
+  if(!("IntersectionObserver" in window)){ els.forEach(function(e){e.classList.add("in");}); return; }
+  var io=new IntersectionObserver(function(ents){ ents.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }); },{threshold:0.3,rootMargin:"0px 0px -12% 0px"});
+  els.filter(function(e){return !e.hasAttribute("data-ghost-manual");}).forEach(function(e){ io.observe(e); });
+})();
+</script>
 </body>
 </html>
