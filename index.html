@@ -1612,20 +1612,19 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
 })();
 </script>
 <style id="nav-actions-css">
-.nav-actions{position:fixed;top:calc((var(--nav-h) - 40px)/2);right:34px;z-index:90;display:flex;align-items:center;gap:15px;transition:transform .35s var(--ease),opacity .35s var(--ease)}
+.nav-actions{position:fixed;top:calc((var(--nav-h) - 40px)/2);right:34px;z-index:90;display:flex;align-items:center;gap:15px;mix-blend-mode:difference;transition:transform .35s var(--ease),opacity .35s var(--ease)}
 body.nav-hidden .nav-actions{transform:translateY(-160%);opacity:0;pointer-events:none}
-.nav-platform{display:inline-flex;align-items:center;background:var(--ink);color:var(--app,var(--paper,#000));font:600 14px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:.62em 1.05em .5em;border-radius:999px;transition:opacity .15s}
-.nav-platform:hover{opacity:.85}
-.nav-div{width:1px;height:22px;background:color-mix(in srgb,var(--ink) 30%,transparent);flex:0 0 auto}
+.nav-platform{display:inline-flex;align-items:center;background:#fff;color:#000;font:600 14px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:.62em 1.05em .5em;border-radius:999px;transition:opacity .15s;mix-blend-mode:normal}
+.nav-platform:hover{opacity:.82}
+.nav-div{width:1px;height:22px;background:rgba(255,255,255,.5);flex:0 0 auto;mix-blend-mode:normal}
 .menu-btn{position:static!important;top:auto!important;right:auto!important;width:auto!important;height:40px!important;padding:0 2px!important;display:inline-flex!important;align-items:center!important;gap:.5em!important}
 .menu-btn .menu-lbl{font:500 15px/1 var(--sans);letter-spacing:-.01em}
 .menu-btn .menu-ico{position:relative;width:24px;height:24px;display:inline-grid;place-items:center;flex:0 0 auto}
-.menu-btn,.menu-btn .menu-lbl,.menu-btn svg{color:var(--ink)!important;mix-blend-mode:normal!important}
+.menu-btn,.menu-btn .menu-lbl,.menu-btn svg{color:#fff!important;mix-blend-mode:normal!important}
 body.nav-hidden .menu-btn{transform:none!important;opacity:1!important}
 body.nav-open .menu-btn{background:transparent!important;border-radius:0!important}
 .menu-btn:hover,body.nav-open .menu-btn:hover{background:transparent!important}
 body.nav-open .nav-platform,body.nav-open .nav-div{opacity:0;pointer-events:none}
-body.nav-open .menu-btn,body.nav-open .menu-btn .menu-lbl{color:var(--ink)!important;mix-blend-mode:normal!important}
 html.trad-nav .nav-actions{display:none!important}
 @media (max-width:760px){.nav-actions .menu-lbl{display:none}.nav-actions .nav-platform{display:none}.nav-actions .nav-div{display:none}}
 </style>
