@@ -1009,10 +1009,14 @@ html.trad-nav .topnav a.topnav-cta{display:inline-flex!important;align-items:cen
     <a class="topnav-cta" href="#early-access">Platform</a>
   </nav>
 </header>
-<button class="menu-btn" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="sidenav">
-  <svg class="ic-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="butt" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-  <svg class="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="butt" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-</button>
+<div class="nav-actions">
+  <a class="nav-platform" href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer">Platform</a>
+  <span class="nav-div" aria-hidden="true"></span>
+  <button class="menu-btn" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="sidenav">
+    <span class="menu-lbl">Menu</span>
+    <span class="menu-ico" aria-hidden="true"><svg class="ic-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="butt"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><svg class="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="butt"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span>
+  </button>
+</div>
 <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle dark mode" aria-checked="true"><span class="tt-track"><span class="tt-knob"></span></span></button>
 <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
 <style id="sidenav-logo-css">
@@ -1574,5 +1578,23 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
   els.filter(function(e){return !e.hasAttribute("data-ghost-manual");}).forEach(function(e){ io.observe(e); });
 })();
 </script>
+<style id="nav-actions-css">
+.nav-actions{position:fixed;top:calc((var(--nav-h) - 40px)/2);right:34px;z-index:90;display:flex;align-items:center;gap:15px;transition:transform .35s var(--ease),opacity .35s var(--ease)}
+body.nav-hidden .nav-actions{transform:translateY(-160%);opacity:0;pointer-events:none}
+.nav-platform{display:inline-flex;align-items:center;background:var(--ink);color:var(--app,var(--paper,#000));font:600 14px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:.62em 1.05em .5em;border-radius:999px;transition:opacity .15s}
+.nav-platform:hover{opacity:.85}
+.nav-div{width:1px;height:22px;background:color-mix(in srgb,var(--ink) 30%,transparent);flex:0 0 auto}
+.menu-btn{position:static!important;top:auto!important;right:auto!important;width:auto!important;height:40px!important;padding:0 2px!important;display:inline-flex!important;align-items:center!important;gap:.5em!important}
+.menu-btn .menu-lbl{font:500 15px/1 var(--sans);letter-spacing:-.01em}
+.menu-btn .menu-ico{position:relative;width:24px;height:24px;display:inline-grid;place-items:center;flex:0 0 auto}
+.menu-btn,.menu-btn .menu-lbl,.menu-btn svg{color:var(--ink)!important;mix-blend-mode:normal!important}
+body.nav-hidden .menu-btn{transform:none!important;opacity:1!important}
+body.nav-open .menu-btn{background:transparent!important;border-radius:0!important}
+.menu-btn:hover,body.nav-open .menu-btn:hover{background:transparent!important}
+body.nav-open .nav-platform,body.nav-open .nav-div{opacity:0;pointer-events:none}
+body.nav-open .menu-btn,body.nav-open .menu-btn .menu-lbl{color:var(--ink)!important;mix-blend-mode:normal!important}
+html.trad-nav .nav-actions{display:none!important}
+@media (max-width:760px){.nav-actions .menu-lbl{display:none}.nav-actions .nav-platform{display:none}.nav-actions .nav-div{display:none}}
+</style>
 </body>
 </html>

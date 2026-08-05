@@ -1082,6 +1082,9 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
   box-shadow:inset 3px 3px 0 #a3ffb8,inset -3px -3px 0 #006622, 3px 3px 0 #000 !important}
 .tools-cta.admode .field button:hover{background:#4dff4d !important}
 .tools-cta.admode .field button:active{box-shadow:inset 0 3px 0 #006622, 1px 1px 0 #000 !important}
+.tools-cta.admode .wait .ad-platform{display:inline-flex;align-items:center;gap:.45em;background:#00ff00;color:#000;font:700 15px/1 'Times New Roman',Times,serif;text-transform:uppercase;letter-spacing:.04em;padding:11px 22px;text-decoration:none;box-shadow:inset 3px 3px 0 #a3ffb8,inset -3px -3px 0 #006622, 3px 3px 0 #000;transition:background .15s}
+.tools-cta.admode .wait .ad-platform:hover{background:#4dff4d}
+.tools-cta.admode .wait .ad-platform:active{box-shadow:inset 0 3px 0 #006622, 1px 1px 0 #000}
 .tools-cta.admode .note{margin-top:14px;font-family:'Times New Roman',Times,serif;color:#00ff00;font-weight:700}
 .tools-cta.admode .note a{color:#fff !important;background:#006622;padding:0 3px}
 .tools-cta.admode .ok{color:#00ff00;font-weight:700;font-family:'Times New Roman',Times,serif;text-shadow:2px 2px 0 #000}
@@ -1159,10 +1162,14 @@ html.trad-nav .topnav a.topnav-cta{display:inline-flex!important;align-items:cen
     <a class="topnav-cta" href="#early-access">Platform</a>
   </nav>
 </header>
-<button class="menu-btn" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="sidenav">
-  <svg class="ic-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="butt" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-  <svg class="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="butt" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-</button>
+<div class="nav-actions">
+  <a class="nav-platform" href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer">Platform</a>
+  <span class="nav-div" aria-hidden="true"></span>
+  <button class="menu-btn" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="sidenav">
+    <span class="menu-lbl">Menu</span>
+    <span class="menu-ico" aria-hidden="true"><svg class="ic-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="butt"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><svg class="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="butt"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span>
+  </button>
+</div>
 <button class="theme-toggle" id="themeToggle" role="switch" aria-label="Toggle dark mode" aria-checked="true"><span class="tt-track"><span class="tt-knob"></span></span></button>
 <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
 <style id="sidenav-logo-css">
@@ -1301,7 +1308,7 @@ body.theme-light .sidenav-logo img{filter:none}
 <section class="tools-cta admode" aria-labelledby="tcta-h">
   <div class="adbanner" role="group" aria-label="Early access">
     <div class="ad-starburst" aria-hidden="true"><span>NEW!</span></div>
-    <a class="ad-clickhere" href="#waitEmail2" aria-hidden="true">Click<br>Here!</a>
+    <a class="ad-clickhere" href="#platformBtn2" aria-hidden="true">Click<br>Here!</a>
     <div class="ad-hazard" aria-hidden="true"></div>
     <div class="ad-marquee" aria-hidden="true"><span>&#9733;&nbsp; SPIN UP A JOB ON REAL QUANTUM HARDWARE &nbsp;&#9733;&nbsp; FREE EARLY ACCESS &nbsp;&#9733;&nbsp; LIMITED SLOTS — ACT NOW!!! &nbsp;&#9733;&nbsp; SPIN UP A JOB ON REAL QUANTUM HARDWARE &nbsp;&#9733;&nbsp; FREE EARLY ACCESS &nbsp;&#9733;&nbsp; LIMITED SLOTS — ACT NOW!!! &nbsp;&#9733;&nbsp;</span></div>
     <div class="ad-body">
@@ -1311,14 +1318,8 @@ body.theme-light .sidenav-logo img{filter:none}
       </div>
       <img class="ad-gif" src="./butterfly-fly.gif" alt="" aria-hidden="true" width="125" height="137">
       <div class="wait">
-        <form id="waitForm2" novalidate>
-          <div class="field">
-            <input type="email" id="waitEmail2" name="email" placeholder="you@studio.com" autocomplete="email" required aria-label="Email for early access">
-            <button type="submit">Get access!</button>
-          </div>
-          <p class="note">Prefer to dive in? <a href="https://platform.mothquantum.com/create-account" target="_blank" rel="noopener">Create an account →</a></p>
-        </form>
-        <p class="ok" role="status" aria-live="polite">You’re on the list. We’ll reach out as access opens — welcome.</p>
+        <a class="ad-platform" id="platformBtn2" href="https://platform.mothquantum.com/" target="_blank" rel="noopener noreferrer">Platform &#8594;</a>
+        <p class="note">Prefer to dive in? <a href="https://platform.mothquantum.com/create-account" target="_blank" rel="noopener">Create an account &#8594;</a></p>
       </div>
     </div>
   </div>
@@ -1713,5 +1714,23 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
   window.addEventListener("resize",assign);
 })();
 </script>
+<style id="nav-actions-css">
+.nav-actions{position:fixed;top:calc((var(--nav-h) - 40px)/2);right:34px;z-index:90;display:flex;align-items:center;gap:15px;transition:transform .35s var(--ease),opacity .35s var(--ease)}
+body.nav-hidden .nav-actions{transform:translateY(-160%);opacity:0;pointer-events:none}
+.nav-platform{display:inline-flex;align-items:center;background:var(--ink);color:var(--app,var(--paper,#000));font:600 14px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;padding:.62em 1.05em .5em;border-radius:999px;transition:opacity .15s}
+.nav-platform:hover{opacity:.85}
+.nav-div{width:1px;height:22px;background:color-mix(in srgb,var(--ink) 30%,transparent);flex:0 0 auto}
+.menu-btn{position:static!important;top:auto!important;right:auto!important;width:auto!important;height:40px!important;padding:0 2px!important;display:inline-flex!important;align-items:center!important;gap:.5em!important}
+.menu-btn .menu-lbl{font:500 15px/1 var(--sans);letter-spacing:-.01em}
+.menu-btn .menu-ico{position:relative;width:24px;height:24px;display:inline-grid;place-items:center;flex:0 0 auto}
+.menu-btn,.menu-btn .menu-lbl,.menu-btn svg{color:var(--ink)!important;mix-blend-mode:normal!important}
+body.nav-hidden .menu-btn{transform:none!important;opacity:1!important}
+body.nav-open .menu-btn{background:transparent!important;border-radius:0!important}
+.menu-btn:hover,body.nav-open .menu-btn:hover{background:transparent!important}
+body.nav-open .nav-platform,body.nav-open .nav-div{opacity:0;pointer-events:none}
+body.nav-open .menu-btn,body.nav-open .menu-btn .menu-lbl{color:var(--ink)!important;mix-blend-mode:normal!important}
+html.trad-nav .nav-actions{display:none!important}
+@media (max-width:760px){.nav-actions .menu-lbl{display:none}.nav-actions .nav-platform{display:none}.nav-actions .nav-div{display:none}}
+</style>
 </body>
 </html>
