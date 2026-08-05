@@ -1052,7 +1052,7 @@ body.theme-light .sidenav-logo img{filter:none}
       <p class="ghost" data-ghost="line">Moth began in 2022, when two communities that rarely met converged; artists curious about quantum computing, and quantum researchers curious about art. Out of that union, co-founder <span style="color:var(--mute)">Harry Kumar</span> and Quantinuum’s <span style="color:var(--mute)">Ilyas Khan</span> set out to bend quantum towards culture.</p>
     </div>
     <style id="bloch-embed-css">
-  @media (prefers-reduced-motion:reduce){.blochblock{background:#0b0b0d;--bl-ink:#f4f4f0}}
+  @media (prefers-reduced-motion:reduce){.blochblock{background:#000;--bl-ink:#f4f4f0}}
   .blochblock{--bl-ink:#0b0b0d;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);background:transparent}
   .blochblock .bloch-scroll{position:relative;height:560vh;background:transparent}
   .blochblock .bloch-stage{position:sticky;top:calc(-1 * (var(--nav-h) + 76px));height:100vh;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(20px,4vw,72px);padding:0 clamp(24px,5vw,96px)}
@@ -1194,6 +1194,11 @@ body.theme-light .sidenav-logo img{filter:none}
 .combo .off-addr{margin-bottom:10px}
 @media (max-width:860px){.combo{min-height:0;padding:clamp(48px,8vh,90px) 24px}.combo-panes{grid-template-columns:1fr;gap:56px}.combo-div{display:none}.combo .info-lists{grid-template-columns:1fr 1fr}.combo .off-clocks{grid-template-columns:1fr 1fr}.combo-lower{grid-template-columns:1fr;gap:48px}}
 </style>
+    <style id="info-reveal-css">
+#information .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.72,.2,1);transition-delay:calc(var(--rvi,0) * 55ms)}
+#information.rv-in .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){#information .rv{opacity:1!important;transform:none!important;transition:none}}
+</style>
     <section class="combo" id="information" aria-label="Information and Offices">
       <div class="combo-panes">
       <div class="combo-pane combo-info">
@@ -1281,6 +1286,11 @@ Brooklyn, NY 11205 · United States</p>
   </div>
       </div>
       </div>
+    <style id="combo-lower-reveal-css">
+.combo-lower .clrv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.72,.2,1);transition-delay:calc(var(--cli,0) * 60ms)}
+.combo-lower.cl-lit .clrv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.combo-lower .clrv{opacity:1!important;transform:none!important;transition:none}}
+</style>
     <div class="combo-lower">
     <div class="community" aria-labelledby="community-h">
       <h2 id="community-h" class="careers-title">Community</h2>
@@ -1864,7 +1874,7 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
   var deck=document.querySelector('.people-deck');
   if(!scroller||!block||!deck) return;
   if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  var LIGHT=[255,255,255], DARK=[11,11,13], GREY=[230,230,227], INKD=[11,11,13], INKL=[244,244,240];
+  var LIGHT=[255,255,255], DARK=[0,0,0], GREY=[230,230,227], INKD=[11,11,13], INKL=[244,244,240];
   function lp(a,b,t){return Math.round(a+(b-a)*t);}
   function mix(c1,c2,t){return 'rgb('+lp(c1[0],c2[0],t)+','+lp(c1[1],c2[1],t)+','+lp(c1[2],c2[2],t)+')';}
   function cl(x){return x<0?0:x>1?1:x;}
@@ -1878,7 +1888,7 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
     var bg, ink;
     if(y<darkStart){ bg='rgb(255,255,255)'; ink='#0b0b0d'; }
     else if(y<darkFull){ var t=cl((y-darkStart)/(darkFull-darkStart)); bg=mix(LIGHT,DARK,t); ink=mix(INKD,INKL,t); }
-    else if(y<greyStart){ bg='rgb(11,11,13)'; ink='rgb(244,244,240)'; }
+    else if(y<greyStart){ bg='rgb(0,0,0)'; ink='rgb(244,244,240)'; }
     else if(y<greyFull){ var t2=cl((y-greyStart)/(greyFull-greyStart)); bg=mix(DARK,GREY,t2); ink=mix(INKL,INKD,t2); }
     else { bg='rgb(230,230,227)'; ink='#0b0b0d'; }
     scroller.style.backgroundColor=bg;
@@ -1907,5 +1917,46 @@ body.nav-open .nav-platform,body.nav-open .nav-div{opacity:0;pointer-events:none
 html.trad-nav .nav-actions{display:none!important}
 @media (max-width:760px){.nav-actions .menu-lbl{display:none}.nav-actions .nav-platform{display:none}.nav-actions .nav-div{display:none}}
 </style>
+<script id="info-reveal-js">
+(function(){
+  var sec=document.getElementById('information'); if(!sec) return;
+  var items=Array.prototype.slice.call(sec.querySelectorAll('.info-head h2,.info-group .info-gt,.info-list li,.off-head h2,.office-item'));
+  if(!items.length) return;
+  items.forEach(function(el){el.classList.add('rv');});
+  function assign(){
+    items.slice().sort(function(a,b){
+      var ra=a.getBoundingClientRect(), rb=b.getBoundingClientRect();
+      var dt=Math.round(ra.top/8)-Math.round(rb.top/8);
+      return dt!==0?dt:(ra.left-rb.left);
+    }).forEach(function(el,i){el.style.setProperty('--rvi',i);});
+  }
+  assign();
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches || !('IntersectionObserver' in window)){ sec.classList.add('rv-in'); return; }
+  var scroller=sec.closest('.state');
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(e){if(e.isIntersecting){assign();sec.classList.add('rv-in');io.unobserve(e.target);}});},{root:scroller||null,threshold:0.08,rootMargin:'0px 0px -12% 0px'});
+  io.observe(sec);
+  window.addEventListener('resize',assign);
+})();
+</script>
+<script id="combo-lower-reveal-js">
+(function(){
+  var cl=document.querySelector('.combo-lower'); if(!cl) return;
+  var items=Array.prototype.slice.call(cl.querySelectorAll('.careers-title,.community-body,.acc'));
+  if(!items.length) return;
+  items.forEach(function(el){el.classList.add('clrv');});
+  function assign(){
+    items.slice().sort(function(a,b){
+      var ra=a.getBoundingClientRect(), rb=b.getBoundingClientRect();
+      var dt=Math.round(ra.top/8)-Math.round(rb.top/8);
+      return dt!==0?dt:(ra.left-rb.left);
+    }).forEach(function(el,i){el.style.setProperty('--cli',i);});
+  }
+  assign();
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches || !('IntersectionObserver' in window)){ cl.classList.add('cl-lit'); return; }
+  var scroller=cl.closest('.state');
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(e){if(e.isIntersecting){assign();cl.classList.add('cl-lit');io.disconnect();}});},{root:scroller||null,threshold:0.08,rootMargin:'0px 0px -12% 0px'});
+  io.observe(cl);
+})();
+</script>
 </body>
 </html>
