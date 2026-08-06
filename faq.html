@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="rev-riforma trad-nav">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1177,6 +1177,7 @@ body.theme-light .sidenav-logo img{filter:none}
       <a href="#" data-stub="Cookie Policy page — next pass">Cookie Policy</a>
       <a href="./faq.html">FAQ</a>
       <a href="./bloch.html">Bloch</a>
+      <a href="./heroes.html">Heroes</a>
     </nav>
     <p class="foot-copy">© 2026 Moth Quantum</p>
   </div>
@@ -1349,9 +1350,8 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
 </style>
 <div id="revAdjust">
   <div id="revPanel" role="group" aria-label="Review adjustments">
-    <div class="rev-row"><span>Dark mode</span><button class="rev-sw" id="revTheme" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button></div>
-    <div class="rev-row"><span>Riforma font</span><button class="rev-sw" id="revFont" role="switch" aria-checked="false" aria-label="Toggle Riforma font"></button></div>
-    <div class="rev-row"><span>Trad nav</span><button class="rev-sw" id="revNav" role="switch" aria-checked="false" aria-label="Toggle traditional nav"></button></div>
+    <div class="rev-row"><span>Riforma font</span><button class="rev-sw" id="revFont" role="switch" aria-checked="true" aria-label="Toggle Riforma font"></button></div>
+    <div class="rev-row"><span>Trad nav</span><button class="rev-sw" id="revNav" role="switch" aria-checked="true" aria-label="Toggle traditional nav"></button></div>
   </div>
   <button id="revToggle" aria-expanded="false" aria-controls="revPanel">Adjust</button>
 </div>
@@ -1359,7 +1359,6 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
 (function(){
   var wrap=document.getElementById('revAdjust');
   var btn=document.getElementById('revToggle');
-  var revTheme=document.getElementById('revTheme');
   var revFont=document.getElementById('revFont');
   var pageToggle=document.getElementById('themeToggle');
   if(!wrap||!btn) return;
@@ -1370,9 +1369,6 @@ html.rev-riforma{--sans:'Riforma','Inter',system-ui,sans-serif}
     if(dt) return dt!=='light';
     return !(b&&b.classList.contains('theme-light'));
   }
-  function syncTheme(){ revTheme.setAttribute('aria-checked',String(isDark())); }
-  revTheme.addEventListener('click',function(){ if(pageToggle){pageToggle.click();} setTimeout(syncTheme,20); });
-  syncTheme();
   revFont.addEventListener('click',function(){
     var on=document.documentElement.classList.toggle('rev-riforma');
     revFont.setAttribute('aria-checked',String(on));
