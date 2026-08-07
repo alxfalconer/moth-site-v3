@@ -376,10 +376,10 @@ html.js .fig-wrap.in .fig .stroke{stroke-dashoffset:0}
 .cta-band .h-sec{max-width:16ch}
 
 /* ---------------- footer (giant wordmark, 100vh) ---------------- */
-.foot{--paper:#000;--paper-2:#0b0b0d;--ink:#f0f0ec;--body:#c7c7c3;--muted:#97979c;--faint:#82828a;--dim:#86868c;--line:#26262a;background:#000;color:var(--ink);min-height:100vh;padding:clamp(28px,4vh,44px) 34px clamp(8px,1.5vh,16px);
+.foot{--paper:#ffffff;--paper-2:#f4f3f0;--ink:#000;--body:#2a2a2e;--muted:#6b6b70;--faint:#73737a;--dim:#8a8a90;--line:#e4e3df;background:#eeedea;color:var(--ink);min-height:100vh;padding:clamp(28px,4vh,44px) 34px clamp(8px,1.5vh,16px);
   display:flex;flex-direction:column;justify-content:flex-start;position:relative}
 html[data-theme="dark"] .foot .foot-nav a{color:var(--ink)}
-html[data-theme="dark"] .foot .footmark{filter:invert(1)}
+html[data-theme="dark"] .foot .footmark{filter:none}
 .foot .field{border-color:var(--ink)!important}
 
 .foot-mid{order:1;margin-top:auto}
@@ -477,7 +477,7 @@ html[data-theme="dark"] .footmark{filter:invert(1)}
 .hero-info .mqc-desc,.hero-info .mqc-count{display:none !important}
 .hero-info{display:none !important}
 .hero-row{display:none !important}
-.hero{padding-top:calc(var(--nav-h) + 12px) !important;padding-bottom:0 !important}
+.hero{padding-top:calc(var(--nav-h) + clamp(48px,8vh,120px)) !important;padding-bottom:0 !important}
 .hero-stage{justify-content:flex-end !important;padding-bottom:0}
 /* push the slider band down so its lower fold-headroom runs off the bottom edge (images sit near the edge) */
 .hero-carousel{margin-bottom:-72px}
@@ -485,7 +485,7 @@ html[data-theme="dark"] .footmark{filter:invert(1)}
 .hero-wait{align-self:flex-start !important;margin:8px 0 auto 0 !important;width:min(94vw,500px) !important;max-width:100% !important}
 .hero-backed{margin-top:36px;text-align:left;font:400 12px/1.5 var(--sans);color:var(--ink)}
 .hero-backed .hb-grey{color:var(--muted)}
-.hero-cap{align-self:center !important;text-align:left !important;margin:auto 0 0 0 !important;
+.hero-cap{align-self:center !important;text-align:center !important;margin:auto 0 0 0 !important;
   width:auto !important;max-width:94vw !important;white-space:normal !important;
   font-size:clamp(1.45rem,2vw,2rem) !important;line-height:1.1 !important;letter-spacing:-.045em !important}
 .hero-cap .muted-sentence{color:var(--muted);white-space:nowrap}
@@ -640,16 +640,11 @@ html:not(.trad-nav) #nav .topnav-right{display:none}
 .pagequote.midq cite.mq-attr{display:block;text-align:center;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:30px;font-style:normal}
 </style>
 <style id="hero-fx-css">
-.hero-fx{margin:16px 0 0;display:flex}
-.hero-fx-switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
-.hero-fx-switch input{position:absolute;opacity:0;width:0;height:0}
-.hero-fx-track{position:relative;width:38px;height:20px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.30);transition:background .18s ease,border-color .18s ease}
-.hero-fx-thumb{position:absolute;top:1px;left:1px;width:16px;height:16px;border-radius:999px;background:#fff;transition:transform .18s ease}
-.hero-fx-switch input:checked + .hero-fx-track{background:rgba(255,255,255,.88);border-color:rgba(255,255,255,.9)}
-.hero-fx-switch input:checked + .hero-fx-track .hero-fx-thumb{transform:translateX(18px);background:#0a0a0a}
-.hero-fx-switch input:focus-visible + .hero-fx-track{outline:2px solid rgba(255,255,255,.6);outline-offset:2px}
-.hero-fx-label{font-family:var(--mono,var(--sans));font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,rgba(255,255,255,.55))}
-.hero-carousel.fx-on .mqc-canvas{filter:saturate(1.55) contrast(1.06)}
+.hero-fx{margin:16px 0 0;display:flex;justify-content:center}
+.hero-fx-range{-webkit-appearance:none;appearance:none;width:160px;height:2px;background:rgba(255,255,255,.24);border-radius:2px;outline:none;cursor:pointer}
+.hero-fx-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:13px;height:13px;border-radius:999px;background:#fff;border:0;cursor:pointer;box-shadow:0 0 0 1px rgba(0,0,0,.18)}
+.hero-fx-range::-moz-range-thumb{width:13px;height:13px;border-radius:999px;background:#fff;border:0;cursor:pointer}
+.hero-fx-range:focus-visible{outline:2px solid rgba(255,255,255,.6);outline-offset:6px}
 </style>
 </head>
 <body>
@@ -727,9 +722,9 @@ body.theme-light .sidenav-logo img{filter:none}
 <!-- ============ 1 · HERO ============ -->
 <section class="section hero" aria-labelledby="hero-h">
   <div class="hero-stage">
-    <h1 class="hero-cap" id="hero-h"><span class="hero-lead">Bending Quantum toward Culture.</span><br><span class="muted-sentence">Pioneering the first consumer<br>wave of quantum computing for<br>Media, Entertainment &amp; Creativity.</span></h1>
+    <h1 class="hero-cap" id="hero-h"><span class="hero-lead">Bending Quantum toward Culture.</span><br><span class="muted-sentence">The first wave of quantum computing<br>for Media, Entertainment &amp; Creativity</span></h1>
     <div class="hero-fx">
-      <label class="hero-fx-switch"><input type="checkbox" id="heroFx"><span class="hero-fx-track"><span class="hero-fx-thumb"></span></span><span class="hero-fx-label">Superposition</span></label>
+      <input type="range" id="heroFx" class="hero-fx-range" min="0" max="1" step="0.01" value="0" aria-label="Superposition">
     </div>
     <p class="hero-sub reveal" style="--d:120ms">Pioneering the first consumer wave of Quantum for Media, Entertainment &amp; the Arts.</p>
     <div class="hero-carousel" id="mqc" aria-label="Selected work carousel">
@@ -853,7 +848,7 @@ body.theme-light .sidenav-logo img{filter:none}
 </section>
 
 <!-- ============ FOOTER ============ -->
-<blockquote class="pagequote midq"><p class="ghost">“Whatever you now find weird, ugly, uncomfortable and nasty about a new medium will surely become its signature.”</p><cite class="mq-attr">Brian Eno</cite></blockquote>
+<blockquote class="pagequote midq" hidden style="display:none!important"><p class="ghost">“Whatever you now find weird, ugly, uncomfortable and nasty about a new medium will surely become its signature.”</p><cite class="mq-attr">Brian Eno</cite></blockquote>
 <footer class="foot" aria-label="Footer">
   <div class="foot-top">
     <div class="foot-identity">
@@ -1246,8 +1241,8 @@ async function run(THREE, gsap){
     measureTex.needsUpdate=true;
   }
   let fxSpeed=1;
-  const fxToggle=document.getElementById('heroFx');
-  if(fxToggle){ const applyFx=()=>{ lensMat.uniforms.uBoil.value = fxToggle.checked ? 0.8 : 0.0; fxSpeed = fxToggle.checked ? 12 : 1; var mqc=document.getElementById('mqc'); if(mqc) mqc.classList.toggle('fx-on', fxToggle.checked); }; fxToggle.addEventListener('change', applyFx); applyFx(); }
+  const fxRange=document.getElementById('heroFx');
+  if(fxRange){ const applyFx=()=>{ var v=parseFloat(fxRange.value)||0; lensMat.uniforms.uBoil.value=v; fxSpeed=1+v*47; var mqc=document.getElementById('mqc'); if(mqc) mqc.style.filter = v>0.001 ? ('saturate('+(1+v*0.6).toFixed(3)+') contrast('+(1+v*0.07).toFixed(3)+')') : 'none'; }; fxRange.addEventListener('input', applyFx); applyFx(); }
 
   // centre-crop a texture to a 1:1 square (cover) so panels are square, not stretched
   function squareCrop(t,w,h){
