@@ -763,10 +763,11 @@
   .demoshead{margin:24px 0 26px}
   .demoshead .demos-title{font-family:var(--sans);font-size:clamp(22px,2vw,30px);font-weight:600;letter-spacing:-.03em;color:var(--ink);margin:0}
   .demoshead .demos-lede{margin:6px 0 0;font-size:13.5px;line-height:1.6;color:var(--mute)}
-  .demos{display:grid;grid-template-columns:repeat(4,1fr);gap:36px 24px;margin:0 0 clamp(64px,10vh,120px)}
+  .demos{display:grid;grid-template-columns:repeat(3,1fr);gap:36px 24px;margin:0 0 clamp(64px,10vh,120px)}
   .demo{display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit;transition:opacity .2s}
   .demo:hover{opacity:.68}
-  .demo-thumb{aspect-ratio:1;border-radius:0;background:linear-gradient(150deg,var(--card-a),var(--card-b))}
+  .demo-thumb{aspect-ratio:16/9;border-radius:0;background:linear-gradient(150deg,var(--card-a),var(--card-b))}
+  .demo-thumb img{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
   .demo-t{font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);margin:0}
   .demo-p{font-size:12.5px;line-height:1.6;color:var(--mute);margin:0}
   @media (max-width:720px){ .demos{grid-template-columns:1fr 1fr;gap:26px 16px} }
@@ -1133,13 +1134,13 @@ body.theme-light .sidenav-logo img{filter:none}
         <h3 class="demos-title">Apps &amp; Artifacts created in-house.</h3>
       </div>
       <div class="demos">
-        <a class="demo" href="https://smell-of-gasoline.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">The Smell of Gasoline</h4></a>
-        <a class="demo" href="https://overtone-grid.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">Overtone Window</h4></a>
+        <a class="demo" href="https://smell-of-gasoline.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"><img src="./smell-of-gasoline.jpg" alt="The Smell of Gasoline" loading="lazy" draggable="false"></div><h4 class="demo-t">The Smell of Gasoline</h4></a>
+        <a class="demo" href="https://overtone-grid.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"><img src="./overtone-window.jpg" alt="Overtone Window" loading="lazy" draggable="false"></div><h4 class="demo-t">Overtone Window</h4></a>
+        <a class="demo" href="https://teleblur-photo-booth.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"><img src="./teleblur-booth.jpg" alt="Quantum Teleblur Photo Booth" loading="lazy" draggable="false"></div><h4 class="demo-t">Quantum Teleblur Photo Booth</h4></a>
+        <a class="demo" href="https://mothagotchi.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"><img src="./mothagotchi.jpg" alt="Mothagotchi" loading="lazy" draggable="false"></div><h4 class="demo-t">Mothagotchi</h4></a>
+        <a class="demo" href="https://quantum-image-deepfry.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"><img src="./deep-fryer.jpg" alt="Deep Fryer" loading="lazy" draggable="false"></div><h4 class="demo-t">Deep Fryer</h4></a>
+        <a class="demo" href="https://shader-visualization-app.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"><img src="./entanglement-viewer.jpg" alt="Entanglement Shader Viewer" loading="lazy" draggable="false"></div><h4 class="demo-t">Entanglement Shader Viewer</h4></a>
         <a class="demo" href="https://v0-qc-volumetric-shader-example.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">Volumetric Shader</h4></a>
-        <a class="demo" href="https://teleblur-photo-booth.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">Quantum Teleblur Photo Booth</h4></a>
-        <a class="demo" href="https://mothagotchi.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">Mothagotchi</h4></a>
-        <a class="demo" href="https://quantum-image-deepfry.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">Deep Fryer</h4></a>
-        <a class="demo" href="https://shader-visualization-app.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">Entanglement Shader Viewer</h4></a>
         <a class="demo" href="https://blur-jazz-workstation.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">Blur Jazz Workstation</h4></a>
         <a class="demo" href="https://v0-gladiator-arena-game-ochre.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">Qommodor’s LXIV</h4></a>
         <a class="demo" href="https://v0-moth-effect.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="demo-thumb"></div><h4 class="demo-t">The Moth Effect</h4></a>
@@ -1424,7 +1425,7 @@ window.WQB_FRAMES=[["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUE
     })(performance.now());
   }
   function init(){
-    var SEL = '.sidenav a, .foot-nav a, .foot-legal a, .foot-social a, .workfoot a';
+    var SEL = '.sidenav a, .foot-nav a, .foot-social a, .workfoot a';
     document.querySelectorAll(SEL).forEach(function(a){
       if(a.classList.contains('glitch-trigger')) return;
       a.classList.add('glitch-trigger');
