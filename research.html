@@ -1009,7 +1009,7 @@ body.nav-hidden .menu-btn{transform:translateY(-160%);opacity:0;pointer-events:n
 .foot-nav a.foot-cta:hover{opacity:.85}
 </style>
 <style id="research-radius-css">
-#research .qcard,#research .qc-illo,#research .rblock,#research .rbfig,#research .rbimg,#research .spotcard,#research .spotimg,#research .wpgallery,#research .wpg-media,#research .wpg-img{border-radius:10px !important}
+#research .qcard,#research .qc-illo,#research .rblock,#research .rbfig,#research .rbimg,#research #research .spotimg,#research .wpgallery,#research .wpg-media,#research .wpg-img{border-radius:10px !important}
 </style>
 <style id="ghost-css">
 .ghost .ghost-w{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.14em);transition:opacity .95s ease, filter 1.05s ease, transform .95s cubic-bezier(.2,.72,.2,1);transition-delay:calc(var(--wi,0) * 55ms)}
@@ -1195,36 +1195,23 @@ body.theme-light .sidenav-logo img{filter:none}
       render();
     })();
     </script>
-    <div class="spotcards">
-      <a class="spotcard" data-cat="whitepaper" href="https://arxiv.org/abs/2606.29989" target="_blank" rel="noopener noreferrer"><span class="spotcat">Whitepaper</span><h3 class="spottl">Rendering Coherent Scattering via Quantum Collision Models</h3></a>
-      <a class="spotcard" data-cat="blog" href="https://mothquantum.substack.com/p/a-new-way-to-think-about-quantum" target="_blank" rel="noopener noreferrer"><span class="spotcat">Blog</span><h3 class="spottl">A new way to think about quantum programming</h3></a>
-      <a class="spotcard" data-cat="article" href="https://www.newscientist.com/article/2518974-the-race-to-solve-the-biggest-problem-in-quantum-computing/?utm_term=Autofeed&amp;utm_campaign=echobox&amp;utm_medium=social&amp;utm_source=Linkedin#Echobox=1773396068" target="_blank" rel="noopener noreferrer"><span class="spotcat">Article</span><h3 class="spottl">New Scientist</h3></a>
-      <a class="spotcard" data-cat="interview" href="https://www.youtube.com/watch?v=MkBvSCkv6Pk&amp;list=PLqHnHG5X2PXD5rosKP0gr3qqyWvWB7567" target="_blank" rel="noopener noreferrer"><span class="spotcat">Interview</span><h3 class="spottl">Quantum technology for music, gaming, and art</h3></a>
-    </div>
     <div class="filters">
       <button class="f on" data-f="all">All</button>
-      <button class="f" data-f="whitepaper">Whitepaper</button>
+      <button class="f" data-f="blog">Blog</button>
       <button class="f" data-f="article">Article</button>
       <button class="f" data-f="interview">Interview</button>
-      <button class="f" data-f="blog">Blog</button>
     </div>
     <div class="rows">
-      <a class="row" data-type="whitepaper" href="https://arxiv.org/abs/2606.29989" target="_blank" rel="noopener noreferrer"><span class="tag">Whitepaper</span><span class="rt">Rendering Coherent Scattering via Quantum Collision Models</span><span class="rd">Jun 2026</span></a>
-      <a class="row" data-type="whitepaper" href="https://arxiv.org/abs/2606.20123" target="_blank" rel="noopener noreferrer"><span class="tag">Whitepaper</span><span class="rt">QPU-scale randomized benchmarking via Bell-pair injection</span><span class="rd">May 2026</span></a>
-      <a class="row" data-type="whitepaper" href="https://arxiv.org/abs/2605.22744" target="_blank" rel="noopener noreferrer"><span class="tag">Whitepaper</span><span class="rt">Quantum circuit design via dynamic Pauli constraints</span><span class="rd">Apr 2026</span></a>
       <a class="row" data-type="blog" href="https://mothquantum.substack.com/p/a-new-way-to-think-about-quantum" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">A new way to think about quantum programming</span><span class="rd">Mar 2026</span></a>
       <a class="row" data-type="blog" href="https://www.linkedin.com/pulse/qite-games-moth-pierre-fromholz-wfvme/?trackingId=B92JrQdzuq%2BhWYNKGyJ%2BqQ%3D%3D" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">QITE for games at Moth</span><span class="rd">Feb 2026</span></a>
       <a class="row" data-type="article" href="https://www.newscientist.com/article/2518974-the-race-to-solve-the-biggest-problem-in-quantum-computing/?utm_term=Autofeed&amp;utm_campaign=echobox&amp;utm_medium=social&amp;utm_source=Linkedin#Echobox=1773396068" target="_blank" rel="noopener noreferrer"><span class="tag">Article</span><span class="rt">New Scientist</span><span class="rd">Jan 2026</span></a>
       <a class="row" data-type="blog" href="https://mothquantum.substack.com/p/a-decade-of-quantum-games" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">A Decade of Quantum Games</span><span class="rd">Dec 2025</span></a>
       <a class="row" data-type="blog" href="https://mothquantum.substack.com/p/painting-with-quantum-physics" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">Painting with Quantum Physics</span><span class="rd">Nov 2025</span></a>
-      <a class="row" data-type="whitepaper" href="https://arxiv.org/abs/2509.01442" target="_blank" rel="noopener noreferrer"><span class="tag">Whitepaper</span><span class="rt">Quantum Brush: A quantum computing-based tool for digital painting</span><span class="rd">Oct 2025</span></a>
       <a class="row" data-type="blog" href="https://mothquantum.substack.com/p/quantum-powered-games-from-today" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">Quantum-Powered Games: From Today to 2030</span><span class="rd">Sep 2025</span></a>
       <a class="row" data-type="blog" href="https://mothquantum.substack.com/p/benchmarking-a-decade-of-quantum" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">Benchmarking a decade of quantum computers with games</span><span class="rd">Aug 2025</span></a>
       <a class="row" data-type="blog" href="https://mothquantum.substack.com/p/from-quantum-music-to-quantum-games" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">From Quantum Music to Quantum Games: MOTH at Gamescom 2025</span><span class="rd">Jul 2025</span></a>
       <a class="row" data-type="blog" href="https://mothquantum.substack.com/p/quantum-music-for-quantum-games" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">Composing for Quantum Games</span><span class="rd">Jun 2025</span></a>
-      <a class="row" data-type="whitepaper" href="https://arxiv.org/abs/2508.09683" target="_blank" rel="noopener noreferrer"><span class="tag">Whitepaper</span><span class="rt">Procedural Generation and Games at the Dawn of Fault Tolerant Quantum Computing</span><span class="rd">May 2025</span></a>
       <a class="row" data-type="blog" href="https://mothquantum.substack.com/p/gamescom-2025-a-personal-journey" target="_blank" rel="noopener noreferrer"><span class="tag">Blog</span><span class="rt">Gamescom 2025: A Personal Journey into a Quantum Universe</span><span class="rd">Apr 2025</span></a>
-      <a class="row" data-type="whitepaper" href="https://arxiv.org/abs/2505.13287" target="_blank" rel="noopener noreferrer"><span class="tag">Whitepaper</span><span class="rt">Level Generation with Quantum Reservoir Computing</span><span class="rd">Mar 2025</span></a>
       <a class="row" data-type="interview" href="https://www.youtube.com/watch?v=MkBvSCkv6Pk&amp;list=PLqHnHG5X2PXD5rosKP0gr3qqyWvWB7567" target="_blank" rel="noopener noreferrer"><span class="tag">Interview</span><span class="rt">Quantum technology for music, gaming, and art</span><span class="rd">Feb 2025</span></a>
     </div>
     
@@ -1273,7 +1260,7 @@ body.theme-light .sidenav-logo img{filter:none}
     requestAnimationFrame(()=>requestAnimationFrame(()=> line.classList.add('words-in'))); })();
   // scroll reveal (+ quote word-reveal), matching v2
   (function(){
-    const SR_SEL='.rblocks,.rintro,.grouphdr,.filters,.row,.qcard,.spotcard';
+    const SR_SEL='.rblocks,.rintro,.grouphdr,.filters,.row,.qcard';
     const els=[...document.querySelectorAll(SR_SEL)];
     els.forEach(e=> e.classList.add('sr'));
     if(REDUCE){ els.forEach(e=>{ e.classList.add('in'); if(e.matches('.pagequote')) e.classList.add('words-in'); }); return; }
@@ -1326,7 +1313,7 @@ body.theme-light .sidenav-logo img{filter:none}
     })(performance.now());
   }
   function init(){
-    var SEL = '.sidenav a, .foot-nav a, .foot-legal a, .foot-social a, .workfoot a';
+    var SEL = '.sidenav a, .foot-nav a, .foot-social a, .workfoot a';
     document.querySelectorAll(SEL).forEach(function(a){
       if(a.classList.contains('glitch-trigger')) return;
       a.classList.add('glitch-trigger');
